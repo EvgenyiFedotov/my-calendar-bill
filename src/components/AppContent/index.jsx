@@ -53,7 +53,7 @@ const AppContent = () => {
 
         <Column alignItems="center">
           <CalendarTrigger {...{ date, setDate }} />
-          <Calendar {...{ date, getDayContent: DayContent }} />
+          <Calendar {...{ date, DayComponent: DayContent }} />
           <ListChangesBill />
         </Column>
       </Branch>

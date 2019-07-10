@@ -4,9 +4,11 @@ import Stepper from '../../core/Stepper';
 import Button from '../../styled/Button';
 import useStepper from '../../../hooks/use-stepper';
 import InputText from '../../styled/InputText';
-import CaledarNumbers from '../CalendarNumbers';
 import useField from '../../../hooks/use-field';
 import AppContext from '../../contexts/App/context';
+import Calendar from '../../Calendar';
+import useSelectedDate from '../../../hooks/use-selected-date';
+import { isEqualMonth } from '../../../helpers/date';
 
 import StepContent from './StepContent';
 
@@ -17,16 +19,18 @@ const FirstSetup = () => {
   } = React.useContext(AppContext);
   const [step, { prev, next }] = useStepper(0, 1);
   const [countRef, count] = useField();
-  const [dateRef, date] = useField({ getValueRef: ref => ref.current.getSelectedDate() });
+  const [selectedDate, { isSelectedDate, clickDate }] = useSelectedDate({
+    checkClickDate: ({ dateWeek, date }) => isEqualMonth(dateWeek, date),
+  });
   const nextToDate = React.useCallback(() => {
     if (count.getValue()) next();
   }, [next]);
   const endSetup = React.useCallback(() => {
-    if (date.getValue()) {
+    if (selectedDate) {
       setCount(count.getValue());
-      setDate(date.getValue());
+      setDate(selectedDate);
     }
-  }, []);
+  }, [selectedDate]);
 
   return (
     <Stepper step={step}>
@@ -43,7 +47,9 @@ const FirstSetup = () => {
           </>
         }
       >
-        <CaledarNumbers ref={dateRef} defaultSelectedDate={new Date().getDate()} />
+        <Calendar
+          getDayProps={params => ({ selected: isSelectedDate(params), onClick: clickDate })}
+        />
       </StepContent>
     </Stepper>
   );

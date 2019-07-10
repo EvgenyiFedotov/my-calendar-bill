@@ -15,6 +15,7 @@ export default createGlobalStyle`
     --red-color: #ef5350;
     --red-dk-color: #6f3332;
     --green-color: #26a69a;
+    --gray-color: #999999;
 
     --space: 8px;
 

@@ -16,7 +16,7 @@ import Content from './styled/Content';
  */
 const ModalEditListItem = ({
   title = '',
-  isNew = true,
+  isNew = false,
   children,
   onDelete = () => {},
   onSave = () => {},

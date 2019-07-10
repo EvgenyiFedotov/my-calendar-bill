@@ -11,8 +11,8 @@ const App = ({ children }) => {
     { name: '#3', date: 19, type: 'out', count: 500 },
     { name: '#4', date: 25, type: 'in', count: 2500 },
   ]);
-  const lastCheckedCount = React.useState();
-  const lastCheckedDate = React.useState();
+  const lastCheckedCount = React.useState(1000);
+  const lastCheckedDate = React.useState(new Date());
 
   return (
     <Context.Provider value={{ changesBill, lastCheckedCount, lastCheckedDate }}>

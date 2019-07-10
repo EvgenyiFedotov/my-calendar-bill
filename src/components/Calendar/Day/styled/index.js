@@ -1,14 +1,25 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import Box, { backgroundColor as backgroundColorBox } from '../../../styled/Box';
+import Box from '../../../styled/Box';
 import shadowHover from '../../../styled/shadow-hover';
 
 // Get background color hover
-export const color = ({ disabled, holiday }) => {
+export const color = ({ otherMonth, holiday, ...props }) => {
   if (holiday) {
-    return disabled ? 'var(--red-dk-color)' : 'var(--red-color)';
+    return otherMonth
+      ? css`
+          color: var(--red-dk-color);
+        `
+      : css`
+          color: var(--red-color);
+        `;
   }
-  return backgroundColorBox({ disabled });
+
+  if (otherMonth) {
+    return css`
+      color: var(--main-dk-color);
+    `;
+  }
 };
 
 export const backgroundColor = ({ selected }) => (selected ? 'var(--main-lg-color)' : undefined);
@@ -21,7 +32,7 @@ export const backgroundColor = ({ selected }) => (selected ? 'var(--main-lg-colo
  */
 export default styled(Box)`
   position: relative;
-  color: ${color};
+  ${color};
   background-color: ${backgroundColor};
   ${shadowHover};
 `;

@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 const beforeAfter = css`
   content: '';
   display: block;
-  width: 4px;
-  height: 4px;
+  width: calc(var(--space) * 0.5);
+  height: calc(var(--space) * 0.5);
   border-radius: 100%;
 `;
 
