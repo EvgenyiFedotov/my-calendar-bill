@@ -21,7 +21,7 @@ export default (options = {}) => {
   const [error, setError] = React.useState(false);
 
   // Get value from field
-  const getValue = React.useCallback(() => getValueRef(ref), [ref]);
+  const getValue = React.useCallback(() => getValueRef(ref), [ref, getValueRef]);
 
   // Set value in field (remove `error`)
   const setValue = React.useCallback(
@@ -37,7 +37,7 @@ export default (options = {}) => {
     const result = validator(getValueRef(ref));
     setError(!result);
     return result;
-  }, [ref, setError, validator]);
+  }, [ref, setError, validator, getValueRef]);
 
   return [
     ref,

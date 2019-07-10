@@ -18,7 +18,7 @@ export default (options = {}) => {
       const { dateWeek } = params;
       checkClickDate(params) && setSelectedDate(dateWeek);
     },
-    [setSelectedDate],
+    [setSelectedDate, checkClickDate],
   );
 
   return [selectedDate, { isSelectedDate, setSelectedDate, clickDate }];

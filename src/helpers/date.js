@@ -104,3 +104,14 @@ export const isPrevDate = (date1, date2) => date1.getFullYear() < date2.getFullY
   || (date1.getFullYear() === date2.getFullYear()
     && date1.getMonth() === date2.getMonth()
     && date1.getDate() < date2.getDate());
+
+/**
+ * Format date to SQL date
+ * @param {Date} date
+ *
+ * @returns {string} Date in format `YYYY-MM-DD`
+ */
+export const dateToSQL = date => `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date
+  .getDate()
+  .toString()
+  .padStart(2, '0')}`;

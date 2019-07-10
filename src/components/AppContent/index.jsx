@@ -52,6 +52,9 @@ const AppContent = () => {
         </Row>
 
         <Column alignItems="center">
+          <Row alignItems="center" style={{ fontSize: 'calc(var(--space) * 3)' }}>
+            Count: <b>{lastCheckedCount}</b>
+          </Row>
           <CalendarTrigger {...{ date, setDate }} />
           <Calendar {...{ date, DayComponent: DayContent }} />
           <ListChangesBill />

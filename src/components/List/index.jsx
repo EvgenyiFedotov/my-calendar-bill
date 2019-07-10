@@ -18,13 +18,13 @@ const List = ({
 }) => {
   return (
     <Column>
-      {!!items.length &&
-        items.map((item, index) => (
-          <ItemList {...getPropsItem(item, index, items)} key={index}>
+      {!!items.size &&
+        Array.from(items).map((item, index) => (
+          <ItemList {...getPropsItem(item, index, items)} key={item[0]}>
             {getContentItem(item, index, items)}
           </ItemList>
         ))}
-      {!items.length && <i>{messageListEmpty}</i>}
+      {!items.size && <i>{messageListEmpty}</i>}
     </Column>
   );
 };

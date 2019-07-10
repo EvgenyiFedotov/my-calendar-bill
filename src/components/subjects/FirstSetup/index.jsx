@@ -24,13 +24,13 @@ const FirstSetup = () => {
   });
   const nextToDate = React.useCallback(() => {
     if (count.getValue()) next();
-  }, [next]);
+  }, [next, count]);
   const endSetup = React.useCallback(() => {
     if (selectedDate) {
       setCount(count.getValue());
       setDate(selectedDate);
     }
-  }, [selectedDate]);
+  }, [selectedDate, count, setCount, setDate]);
 
   return (
     <Stepper step={step}>

@@ -12,7 +12,15 @@ import Row from '../../styled/Row';
 
 const ListChangesBill = () => {
   const {
-    changesBill: { items, item, createItem, clearItem, saveItem, editItem },
+    changesBill: {
+      items,
+      item: [keyItem, item],
+      createItem,
+      clearItem,
+      saveItem,
+      editItem,
+      deleteItem,
+    },
   } = React.useContext(AppContext);
   const nameRef = React.useRef();
   const typeRef = React.useRef();
@@ -24,20 +32,20 @@ const ListChangesBill = () => {
     const date = dateRef.current.getSelectedDate();
     const count = countRef.current.value;
 
-    if (name) saveItem({ name, type, date, count });
+    if (name && type && date && count) saveItem({ name, type, date, count });
   }, [nameRef, saveItem]);
 
   return (
     <Column>
-      <Button onClick={createItem({ name: `Change_bill #${items.length}` })}>Add</Button>
+      <Button onClick={createItem({ name: `Change_bill #${items.size}` })}>Add</Button>
 
       <List
         items={items}
-        getPropsItem={(item, index) => ({
-          onClick: editItem(index),
+        getPropsItem={([key]) => ({
+          onClick: editItem(key),
           justifyContent: 'space-between',
         })}
-        getContentItem={({ name, type, date, count }) => (
+        getContentItem={([, { name, type, date, count }]) => (
           <Row>
             <div>{name}</div>
             <div>{type}</div>
@@ -51,9 +59,10 @@ const ListChangesBill = () => {
         <Modal onClose={clearItem}>
           <EditListItem
             title="Edit change bill"
-            isNew={item.isNew}
+            isNew={!items.has(keyItem)}
             onCancel={clearItem}
             onSave={save}
+            onDelete={() => deleteItem()}
           >
             <InputText defaultValue={item.name} placeholder="Name" ref={nameRef} />
             <CalendarNumbers ref={dateRef} defaultSelectedDate={item.date} />

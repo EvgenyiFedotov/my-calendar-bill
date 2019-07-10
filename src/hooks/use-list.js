@@ -1,44 +1,43 @@
 import * as React from 'react';
+import uuid from 'uuid/v4';
 
 /**
  * Hook for get method for work component list
  */
 export default (defaultList = []) => {
-  const [items, setItems] = React.useState(defaultList);
-  const [item, setItem] = React.useState();
+  const [items, setItems] = React.useState(new Map(defaultList));
+  const [item, setItem] = React.useState([]);
+  const createItem = React.useCallback(
+    (defaultValues = {}, key = uuid()) => () => setItem([key, { ...defaultValues }]),
+    [setItem],
+  );
   const saveItem = React.useCallback(
-    (newItemProps) => {
+    (newItemProps, key) => {
       setItems((prevItems) => {
-        const nextItems = [...prevItems];
-        const index = prevItems.indexOf(item);
-
-        if (index === -1) {
-          nextItems.push({ ...newItemProps, isNew: false });
-        } else {
-          nextItems[index] = { ...item, ...newItemProps, isNew: false };
-        }
-
+        const nextItems = new Map(prevItems);
+        const normKey = key || item[0];
+        nextItems.set(key || item[0], { ...nextItems.get(normKey), ...newItemProps });
         return nextItems;
       });
 
-      setItem(undefined);
+      setItem([]);
     },
     [item, setItems, setItem],
   );
-  const deleteItem = React.useCallback(() => {
-    setItems((prevItems) => {
-      const nextItems = [...prevItems];
-      nextItems.splice(prevItems.indexOf(item), 1);
-      return nextItems;
-    });
-    setItem(undefined);
-  }, [item, setItems, setItem]);
-  const createItem = React.useCallback(
-    (defaultValues = {}) => () => setItem({ ...defaultValues, isNew: true }),
-    [setItem],
+  const deleteItem = React.useCallback(
+    (key) => {
+      setItems((prevItems) => {
+        const nextItems = new Map(prevItems);
+        const normKey = key || item[0];
+        nextItems.delete(normKey);
+        return nextItems;
+      });
+      setItem([]);
+    },
+    [item, setItems, setItem],
   );
-  const clearItem = React.useCallback(() => setItem(undefined), [setItem]);
-  const editItem = React.useCallback(index => () => setItem(items[index]), [setItem, items]);
+  const clearItem = React.useCallback(() => setItem([]), [setItem]);
+  const editItem = React.useCallback(key => () => setItem([key, items.get(key)]), [setItem, items]);
 
   return {
     items,
