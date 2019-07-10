@@ -10,7 +10,7 @@ export default styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: show 0.75s ease-in-out;
+  animation: show 0.3s ease-in-out;
   pointer-events: none;
 
   @keyframes show {

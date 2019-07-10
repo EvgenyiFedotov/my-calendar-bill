@@ -12,7 +12,7 @@ import Styled from './styled';
 import DayContent from './DayContent';
 
 const AppContent = () => {
-  const [theme, setTheme] = React.useState('dark');
+  const [theme, setTheme] = React.useState('white');
   const changeTheme = React.useCallback(
     () =>
       setTheme(prevTheme => {
@@ -26,7 +26,6 @@ const AppContent = () => {
     [setTheme],
   );
   const [date, setDate] = React.useState(new Date());
-  // const getDayContent = React.useCallback(({ dateWeek }) => <>{dateWeek.getDate()}</>, []);
 
   return (
     <Styled>
@@ -36,13 +35,11 @@ const AppContent = () => {
         <Button onClick={changeTheme}>{theme}</Button>
       </Row>
 
-      <Row justifyContent="space-between" style={{ height: '100%' }}>
-        <Column>
-          <CalendarTrigger {...{ date, setDate }} />
-          <Calendar {...{ date, getDayContent: DayContent }} />
-          <ListChangesBill />
-        </Column>
-      </Row>
+      <Column>
+        <CalendarTrigger {...{ date, setDate }} />
+        <Calendar {...{ date, getDayContent: DayContent }} />
+        <ListChangesBill />
+      </Column>
     </Styled>
   );
 };

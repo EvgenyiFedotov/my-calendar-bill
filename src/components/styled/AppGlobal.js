@@ -2,7 +2,7 @@ import { createGlobalStyle, css } from 'styled-components';
 
 const whiteTheme = css`
   --bg-color: white;
-  --bg-lg-color: #fafcff;
+  --bg-lg-color: #fafafa;
 `;
 
 export default createGlobalStyle`
