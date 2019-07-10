@@ -9,11 +9,11 @@ import StepsWrapper from './styled/StepsWrapper';
  * @param {React.Element} [topPanel]
  * @param {React.Element} [bottomPanel]
  */
-const Stepper = ({ step = 0, topPanel, bottomPanel, children }) => {
+const Stepper = ({ step = 0, topPanel, bottomPanel, children, ...props }) => {
   const arrChildren = React.useMemo(() => React.Children.toArray(children), [children]);
 
   return (
-    <Styled>
+    <Styled {...props}>
       {topPanel}
       <StepsWrapper step={step}>
         {arrChildren.map(element => React.cloneElement(element, { ...element.props }))}

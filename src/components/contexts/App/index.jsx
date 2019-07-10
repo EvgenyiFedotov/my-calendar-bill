@@ -11,9 +11,14 @@ const App = ({ children }) => {
     { name: '#3', date: 19, type: 'out', count: 500 },
     { name: '#4', date: 25, type: 'in', count: 2500 },
   ]);
-  const [currPoint, setCurrentPoint] = React.useState({ summ: 0, date: new Date('2019-07-01') });
+  const lastCheckedCount = React.useState();
+  const lastCheckedDate = React.useState();
 
-  return <Context.Provider value={{ changesBill, currPoint }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ changesBill, lastCheckedCount, lastCheckedDate }}>
+      {children}
+    </Context.Provider>
+  );
 };
 
 export default App;

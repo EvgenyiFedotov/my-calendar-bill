@@ -8,6 +8,7 @@ import Modal from '../../Modal';
 import EditListItem from '../../EditListItem';
 import InputText from '../../styled/InputText';
 import CalendarNumbers from '../CalendarNumbers';
+import Row from '../../styled/Row';
 
 const ListChangesBill = () => {
   const {
@@ -37,12 +38,12 @@ const ListChangesBill = () => {
           justifyContent: 'space-between',
         })}
         getContentItem={({ name, type, date, count }) => (
-          <>
+          <Row>
             <div>{name}</div>
             <div>{type}</div>
             <div>{date}</div>
             <div>{count}</div>
-          </>
+          </Row>
         )}
       />
 
