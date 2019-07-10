@@ -8,7 +8,9 @@ export default (defaultList = []) => {
   const [items, setItems] = React.useState(new Map(defaultList));
   const [item, setItem] = React.useState([]);
   const createItem = React.useCallback(
-    (defaultValues = {}, key = uuid()) => () => setItem([key, { ...defaultValues }]),
+    (defaultValues = {}, key = uuid()) => () => {
+      setItem([key, { ...defaultValues }]);
+    },
     [setItem],
   );
   const saveItem = React.useCallback(

@@ -10,6 +10,9 @@ import ListChangesBill from '../subjects/ListChangesBill';
 import AppContext from '../contexts/App/context';
 import FirstSetup from '../subjects/FirstSetup';
 import Branch from '../core/Branch';
+import Modal from '../Modal';
+import EditListItem from '../EditListItem';
+import InputText from '../styled/InputText';
 
 import Styled from './styled';
 import DayContent from './DayContent';
@@ -18,6 +21,7 @@ const AppContent = () => {
   const {
     lastCheckedCount: [lastCheckedCount],
     lastCheckedDate: [lastCheckedDate],
+    listChecks,
   } = React.useContext(AppContext);
   const [theme, setTheme] = React.useState('white');
   const changeTheme = React.useCallback(
@@ -59,6 +63,29 @@ const AppContent = () => {
           <Calendar {...{ date, DayComponent: DayContent }} />
           <ListChangesBill />
         </Column>
+
+        <Branch value={!!listChecks.item[0]}>
+          <Modal onClose={listChecks.clearItem}>
+            <EditListItem
+              title="Check date result"
+              isNew={listChecks.items.has(!!listChecks.item[0])}
+              onCancel={listChecks.clearItem}
+            >
+              <Column>
+                <InputText
+                  placeholder="Count"
+                  type="number"
+                  defaultValue={!!listChecks.item[0] && listChecks.item[1].count}
+                />
+                <InputText
+                  placeholder="Plan count"
+                  type="number"
+                  defaultValue={!!listChecks.item[0] && listChecks.item[1].planCount}
+                />
+              </Column>
+            </EditListItem>
+          </Modal>
+        </Branch>
       </Branch>
     </Styled>
   );

@@ -7,6 +7,10 @@ import Styled from './styled';
 import ChangeBill from './styled/ChangeBill';
 import CheckResult from './styled/CheckResult';
 
+/**
+ * Component `DayContent`
+ * @param {Object} defaultDayProps
+ */
 const DayContent = ({ defaultDayProps }) => {
   const {
     changesBillByType,
@@ -16,14 +20,17 @@ const DayContent = ({ defaultDayProps }) => {
   const { dateWeek, date } = defaultDayProps;
   const dwDate = React.useMemo(() => dateWeek.getDate(), [dateWeek]);
   const clickDate = React.useCallback(() => {
-    listChecks.saveItem({ count: 100, planCount: 101 }, dateToSQL(dateWeek));
-  }, [dateWeek]);
+    const dateWeekSQL = dateToSQL(dateWeek);
+    if (listChecks.items.has(dateWeekSQL)) {
+      listChecks.editItem(dateWeekSQL)();
+    } else {
+      listChecks.createItem({ count: 100, planCount: 101 }, dateToSQL(dateWeek))();
+    }
+  }, [listChecks, dateWeek]);
   const checkResult = React.useMemo(() => listChecks.items.get(dateToSQL(dateWeek)), [
     listChecks.items,
     dateWeek,
   ]);
-
-  console.log(listChecks.items);
 
   return (
     <Styled
