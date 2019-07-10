@@ -5,6 +5,7 @@ import { isEqualMonth, isEqualDate, isPrevDate, isHoliday } from '../../../helpe
 
 import Styled from './styled';
 import ChangeBill from './styled/ChangeBill';
+import CheckResult from './styled/CheckResult';
 
 const DayContent = ({ defaultDayProps }) => {
   const {
@@ -29,7 +30,7 @@ const DayContent = ({ defaultDayProps }) => {
       holiday={isHoliday(dateWeek)}
       otherMonth={!isEqualMonth(dateWeek, date)}
     >
-      {isEqualDate(dateWeek, lastCheckedDate) ? <b>{dwDate}</b> : dwDate}
+      <CheckResult>{isEqualDate(dateWeek, lastCheckedDate) ? <b>{dwDate}</b> : dwDate}</CheckResult>
       {isEqualMonth(dateWeek, date) && <ChangeBill isOut={isOut} isIn={isIn} />}
     </Styled>
   );

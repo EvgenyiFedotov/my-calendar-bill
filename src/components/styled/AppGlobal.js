@@ -3,6 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 const whiteTheme = css`
   --bg-color: white;
   --bg-lg-color: #fafafa;
+  --green-color: #26a69a;
 `;
 
 export default createGlobalStyle`
@@ -14,7 +15,7 @@ export default createGlobalStyle`
     --main-dk-color: #47597d;
     --red-color: #ef5350;
     --red-dk-color: #6f3332;
-    --green-color: #26a69a;
+    --green-color: #00695C;
     --gray-color: #999999;
 
     --space: 8px;
