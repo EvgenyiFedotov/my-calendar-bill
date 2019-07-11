@@ -12,6 +12,10 @@ const colorsByResult = ({ value }) => {
         background-color: var(--red-color);
         color: var(--bg-color);
       `;
+    case null:
+      return css`
+        background-color: var(--bg-lg-color);
+      `;
     default:
       return undefined;
   }

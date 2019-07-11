@@ -14,8 +14,7 @@ import StepContent from './StepContent';
 
 const FirstSetup = () => {
   const {
-    lastCheckedCount: [, setCount],
-    lastCheckedDate: [, setDate],
+    // count: [, setCount],
   } = React.useContext(AppContext);
   const [step, { prev, next }] = useStepper(0, 1);
   const [countRef, count] = useField();
@@ -27,10 +26,9 @@ const FirstSetup = () => {
   }, [next, count]);
   const endSetup = React.useCallback(() => {
     if (selectedDate) {
-      setCount(count.getValue());
-      setDate(selectedDate);
+      // setCount(count.getValue());
     }
-  }, [selectedDate, count, setCount, setDate]);
+  }, [selectedDate, count]);
 
   return (
     <Stepper step={step}>

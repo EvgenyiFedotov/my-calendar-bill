@@ -29,7 +29,7 @@ const after = ({ isIn }) => (isIn
         &:after {
           ${beforeAfter};
           ${afterMarginLeft};
-          background-color: var(--main-color);
+          background-color: var(--green-color);
         }
       `
   : undefined);

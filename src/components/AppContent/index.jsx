@@ -13,17 +13,14 @@ import Branch from '../core/Branch';
 import Modal from '../Modal';
 import EditListItem from '../EditListItem';
 import InputText from '../styled/InputText';
+import List from '../List';
 
 import Styled from './styled';
 import DayContent from './DayContent';
 
 const AppContent = () => {
-  const {
-    lastCheckedCount: [lastCheckedCount],
-    lastCheckedDate: [lastCheckedDate],
-    listChecks,
-  } = React.useContext(AppContext);
-  const [theme, setTheme] = React.useState('white');
+  const { listChecks } = React.useContext(AppContext);
+  const [theme, setTheme] = React.useState('dark');
   const changeTheme = React.useCallback(
     () =>
       setTheme(prevTheme => {
@@ -37,10 +34,7 @@ const AppContent = () => {
     [setTheme],
   );
   const [date, setDate] = React.useState(new Date());
-  const isFirstSetup = React.useMemo(
-    () => lastCheckedCount === undefined || lastCheckedDate === undefined,
-    [lastCheckedCount, lastCheckedDate],
-  );
+  const isFirstSetup = React.useMemo(() => !listChecks.items.size, [listChecks.items]);
 
   return (
     <Styled>
@@ -55,14 +49,27 @@ const AppContent = () => {
           <Button onClick={changeTheme}>{theme}</Button>
         </Row>
 
-        <Column alignItems="center">
-          <Row alignItems="center" style={{ fontSize: 'calc(var(--space) * 3)' }}>
-            Count: <b>{lastCheckedCount}</b>
-          </Row>
-          <CalendarTrigger {...{ date, setDate }} />
-          <Calendar {...{ date, DayComponent: DayContent }} />
-          <ListChangesBill />
-        </Column>
+        <Row justifyContent="center">
+          <Column alignItems="center">
+            <CalendarTrigger {...{ date, setDate }} />
+            <Calendar {...{ date, DayComponent: DayContent }} />
+          </Column>
+          <Column>
+            <ListChangesBill />
+          </Column>
+          <Column>
+            <List
+              items={listChecks.items}
+              getContentItem={([key, { count, planCount }]) => (
+                <Row key={key}>
+                  <div>{key}</div>
+                  <div>{count || 'wait check'}</div>
+                  <div>{planCount}</div>
+                </Row>
+              )}
+            />
+          </Column>
+        </Row>
 
         <Branch value={!!listChecks.item[0]}>
           <Modal onClose={listChecks.clearItem}>
@@ -81,6 +88,7 @@ const AppContent = () => {
                   placeholder="Plan count"
                   type="number"
                   defaultValue={!!listChecks.item[0] && listChecks.item[1].planCount}
+                  disabled={true}
                 />
               </Column>
             </EditListItem>

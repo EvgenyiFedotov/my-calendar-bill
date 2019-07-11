@@ -10,6 +10,20 @@ export const isEqualDate = (date1, date2) => date1.getFullYear() === date2.getFu
   && date1.getDate() === date2.getDate();
 
 /**
+ * Each date from -> to
+ * @param {Date} from
+ * @param {Date} to
+ */
+export const eachDate = (from, to, callback) => {
+  if (isPrevDate(from, to)) {
+    while (!isEqualDate(from, to)) {
+      callback(new Date(from));
+      from.setDate(from.getDate() + 1);
+    }
+  }
+};
+
+/**
  * Get dates month by weeks
  *
  * @param {number} [date=new Date()]
@@ -30,14 +44,15 @@ export const getDatesMonths = (date = new Date(), options = {}) => {
   endDate.setDate(endDate.getDate() + (7 - endDate.getDay()));
 
   const result = [[]];
-  while (!isEqualDate(currDate, endDate)) {
-    result[result.length - 1].push(new Date(currDate));
-    currDate.setDate(currDate.getDate() + 1);
-    if (currDate.getDay() === 1) {
+  eachDate(currDate, endDate, (dateEach) => {
+    result[result.length - 1].push(new Date(dateEach));
+    if (dateEach.getDay() === 0) {
       result.push([]);
     }
-  }
+  });
   result[result.length - 1].push(new Date(currDate));
+
+  console.log(result.length);
 
   if (result.length === 5 && (showSixthWeek || (!showSixthWeek && isEqualMonth(date, currDate)))) {
     result.push([]);
