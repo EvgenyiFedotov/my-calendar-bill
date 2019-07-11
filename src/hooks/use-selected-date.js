@@ -10,7 +10,7 @@ export default (options = {}) => {
   const { checkClickDate = () => true } = options;
   const [selectedDate, setSelectedDate] = React.useState();
   const isSelectedDate = React.useCallback(
-    ({ dateWeek }) => selectedDate && isEqualDate(dateWeek, selectedDate),
+    date => selectedDate && isEqualDate(date, selectedDate),
     [selectedDate],
   );
   const clickDate = React.useCallback(

@@ -21,6 +21,8 @@ export default createGlobalStyle`
 
     --space: 8px;
 
+    --border-radius: calc(var(--space) * 0.5);
+
     ${({ theme }) => theme === 'white' && whiteTheme}
   }
 

@@ -47,11 +47,9 @@ const DayContent = ({ defaultDayProps }) => {
   const valueCheckResult = React.useMemo(() => {
     const check = listChecks.items.get(dateToSQL(dateWeek));
 
-    return check && check.show !== false
-      ? check.count === null
-        ? null
-        : check.count >= check.planCount
-      : undefined;
+    if (check && check.show !== false) {
+      return typeof check.count === 'number' ? check.count >= check.planCount : null;
+    }
   }, [listChecks, dateWeek]);
 
   return (

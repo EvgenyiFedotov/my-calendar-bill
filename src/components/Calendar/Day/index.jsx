@@ -27,7 +27,7 @@ const Day = ({
 
   return (
     <Styled
-      disabled={!isEqualMonth(dateWeek, date)}
+      otherMonth={!isEqualMonth(dateWeek, date)}
       holiday={isHoliday(dateWeek)}
       {...otherDayProps}
       onClick={onClickWrapper(defaultDayProps)}

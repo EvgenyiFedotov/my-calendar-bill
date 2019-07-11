@@ -15,9 +15,10 @@ const List = ({
   getPropsItem = () => {},
   getContentItem = () => null,
   messageListEmpty = 'List is empty',
+  style,
 }) => {
   return (
-    <Column>
+    <Column {...{ style }}>
       {!!items.size &&
         Array.from(items).map((item, index) => (
           <ItemList {...getPropsItem(item, index, items)} key={item[0]}>

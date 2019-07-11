@@ -7,8 +7,11 @@ import Button from '../../styled/Button';
 import Modal from '../../Modal';
 import EditListItem from '../../EditListItem';
 import InputText from '../../styled/InputText';
-import CalendarNumbers from '../CalendarNumbers';
-import Row from '../../styled/Row';
+import LabelText from '../../core/LabelText';
+import Calendar from '../../Calendar';
+import CalendarTrigger from '../../CalendarTrigger';
+import { side } from '../../styled/Box';
+import useSelectedDate from '../../../hooks/use-selected-date';
 
 const ListChangesBill = () => {
   const {
@@ -22,18 +25,19 @@ const ListChangesBill = () => {
       deleteItem,
     },
   } = React.useContext(AppContext);
-  const nameRef = React.useRef();
   const typeRef = React.useRef();
-  const dateRef = React.useRef();
   const countRef = React.useRef();
+  const [selectedDate, { isSelectedDate, clickDate, setSelectedDate }] = useSelectedDate();
   const save = React.useCallback(() => {
-    const name = nameRef.current.value.trim();
     const type = typeRef.current.value.trim();
-    const date = dateRef.current.getSelectedDate();
-    const count = countRef.current.value;
+    const count = parseInt(countRef.current.value, 10);
 
-    if (name && type && date && count) saveItem({ name, type, date, count });
-  }, [nameRef, saveItem]);
+    if (type && count && selectedDate) {
+      saveItem({ type, count, date: new Date(selectedDate) });
+      setSelectedDate(undefined);
+    }
+  }, [saveItem, selectedDate]);
+  const [date, setDate] = React.useState(new Date());
 
   return (
     <Column>
@@ -41,17 +45,18 @@ const ListChangesBill = () => {
 
       <List
         items={items}
+        style={{
+          width: side(8),
+        }}
         getPropsItem={([key]) => ({
           onClick: editItem(key),
           justifyContent: 'space-between',
         })}
-        getContentItem={([, { name, type, date, count }]) => (
-          <Row>
-            <div>{name}</div>
-            <div>{type}</div>
-            <div>{date}</div>
-            <div>{count}</div>
-          </Row>
+        getContentItem={([, { type, date, count }]) => (
+          <>
+            <div>{date.getDate()}th</div>
+            <LabelText color={type === 'in' ? 'green' : 'red'}>{count}</LabelText>
+          </>
         )}
       />
 
@@ -64,8 +69,14 @@ const ListChangesBill = () => {
             onSave={save}
             onDelete={() => deleteItem()}
           >
-            <InputText defaultValue={item.name} placeholder="Name" ref={nameRef} />
-            <CalendarNumbers ref={dateRef} defaultSelectedDate={item.date} />
+            <CalendarTrigger {...{ date, setDate }} />
+            <Calendar
+              {...{ date, setDate }}
+              getDayProps={({ dateWeek }) => ({
+                selected: isSelectedDate(dateWeek),
+                onClick: clickDate,
+              })}
+            />
             <InputText defaultValue={item.type || 'in'} placeholder="Type" ref={typeRef} />
             <InputText defaultValue={item.count} placeholder="Count" type="number" ref={countRef} />
           </EditListItem>

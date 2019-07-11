@@ -4,7 +4,13 @@ import Box from '../../../styled/Box';
 import shadowHover from '../../../styled/shadow-hover';
 
 // Get background color hover
-export const color = ({ otherMonth, holiday, ...props }) => {
+export const color = ({ otherMonth, holiday, selected }) => {
+  if (selected) {
+    return css`
+      color: var(--bg-color);
+    `;
+  }
+
   if (holiday) {
     return otherMonth
       ? css`

@@ -7,4 +7,5 @@ export default styled.div`
   z-index: 10;
   width: 100vw;
   height: 100vh;
+  background-color: hsla(0, 0%, 0%, 0.2);
 `;

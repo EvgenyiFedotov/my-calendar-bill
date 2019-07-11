@@ -7,16 +7,16 @@ import Context from './context';
 
 const App = ({ children }) => {
   const changesBill = useList([
-    [9, { name: '#1', date: 9, type: 'out', count: 1000 }],
-    [10, { name: '#2', date: 10, type: 'in', count: 2500 }],
-    [19, { name: '#3', date: 19, type: 'out', count: 500 }],
-    [25, { name: '#4', date: 25, type: 'in', count: 2500 }],
+    [9, { name: '#1', date: new Date('2019-07-09'), type: 'out', count: 1000 }],
+    [10, { name: '#2', date: new Date('2019-07-10'), type: 'in', count: 2500 }],
+    [19, { name: '#3', date: new Date('2019-07-19'), type: 'out', count: 500 }],
+    [25, { name: '#4', date: new Date('2019-07-25'), type: 'in', count: 2500 }],
   ]);
   const changesBillByType = React.useMemo(
     () =>
       Array.from(changesBill.items).reduce(
         (memo, [, { type, date, count }]) => {
-          memo[type].set(date, count + (memo[type].get(date) || 0));
+          memo[type].set(date.getDate(), count + (memo[type].get(date) || 0));
           return memo;
         },
         { in: new Map(), out: new Map() },
@@ -24,9 +24,9 @@ const App = ({ children }) => {
     [changesBill.items],
   );
   const listChecks = useList([
-    ['2019-07-10', { count: 2000, planCount: 2000 }],
-    ['2019-07-19', { count: 100, planCount: 4500 }],
-    ['2019-07-25', { count: 2000, planCount: 3500 }],
+    ['2019-07-10', { count: 0, planCount: 0 }],
+    // ['2019-07-19', { count: 100, planCount: 4500 }],
+    // ['2019-07-25', { count: 2000, planCount: 3500 }],
   ]);
   /**
    * @param {Date} date
@@ -69,26 +69,20 @@ const App = ({ children }) => {
         const [key, { count }] = lastCheck;
         let result = count;
 
-        eachDate(new Date(key), date, date => {
-          result += changesBillByType.in.get(date.getDate()) || 0;
-          result -= changesBillByType.out.get(date.getDate()) || 0;
-        });
+        eachDate(
+          new Date(key),
+          date,
+          date => {
+            result += changesBillByType.in.get(date.getDate()) || 0;
+            result -= changesBillByType.out.get(date.getDate()) || 0;
+          },
+          { last: true },
+        );
 
         return result;
       }
 
       return null;
-
-      // const today = new Date();
-      // const [key, { count }] = getLastCheck(isPrevDate(date, today) ? today : undefined);
-      // let planCount = count;
-      // console.log(key);
-      // eachDate(new Date(key), date, date => {
-      //   planCount += changesBillByType.in.get(date.getDate()) || 0;
-      //   planCount -= changesBillByType.out.get(date.getDate()) || 0;
-      // });
-
-      return 0;
     },
     [getLastCheck, changesBillByType],
   );

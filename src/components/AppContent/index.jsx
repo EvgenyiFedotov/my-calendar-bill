@@ -20,7 +20,7 @@ import DayContent from './DayContent';
 
 const AppContent = () => {
   const { listChecks } = React.useContext(AppContext);
-  const [theme, setTheme] = React.useState('dark');
+  const [theme, setTheme] = React.useState('white');
   const changeTheme = React.useCallback(
     () =>
       setTheme(prevTheme => {
@@ -56,8 +56,6 @@ const AppContent = () => {
           </Column>
           <Column>
             <ListChangesBill />
-          </Column>
-          <Column>
             <List
               items={listChecks.items}
               getContentItem={([key, { count, planCount }]) => (

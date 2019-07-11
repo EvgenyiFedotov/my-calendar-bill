@@ -13,12 +13,19 @@ export const isEqualDate = (date1, date2) => date1.getFullYear() === date2.getFu
  * Each date from -> to
  * @param {Date} from
  * @param {Date} to
+ * @param {(date: Date) => void}
+ * @param {{ last: boolean }} [options={ last: false }]
  */
-export const eachDate = (from, to, callback) => {
+export const eachDate = (from, to, callback, options = {}) => {
+  const { last = false } = options;
   if (isPrevDate(from, to)) {
     while (!isEqualDate(from, to)) {
       callback(new Date(from));
       from.setDate(from.getDate() + 1);
+    }
+
+    if (last) {
+      callback(new Date(from));
     }
   }
 };
@@ -51,8 +58,6 @@ export const getDatesMonths = (date = new Date(), options = {}) => {
     }
   });
   result[result.length - 1].push(new Date(currDate));
-
-  console.log(result.length);
 
   if (result.length === 5 && (showSixthWeek || (!showSixthWeek && isEqualMonth(date, currDate)))) {
     result.push([]);
