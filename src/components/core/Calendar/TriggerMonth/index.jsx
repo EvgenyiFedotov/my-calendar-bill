@@ -1,36 +1,36 @@
 import * as React from 'react';
 
-import { dateToShortMonth } from '../../helpers/date';
-import Row from '../styled/Row';
-import Box from '../styled/Box';
+import { dateToShortMonth } from '../../../../helpers/date';
+import Row from '../../styled/Row';
+import Box from '../../styled/Box';
 
 /**
  * Component `CalendarTrigger`
- * @param {Date} date
- * @param {React.Dispatch<any>} setDate
+ * @param {Date} [date = new Date()]
+ * @param {(date: Date) => {}} [onChangeDate = () => {}]
  */
-const CalendarTrigger = ({ date, setDate }) => {
+const CalendarTrigger = ({ date = new Date(), onChangeDate = () => {} }) => {
   const prevMonth = React.useCallback(
     () =>
-      setDate(prevDate => {
+      onChangeDate(prevDate => {
         const nextDate = new Date(prevDate);
         nextDate.setMonth(nextDate.getMonth() - 1);
         return nextDate;
       }),
-    [setDate],
+    [onChangeDate],
   );
 
   const nextMonth = React.useCallback(
     () =>
-      setDate(prevDate => {
+      onChangeDate(prevDate => {
         const nextDate = new Date(prevDate);
         nextDate.setMonth(nextDate.getMonth() + 1);
         return nextDate;
       }),
-    [setDate],
+    [onChangeDate],
   );
 
-  const moveToToday = React.useCallback(() => setDate(new Date()), [setDate]);
+  const moveToToday = React.useCallback(() => onChangeDate(new Date()), [onChangeDate]);
 
   return (
     <Row>
