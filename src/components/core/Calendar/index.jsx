@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { getDatesMonths } from '../../helpers/date';
+import { getDatesMonths } from '../../../helpers/date';
 import Column from '../styled/Column';
 
 import Day from './Day';

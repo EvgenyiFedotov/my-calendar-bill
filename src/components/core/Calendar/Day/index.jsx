@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { isEqualMonth, isHoliday } from '../../../helpers/date';
+import { isEqualMonth, isHoliday } from '../../../../helpers/date';
 
 import Styled from './styled';
 
