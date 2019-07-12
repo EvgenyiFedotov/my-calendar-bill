@@ -6,33 +6,13 @@ import Styled from './styled';
 
 /**
  * Component `Day`
- * @param {Object} defaultDayProps
- * @param {number} defaultDayProps.indexWeek
- * @param {number} defaultDayProps.indexDateWeek
- * @param {Date} defaultDayProps.dateWeek
- * @param {Date} defaultDayProps.date
- * @param {() => Object} [getDayProps]
- * @param {() => React.Element} [getDayContent]
+ * @param {Date} dateWeek
+ * @param {Date} date
  */
-const Day = ({
-  defaultDayProps,
-  getDayProps = () => ({}),
-  getDayContent = ({ dateWeek }) => dateWeek.getDate(),
-}) => {
-  const { dateWeek, date } = defaultDayProps;
-  const { onClick = () => {}, ...otherDayProps } = getDayProps(defaultDayProps);
-  const onClickWrapper = React.useCallback(defaultDayProps => () => onClick(defaultDayProps), [
-    onClick,
-  ]);
-
+const Day = ({ dateWeek, date, children, ...props }) => {
   return (
-    <Styled
-      otherMonth={!isEqualMonth(dateWeek, date)}
-      holiday={isHoliday(dateWeek)}
-      {...otherDayProps}
-      onClick={onClickWrapper(defaultDayProps)}
-    >
-      {getDayContent(defaultDayProps)}
+    <Styled otherMonth={!isEqualMonth(dateWeek, date)} holiday={isHoliday(dateWeek)} {...props}>
+      {children || dateWeek.getDate()}
     </Styled>
   );
 };
