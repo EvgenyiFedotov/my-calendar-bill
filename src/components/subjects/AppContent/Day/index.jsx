@@ -22,7 +22,7 @@ const Day = props => {
   );
 
   return (
-    <Styled {...props} prevDate={true}>
+    <Styled {...props}>
       {dateWeek.getDate()}
 
       <ChangeBill>
