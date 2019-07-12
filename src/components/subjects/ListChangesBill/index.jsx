@@ -25,19 +25,21 @@ const ListChangesBill = () => {
       deleteItem,
     },
   } = React.useContext(AppContext);
-  const typeRef = React.useRef();
   const countRef = React.useRef();
   const [selectedDate, { isSelectedDate, clickDate, setSelectedDate }] = useSelectedDate();
   const save = React.useCallback(() => {
-    const type = typeRef.current.value.trim();
     const count = parseInt(countRef.current.value, 10);
 
-    if (type && count && selectedDate) {
-      saveItem({ type, count, date: new Date(selectedDate) });
+    if (typeof count === 'number' && selectedDate) {
+      saveItem({ count, date: new Date(selectedDate) });
       setSelectedDate(undefined);
     }
   }, [saveItem, selectedDate]);
   const [date, setDate] = React.useState(new Date());
+
+  React.useEffect(() => {
+    if (item) setSelectedDate(item.date);
+  }, [item, setSelectedDate]);
 
   return (
     <Column>
@@ -52,10 +54,12 @@ const ListChangesBill = () => {
           onClick: editItem(key),
           justifyContent: 'space-between',
         })}
-        getContentItem={([, { type, date, count }]) => (
+        getContentItem={([, { date, count }]) => (
           <>
             <div>{date.getDate()}th</div>
-            <LabelText color={type === 'in' ? 'green' : 'red'}>{count}</LabelText>
+            <LabelText color={count > 0 ? 'green' : count < 0 ? 'red' : undefined}>
+              {count}
+            </LabelText>
           </>
         )}
       />
@@ -77,7 +81,6 @@ const ListChangesBill = () => {
                 onClick: clickDate,
               })}
             />
-            <InputText defaultValue={item.type || 'in'} placeholder="Type" ref={typeRef} />
             <InputText defaultValue={item.count} placeholder="Count" type="number" ref={countRef} />
           </EditListItem>
         </Modal>

@@ -7,24 +7,36 @@ import Context from './context';
 
 const App = ({ children }) => {
   const changesBill = useList([
-    [9, { name: '#1', date: new Date('2019-07-09'), type: 'out', count: 1000 }],
-    [10, { name: '#2', date: new Date('2019-07-10'), type: 'in', count: 2500 }],
-    [19, { name: '#3', date: new Date('2019-07-19'), type: 'out', count: 500 }],
-    [25, { name: '#4', date: new Date('2019-07-25'), type: 'in', count: 2500 }],
+    [9, { date: new Date('2019-07-09'), type: 'repeat:date', count: -1000 }],
+    [10, { date: new Date('2019-07-10'), type: 'repeat:date', count: 2500 }],
+    [19, { date: new Date('2019-07-19'), type: 'repeat:date', count: -500 }],
+    [25, { date: new Date('2019-07-25'), type: 'repeat:date', count: 2500 }],
+    [251, { date: new Date('2019-07-25'), type: 'repeat:date', count: -200 }],
   ]);
-  const changesBillByType = React.useMemo(
-    () =>
+  const getChangesBillDate = React.useCallback(
+    date =>
       Array.from(changesBill.items).reduce(
-        (memo, [, { type, date, count }]) => {
-          memo[type].set(date.getDate(), count + (memo[type].get(date) || 0));
+        (memo, [key, item]) => {
+          if (item.type === 'repeat:date' && item.date.getDate() === date.getDate()) {
+            memo.changesBill.set(key, item);
+            memo.summCount += item.count;
+
+            if (item.count > 0) {
+              memo.in = true;
+            } else if (item.count < 0) {
+              memo.out = true;
+            } else {
+              memo.zero = true;
+            }
+          }
           return memo;
         },
-        { in: new Map(), out: new Map() },
+        { changesBill: new Map(), summCount: 0, in: undefined, out: undefined, zero: undefined },
       ),
-    [changesBill.items],
+    [changesBill],
   );
   const listChecks = useList([
-    ['2019-07-10', { count: 0, planCount: 0 }],
+    ['2019-07-02', { count: 0, planCount: 0 }],
     // ['2019-07-19', { count: 100, planCount: 4500 }],
     // ['2019-07-25', { count: 2000, planCount: 3500 }],
   ]);
@@ -73,8 +85,7 @@ const App = ({ children }) => {
           new Date(key),
           date,
           date => {
-            result += changesBillByType.in.get(date.getDate()) || 0;
-            result -= changesBillByType.out.get(date.getDate()) || 0;
+            result += getChangesBillDate(date).summCount;
           },
           { last: true },
         );
@@ -84,14 +95,14 @@ const App = ({ children }) => {
 
       return null;
     },
-    [getLastCheck, changesBillByType],
+    [getLastCheck, getChangesBillDate],
   );
 
   return (
     <Context.Provider
       value={{
         changesBill,
-        changesBillByType,
+        getChangesBillDate,
         listChecks,
         getLastCheck,
         getPlanCount,

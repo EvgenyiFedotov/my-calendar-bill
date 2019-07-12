@@ -13,7 +13,7 @@ const backbroundColor = ({ color }) => {
       `;
     default:
       return css`
-        background-color: var(--bg-color);
+        background-color: var(--main-color);
       `;
   }
 };

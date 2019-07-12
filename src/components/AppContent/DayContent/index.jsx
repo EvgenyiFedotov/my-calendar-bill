@@ -1,14 +1,7 @@
 import * as React from 'react';
 
 import AppContext from '../../contexts/App/context';
-import {
-  isEqualMonth,
-  isEqualDate,
-  isPrevDate,
-  isHoliday,
-  dateToSQL,
-  eachDate,
-} from '../../../helpers/date';
+import { isEqualMonth, isEqualDate, isPrevDate, isHoliday, dateToSQL } from '../../../helpers/date';
 
 import Styled from './styled';
 import ChangeBill from './styled/ChangeBill';
@@ -19,7 +12,7 @@ import CheckResult from './styled/CheckResult';
  * @param {Object} defaultDayProps
  */
 const DayContent = ({ defaultDayProps }) => {
-  const { changesBillByType, listChecks, getPlanCount } = React.useContext(AppContext);
+  const { listChecks, getPlanCount, getChangesBillDate } = React.useContext(AppContext);
   const { dateWeek, date } = defaultDayProps;
   const dwDate = React.useMemo(() => dateWeek.getDate(), [dateWeek]);
   const clickDate = React.useCallback(() => {
@@ -31,6 +24,7 @@ const DayContent = ({ defaultDayProps }) => {
       const planCount = getPlanCount(new Date(dateWeek));
 
       if (typeof planCount === 'number') {
+        console.log(planCount);
         listChecks.saveItem({ count: null, planCount }, dateToSQL(dateWeek));
         // listChecks.createItem({ count: null, planCount: 101 }, dateToSQL(dateWeek))();
       }
@@ -52,6 +46,12 @@ const DayContent = ({ defaultDayProps }) => {
     }
   }, [listChecks, dateWeek]);
 
+  // Get changes bill for date
+  const changesBillDate = React.useMemo(() => getChangesBillDate(dateWeek), [
+    getChangesBillDate,
+    dateWeek,
+  ]);
+
   return (
     <Styled
       prevDate={dwIsPrevDate}
@@ -64,8 +64,8 @@ const DayContent = ({ defaultDayProps }) => {
       </CheckResult>
 
       <ChangeBill
-        isIn={!dwIsPrevDate ? changesBillByType.in.get(dwDate) !== undefined : undefined}
-        isOut={!dwIsPrevDate ? changesBillByType.out.get(dwDate) !== undefined : undefined}
+        isIn={!dwIsPrevDate ? changesBillDate.in : undefined}
+        isOut={!dwIsPrevDate ? changesBillDate.out : undefined}
       />
     </Styled>
   );

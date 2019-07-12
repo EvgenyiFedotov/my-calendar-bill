@@ -13,7 +13,6 @@ import Branch from '../core/Branch';
 import Modal from '../Modal';
 import EditListItem from '../EditListItem';
 import InputText from '../styled/InputText';
-import List from '../List';
 
 import Styled from './styled';
 import DayContent from './DayContent';
@@ -56,16 +55,6 @@ const AppContent = () => {
           </Column>
           <Column>
             <ListChangesBill />
-            <List
-              items={listChecks.items}
-              getContentItem={([key, { count, planCount }]) => (
-                <Row key={key}>
-                  <div>{key}</div>
-                  <div>{count || 'wait check'}</div>
-                  <div>{planCount}</div>
-                </Row>
-              )}
-            />
           </Column>
         </Row>
 
