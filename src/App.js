@@ -6,7 +6,7 @@ import AppStyled from './components/core/styled/App';
 
 import Calendar from './components/core/Calendar';
 import TriggerMonth from './components/core/Calendar/TriggerMonth';
-import EditWindow from './components/core/EditWindow';
+import EditDialog from './components/core/EditDialog';
 import ModalWindow from './components/core/ModalWindow';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <TriggerMonth date={date} onChangeDate={setDate} />
         <Calendar date={date} />
         <ModalWindow>
-          <EditWindow />
+          <EditDialog />
         </ModalWindow>
       </AppStyled>
     </AppContext>

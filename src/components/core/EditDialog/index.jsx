@@ -7,14 +7,14 @@ import Styled from './styled';
 import Content from './styled/Content';
 
 /**
- * Component `EditWindow`
+ * Component `EditDialog`
  * @param {string} [title='']
  * @param {boolean} [isNew=false]
  * @param {() => {}} [onDelete=() => {}]
  * @param {() => {}} [onSave=() => {}]
  * @param {() => {}} [onCancel=() => {}]
  */
-const EditWindow = ({
+const EditDialog = ({
   title = '',
   isNew = false,
   children,
@@ -44,4 +44,4 @@ const EditWindow = ({
   );
 };
 
-export default EditWindow;
+export default EditDialog;
