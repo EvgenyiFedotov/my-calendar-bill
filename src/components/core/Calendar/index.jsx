@@ -42,7 +42,7 @@ const Calendar = ({
         })}
       </Week>
     ),
-    [date],
+    [date, getDateProps],
   );
 
   return <Column>{dates.map(renderWeek)}</Column>;

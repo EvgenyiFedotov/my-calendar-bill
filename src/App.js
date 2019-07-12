@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AppContext from './components/contexts/App';
+import AppContext from './components/subjects/contexts/App';
 import AppGlobalStyled from './components/core/styled/AppGlobal';
 import AppStyled from './components/core/styled/App';
 
