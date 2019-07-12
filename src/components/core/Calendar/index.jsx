@@ -11,13 +11,13 @@ import Week from './styled/Week';
  * @param {Date} [date=new Date()]
  * @param {(date: Date, index: number) => void} [onClickDay]
  * @param {boolean} [showSixthWeek=true]
- * @param {React.Component} [DayComponent=Day]
+ * @param {React.Component} [ComponentDate=Day]
  * @param {(props: dateWeekProps) => void} [getDateProps=() => {}]
  */
 const Calendar = ({
   date = new Date(),
   showSixthWeek = true,
-  DayComponent = Day,
+  ComponentDate = Day,
   getDateProps = () => {},
 }) => {
   const dates = React.useMemo(() => getDatesMonths(date, { showSixthWeek }), [date, showSixthWeek]);
@@ -33,7 +33,7 @@ const Calendar = ({
             date,
           };
           return (
-            <DayComponent
+            <ComponentDate
               key={dateWeek.getTime()}
               {...dateWeekProps}
               {...getDateProps(dateWeekProps)}

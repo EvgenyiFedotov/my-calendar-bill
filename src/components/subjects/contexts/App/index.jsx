@@ -2,7 +2,7 @@ import * as React from 'react';
 import uuid from 'uuid/v4';
 
 import useList from '../../../../hooks/use-list';
-import { getBorderMonth, eachDate, dateToSQL } from '../../../../helpers/date';
+import { dateToSQL } from '../../../../helpers/date';
 
 import Context from './context';
 
@@ -26,22 +26,22 @@ const App = ({ children }) => {
   const getChangesBillMonth = React.useCallback(
     date => {
       const result = new Map();
-      const add = (dateSQL, changeBill) => {
-        if (!result.has(dateSQL)) result.set(dateSQL, []);
-        result.get(dateSQL).push(changeBill);
+      const add = (dateSQL, keyChangeBill, changeBill) => {
+        if (!result.has(dateSQL)) result.set(dateSQL, new Map());
+        result.get(dateSQL).set(keyChangeBill, changeBill);
       };
 
-      Array.from(changesBill.items).forEach(([, changeBill]) => {
+      Array.from(changesBill.items).forEach(([keyChangeBill, changeBill]) => {
         const dateMonth = new Date(changeBill.date);
         dateMonth.setFullYear(date.getFullYear());
         dateMonth.setMonth(date.getMonth());
         const dateMonthSQL = dateToSQL(dateMonth);
 
         if (changeBill.type === 'repeat') {
-          add(dateMonthSQL, changeBill);
+          add(dateMonthSQL, keyChangeBill, changeBill);
         } else if (changeBill.type === 'once') {
           if (dateMonthSQL === dateToSQL(new Date(changeBill.date))) {
-            add(dateMonthSQL, changeBill);
+            add(dateMonthSQL, keyChangeBill, changeBill);
           }
         } else {
           // pass
@@ -53,8 +53,37 @@ const App = ({ children }) => {
     [changesBill],
   );
 
+  /**
+   * Get changes bill by direction
+   * @param {Map} changesBill
+   */
+  const getChangesByDirection = React.useCallback(
+    changesBill => {
+      const result = { in: new Map(), out: new Map(), zero: new Map(), summCount: 0 };
+
+      if (changesBill) {
+        Array.from(changesBill).forEach(([keyChangeBill, changeBill]) => {
+          if (changeBill.count > 0) {
+            result.in.set(keyChangeBill, changeBill);
+            result.summCount += changeBill.count;
+          } else if (changeBill.count < 0) {
+            result.out.set(keyChangeBill, changeBill);
+            result.summCount += changeBill.count;
+          } else {
+            result.zero.set(keyChangeBill, changeBill);
+          }
+        });
+      }
+
+      return result;
+    },
+    [changesBill],
+  );
+
   return (
-    <Context.Provider value={{ date, changesBill: { ...changesBill, getChangesBillMonth } }}>
+    <Context.Provider
+      value={{ date, changesBill: { ...changesBill, getChangesBillMonth, getChangesByDirection } }}
+    >
       {children}
     </Context.Provider>
   );

@@ -9,22 +9,28 @@ import LabelText from '../../core/LabelText';
 import Branch from '../../core/Branch';
 import AppContext from '../contexts/App/context';
 
+import Day from './Day';
+
 const AppContent = () => {
   const {
     date: [date, setDate],
     changesBill: { getChangesBillMonth },
   } = React.useContext(AppContext);
   const [showDialog, setShowDialog] = React.useState(false);
-
-  console.log(getChangesBillMonth(date));
+  const changesBillMonth = React.useMemo(() => getChangesBillMonth(date), [
+    getChangesBillMonth,
+    date,
+  ]);
 
   return (
     <>
       <TriggerMonth date={date} onChangeDate={setDate} />
       <Calendar
         date={date}
+        ComponentDate={Day}
         getDateProps={() => ({
           onClick: () => setShowDialog(true),
+          changesBillMonth,
         })}
       />
       <Branch value={showDialog}>
