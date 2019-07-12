@@ -7,14 +7,14 @@ import Styled from './styled';
 import Content from './styled/Content';
 
 /**
- * Component `ModalEditListItem`
+ * Component `EditWindow`
  * @param {string} [title='']
  * @param {boolean} [isNew=false]
  * @param {() => {}} [onDelete=() => {}]
  * @param {() => {}} [onSave=() => {}]
  * @param {() => {}} [onCancel=() => {}]
  */
-const ModalEditListItem = ({
+const EditWindow = ({
   title = '',
   isNew = false,
   children,
@@ -44,4 +44,4 @@ const ModalEditListItem = ({
   );
 };
 
-export default ModalEditListItem;
+export default EditWindow;
