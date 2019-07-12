@@ -7,4 +7,5 @@ export default styled(Column)`
   flex: 1 !important;
   overflow-x: hidden;
   overflow-y: auto;
+  padding: calc(var(--space) * 0.5) 0;
 `;

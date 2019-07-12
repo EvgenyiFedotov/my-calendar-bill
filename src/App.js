@@ -8,6 +8,8 @@ import Calendar from './components/core/Calendar';
 import TriggerMonth from './components/core/Calendar/TriggerMonth';
 import EditDialog from './components/core/EditDialog';
 import ModalWindow from './components/core/ModalWindow';
+import List from './components/core/List';
+import LabelText from './components/core/LabelText';
 
 function App() {
   const [date, setDate] = React.useState(new Date());
@@ -19,7 +21,15 @@ function App() {
         <TriggerMonth date={date} onChangeDate={setDate} />
         <Calendar date={date} />
         <ModalWindow>
-          <EditDialog />
+          <EditDialog>
+            <List
+              items={new Map([[1, 1], [2, 2], [3, 3]])}
+              getItemProps={([, value]) => ({
+                children: <LabelText>{value}</LabelText>,
+                justifyContent: 'flex-end',
+              })}
+            />
+          </EditDialog>
         </ModalWindow>
       </AppStyled>
     </AppContext>
