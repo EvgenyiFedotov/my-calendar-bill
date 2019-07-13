@@ -21,6 +21,8 @@ export default () => {
   /**
    * Get changes bill for month
    * @param {Date} date
+   *
+   * @returns {Map<[string, changeBill]>}
    */
   const getChangesBillMonth = React.useCallback(
     (date) => {

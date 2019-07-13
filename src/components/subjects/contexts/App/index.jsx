@@ -7,7 +7,7 @@ import useCheckList from './use-check-list';
 const App = ({ children }) => {
   const date = React.useState(new Date());
   const changesBill = useChangesBill();
-  const checkList = useCheckList();
+  const checkList = useCheckList(changesBill);
 
   return <Context.Provider value={{ date, changesBill, checkList }}>{children}</Context.Provider>;
 };

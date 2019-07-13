@@ -18,7 +18,9 @@ export const isEqualDate = (date1, date2) => date1.getFullYear() === date2.getFu
  */
 export const eachDate = (from, to, callback, options = {}) => {
   const { last = false } = options;
-  if (isPrevDate(from, to)) {
+  const _isPrevDate = isPrevDate(from, to);
+
+  if (_isPrevDate || (!_isPrevDate && isEqualDate(from, to))) {
     while (!isEqualDate(from, to)) {
       callback(new Date(from));
       from.setDate(from.getDate() + 1);

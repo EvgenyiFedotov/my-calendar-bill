@@ -28,9 +28,12 @@ const Day = props => {
     dateWeek,
     checkList.firstCheck,
   ]);
+  const click = React.useCallback(() => {
+    console.log(checkList.getPlanCount(dateWeek));
+  }, [checkList, dateWeek]);
 
   return (
-    <Styled {...{ ...props, prevDate }}>
+    <Styled {...{ ...props, prevDate }} onClick={click}>
       <CheckResult {...check}>{dateWeek.getDate()}</CheckResult>
 
       <ChangeBill>
