@@ -1,11 +1,12 @@
 import * as React from 'react';
 
 import AppContext from '../../contexts/App/context';
-import { dateToSQL } from '../../../../helpers/date';
+import { dateToSQL, isPrevDate } from '../../../../helpers/date';
 import Branch from '../../../core/Branch';
 
 import Styled from './styled';
 import ChangeBill, { In, Out } from './styled/ChangeBill';
+import CheckResult from './styled/CheckResult';
 
 /**
  * Component `Day`
@@ -14,16 +15,23 @@ import ChangeBill, { In, Out } from './styled/ChangeBill';
 const Day = props => {
   const {
     changesBill: { getChangesByDirection },
+    checkList,
   } = React.useContext(AppContext);
   const { dateWeek, changesBillMonth } = props;
+  const dateWeekSQL = React.useMemo(() => dateToSQL(dateWeek), [dateWeek]);
   const changesByDir = React.useMemo(
-    () => getChangesByDirection(changesBillMonth.get(dateToSQL(dateWeek))),
-    [getChangesByDirection, dateWeek, changesBillMonth],
+    () => getChangesByDirection(changesBillMonth.get(dateWeekSQL)),
+    [getChangesByDirection, dateWeekSQL, changesBillMonth],
   );
+  const check = React.useMemo(() => checkList.items.get(dateWeekSQL), [checkList, dateWeekSQL]);
+  const prevDate = React.useMemo(() => isPrevDate(dateWeek, new Date(checkList.firstCheck[0])), [
+    dateWeek,
+    checkList.firstCheck,
+  ]);
 
   return (
-    <Styled {...props}>
-      {dateWeek.getDate()}
+    <Styled {...{ ...props, prevDate }}>
+      <CheckResult {...check}>{dateWeek.getDate()}</CheckResult>
 
       <ChangeBill>
         <Branch value={changesByDir.in.size}>

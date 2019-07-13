@@ -10,6 +10,9 @@ export default () => {
     [uuid(), { date: new Date('2019-07-19').getTime(), type: 'repeat', count: -500 }],
     [uuid(), { date: new Date('2019-07-25').getTime(), type: 'repeat', count: 1000 }],
     [uuid(), { date: new Date('2019-07-09').getTime(), type: 'repeat', count: -300 }],
+    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: -500 }],
+    [uuid(), { date: new Date('2019-07-30').getTime(), type: 'once', count: 1000 }],
+    [uuid(), { date: new Date('2019-07-31').getTime(), type: 'once', count: -300 }],
     [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
     [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
     [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
@@ -53,33 +56,30 @@ export default () => {
    * Get changes bill by direction
    * @param {Map} changesBill
    */
-  const getChangesByDirection = React.useCallback(
-    (changesBill) => {
-      const result = {
-        in: new Map(),
-        out: new Map(),
-        zero: new Map(),
-        summCount: 0,
-      };
+  const getChangesByDirection = React.useCallback((changesBill) => {
+    const result = {
+      in: new Map(),
+      out: new Map(),
+      zero: new Map(),
+      summCount: 0,
+    };
 
-      if (changesBill) {
-        Array.from(changesBill).forEach(([keyChangeBill, changeBill]) => {
-          if (changeBill.count > 0) {
-            result.in.set(keyChangeBill, changeBill);
-            result.summCount += changeBill.count;
-          } else if (changeBill.count < 0) {
-            result.out.set(keyChangeBill, changeBill);
-            result.summCount += changeBill.count;
-          } else {
-            result.zero.set(keyChangeBill, changeBill);
-          }
-        });
-      }
+    if (changesBill) {
+      Array.from(changesBill).forEach(([keyChangeBill, changeBill]) => {
+        if (changeBill.count > 0) {
+          result.in.set(keyChangeBill, changeBill);
+          result.summCount += changeBill.count;
+        } else if (changeBill.count < 0) {
+          result.out.set(keyChangeBill, changeBill);
+          result.summCount += changeBill.count;
+        } else {
+          result.zero.set(keyChangeBill, changeBill);
+        }
+      });
+    }
 
-      return result;
-    },
-    [changesBill],
-  );
+    return result;
+  }, []);
 
   return {
     ...changesBill,
