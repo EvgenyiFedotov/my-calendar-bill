@@ -65,8 +65,6 @@ export default (changesBill) => {
     (date) => {
       const lastCheck = getLastCheck(date);
 
-      console.log(lastCheck);
-
       if (lastCheck) {
         const [key, { count }] = lastCheck;
         let result = count;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import Column from '../styled/Column';
-
+import Styled from './styled';
 import ItemList from './styled/ItemList';
 
 /**
@@ -19,13 +18,13 @@ const List = ({
   messageListEmpty = 'List is empty',
   ...props
 }) => (
-  <Column {...props}>
+  <Styled {...props}>
     {!!items.size &&
       Array.from(items).map((item, index) => (
         <ItemList {...getItemProps(item, index, items)} key={item[0]} />
       ))}
     {!items.size && <i>{messageListEmpty}</i>}
-  </Column>
+  </Styled>
 );
 
 export default List;
