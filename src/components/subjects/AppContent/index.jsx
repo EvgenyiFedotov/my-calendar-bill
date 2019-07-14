@@ -11,6 +11,7 @@ import AppContext from '../contexts/App/context';
 import Column from '../../core/styled/Column';
 
 import Day from './Day';
+import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
   const {
@@ -53,6 +54,7 @@ const AppContent = () => {
 
   return (
     <Column>
+      <TopToolbar />
       <TriggerMonth date={date} onChangeDate={setDate} />
       <Calendar
         date={date}
