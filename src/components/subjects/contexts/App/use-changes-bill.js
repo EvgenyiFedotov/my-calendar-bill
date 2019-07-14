@@ -16,6 +16,16 @@ export default () => {
     [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
     [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
     [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
+    [uuid(), { date: new Date('2019-07-30').getTime(), type: 'once', count: 1000 }],
+    [uuid(), { date: new Date('2019-07-31').getTime(), type: 'once', count: -300 }],
+    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
+    [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
+    [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
+    [uuid(), { date: new Date('2019-07-30').getTime(), type: 'once', count: 1000 }],
+    [uuid(), { date: new Date('2019-07-31').getTime(), type: 'once', count: -300 }],
+    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
+    [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
+    [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
   ]);
 
   /**

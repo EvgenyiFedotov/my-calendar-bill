@@ -10,14 +10,15 @@ const rootModal = document.getElementById('root-modal');
 /**
  * Component portal `Modal`
  * @param {() => void} onClose
+ * @param {number} [zIndex=100]
  */
-const Modal = ({ children, onClose }) =>
+const Modal = ({ children, onClose, zIndex = 100, ...props }) =>
   ReactDOM.createPortal(
     <>
-      <Styled>
+      <Styled {...props} {...{ zIndex }}>
         <Content>{children}</Content>
       </Styled>
-      <Background onClick={onClose} />
+      <Background onClick={onClose} {...{ zIndex }} />
     </>,
     rootModal,
   );

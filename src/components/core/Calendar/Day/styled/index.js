@@ -14,11 +14,10 @@ export const color = ({ otherMonth, holiday, selected }) => {
   if (holiday) {
     return otherMonth
       ? css`
-          font-weight: bold;
-          color: var(--main-dk-color);
+          color: var(--red-dk-color);
         `
       : css`
-          font-weight: bold;
+          color: var(--red-color);
         `;
   }
 

@@ -9,6 +9,7 @@ import LabelText from '../../core/LabelText';
 import Branch from '../../core/Branch';
 import AppContext from '../contexts/App/context';
 import Column from '../../core/styled/Column';
+import Row from '../../core/styled/Row';
 
 import Day from './Day';
 import TopToolbar from './TopTollbar';
@@ -19,24 +20,10 @@ const AppContent = () => {
     changesBill,
     checkList,
   } = React.useContext(AppContext);
-  const [showDialog, setShowDialog] = React.useState(false);
   const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
     changesBill,
     date,
   ]);
-
-  /**
-   * Render item changes bill
-   */
-  const renderItemChangesBill = React.useCallback(
-    ([key, { count }]) => (
-      <>
-        <div>{key}</div>
-        <LabelText color={count < 0 ? 'red' : count > 0 ? 'green' : undefined}>{count}</LabelText>
-      </>
-    ),
-    [],
-  );
 
   /**
    * Render item check list
@@ -55,46 +42,28 @@ const AppContent = () => {
   return (
     <Column>
       <TopToolbar />
-      <TriggerMonth date={date} onChangeDate={setDate} />
-      <Calendar
-        date={date}
-        ComponentDate={Day}
-        getDateProps={() => ({
-          onClick: () => setShowDialog(true),
-          changesBillMonth,
-        })}
-      />
 
-      <List
-        items={changesBill.items}
-        style={{ flex: 1 }}
-        getItemProps={item => ({
-          children: renderItemChangesBill(item),
-          justifyContent: 'space-between',
-        })}
-      />
+      <Row style={{ flexWrap: 'wrap' }}>
+        <Column>
+          <TriggerMonth date={date} onChangeDate={setDate} />
+          <Calendar
+            date={date}
+            ComponentDate={Day}
+            getDateProps={() => ({
+              changesBillMonth,
+            })}
+          />
+        </Column>
 
-      <List
-        items={checkList.items}
-        getItemProps={item => ({
-          children: renderItemCheckList(item),
-          justifyContent: 'space-between',
-        })}
-      />
-
-      <Branch value={showDialog}>
-        <ModalWindow onClose={() => setShowDialog(false)}>
-          <EditDialog title="Edit date" onCancel={() => setShowDialog(false)}>
-            <List
-              items={new Map([[1, 1], [2, 2], [3, 3]])}
-              getItemProps={([, value]) => ({
-                children: <LabelText>{value}</LabelText>,
-                justifyContent: 'flex-end',
-              })}
-            />
-          </EditDialog>
-        </ModalWindow>
-      </Branch>
+        <List
+          items={checkList.items}
+          style={{ flex: 1, minWidth: '300px' }}
+          getItemProps={item => ({
+            children: renderItemCheckList(item),
+            justifyContent: 'space-between',
+          })}
+        />
+      </Row>
     </Column>
   );
 };

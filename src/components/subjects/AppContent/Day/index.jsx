@@ -36,15 +36,17 @@ const Day = props => {
     <Styled {...{ ...props, prevDate }} onClick={click}>
       <CheckResult {...check}>{dateWeek.getDate()}</CheckResult>
 
-      <ChangeBill>
-        <Branch value={changesByDir.in.size}>
-          <In />
-        </Branch>
+      <Branch value={!prevDate}>
+        <ChangeBill>
+          <Branch value={changesByDir.in.size}>
+            <In />
+          </Branch>
 
-        <Branch value={changesByDir.out.size}>
-          <Out />
-        </Branch>
-      </ChangeBill>
+          <Branch value={changesByDir.out.size}>
+            <Out />
+          </Branch>
+        </ChangeBill>
+      </Branch>
     </Styled>
   );
 };
