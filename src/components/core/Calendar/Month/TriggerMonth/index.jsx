@@ -8,62 +8,42 @@ import Column from 'components/core/styled/Column';
 /**
  * Component `CalendarTrigger`
  * @param {Date} [date = new Date()]
- * @param {(date: Date) => void} [onChangeDate = () => {}]
  * @param {() => void} [onClickMonth = () => {}]
  * @param {() => void} [onClickYear = () => {}]
+ * @param {() => void} [onClickPrev = () => {}]
+ * @param {() => void} [onClickToday = () => {}]
+ * @param {() => void} [onClickNext = () => {}]
  */
 const CalendarTrigger = ({
   date = new Date(),
-  onChangeDate = () => {},
   onClickMonth = () => {},
   onClickYear = () => {},
-}) => {
-  const prevMonth = React.useCallback(
-    () =>
-      onChangeDate(prevDate => {
-        const nextDate = new Date(prevDate);
-        nextDate.setMonth(nextDate.getMonth() - 1);
-        return nextDate;
-      }),
-    [onChangeDate],
-  );
+  onClickPrev = () => {},
+  onClickToday = () => {},
+  onClickNext = () => {},
+}) => (
+  <Column>
+    <Row>
+      <Box width={3.5} onClick={onClickMonth}>
+        {dateToMonth(date)}
+      </Box>
+      <Box width={3.5} onClick={onClickYear}>
+        {date.getFullYear()}
+      </Box>
+    </Row>
 
-  const nextMonth = React.useCallback(
-    () =>
-      onChangeDate(prevDate => {
-        const nextDate = new Date(prevDate);
-        nextDate.setMonth(nextDate.getMonth() + 1);
-        return nextDate;
-      }),
-    [onChangeDate],
-  );
-
-  const moveToToday = React.useCallback(() => onChangeDate(new Date()), [onChangeDate]);
-
-  return (
-    <Column>
-      <Row>
-        <Box width={3.5} onClick={onClickMonth}>
-          {dateToMonth(date)}
-        </Box>
-        <Box width={3.5} onClick={onClickYear}>
-          {date.getFullYear()}
-        </Box>
-      </Row>
-
-      <Row>
-        <Box width={2} onClick={prevMonth} disabled={true}>
-          Prev
-        </Box>
-        <Box width={3} onClick={moveToToday}>
-          Today
-        </Box>
-        <Box width={2} onClick={nextMonth} disabled={true}>
-          Next
-        </Box>
-      </Row>
-    </Column>
-  );
-};
+    <Row>
+      <Box width={2} onClick={onClickPrev} disabled={true}>
+        Prev
+      </Box>
+      <Box width={3} onClick={onClickToday}>
+        Today
+      </Box>
+      <Box width={2} onClick={onClickNext} disabled={true}>
+        Next
+      </Box>
+    </Row>
+  </Column>
+);
 
 export default CalendarTrigger;

@@ -1,26 +1,15 @@
 import * as React from 'react';
 
-import CalendarMonth from 'components/core/Calendar/Month';
-import TriggerMonth from 'components/core/Calendar/Month/TriggerMonth';
 import List from 'components/core/List';
 import AppContext from 'components/subjects/contexts/App/context';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
-import CalendarYear from 'components/core/Calendar/Year';
 
-import Day from './Calendar/Day';
+import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
-  const {
-    date: [date, setDate],
-    changesBill,
-    checkList,
-  } = React.useContext(AppContext);
-  const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
-    changesBill,
-    date,
-  ]);
+  const { checkList } = React.useContext(AppContext);
 
   /**
    * Render item check list
@@ -41,23 +30,7 @@ const AppContent = () => {
       <TopToolbar />
 
       <Row style={{ flexWrap: 'wrap' }}>
-        <Column>
-          <TriggerMonth date={date} onChangeDate={setDate} />
-          <CalendarMonth
-            date={date}
-            ComponentDate={Day}
-            getDateProps={() => ({
-              changesBillMonth,
-            })}
-          />
-
-          <CalendarYear
-            date={date}
-            getMonthProps={() => ({
-              onClick: () => console.log('@@@'),
-            })}
-          />
-        </Column>
+        <Calendar />
 
         <List
           items={checkList.items}

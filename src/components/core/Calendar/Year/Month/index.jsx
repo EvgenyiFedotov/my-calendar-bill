@@ -7,7 +7,16 @@ import Styled from './styled';
 /**
  * Component `Month`
  * @param {Date} date
+ * @param {(date: Date) => {}} [onClick = () => {}]
  */
-const Month = ({ date, ...props }) => <Styled {...props}>{dateToShortMonth(date)}</Styled>;
+const Month = ({ date, onClick = () => {}, ...props }) => {
+  const onClickMonth = React.useCallback(() => onClick(date), [date, onClick]);
+
+  return (
+    <Styled {...props} onClick={onClickMonth}>
+      {dateToShortMonth(date)}
+    </Styled>
+  );
+};
 
 export default Month;
