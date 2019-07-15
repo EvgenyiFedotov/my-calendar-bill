@@ -14,7 +14,7 @@ import Day from './Day';
 
 const Calendar = () => {
   const {
-    date: [date, { prevMonth, nextMonth, today, setDate }],
+    date: [date, { prevMonth, nextMonth, today, setDate, prevYear, nextYear }],
     changesBill,
   } = React.useContext(AppContext);
   const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
@@ -24,17 +24,25 @@ const Calendar = () => {
   const [step, stepMethods] = useStepper(0, 1);
 
   const clickMonth = React.useCallback(() => {
-    stepMethods.next();
-  }, []);
+    if (step === 0) {
+      stepMethods.next();
+    } else {
+      stepMethods.setStep(0);
+    }
+  }, [stepMethods, step]);
 
   const prev = React.useCallback(() => {
     if (step === 0) {
       prevMonth();
+    } else if (step === 1) {
+      prevYear();
     }
   }, [step]);
   const next = React.useCallback(() => {
     if (step === 0) {
       nextMonth();
+    } else if (step === 1) {
+      nextYear();
     }
   }, [step]);
   const nextToday = React.useCallback(() => {

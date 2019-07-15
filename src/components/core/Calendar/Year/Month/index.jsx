@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { dateToShortMonth } from 'helpers/date';
+import { dateToShortMonth, isEqualMonth } from 'helpers/date';
+import Branch from 'components/core/Branch';
 
 import Styled from './styled';
 
@@ -14,7 +15,11 @@ const Month = ({ date, onClick = () => {}, ...props }) => {
 
   return (
     <Styled {...props} onClick={onClickMonth}>
-      {dateToShortMonth(date)}
+      <Branch value={isEqualMonth(date, new Date())}>
+        <b>{dateToShortMonth(date)}</b>
+      </Branch>
+
+      <Branch value={!isEqualMonth(date, new Date())}>{dateToShortMonth(date)}</Branch>
     </Styled>
   );
 };

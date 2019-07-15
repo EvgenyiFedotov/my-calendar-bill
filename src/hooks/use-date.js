@@ -27,7 +27,33 @@ export default (defaultDate = new Date()) => {
 
   const today = React.useCallback(() => setDate(new Date()), [setDate]);
 
-  return [date, {
-    setDate, prevMonth, nextMonth, today,
-  }];
+  const prevYear = React.useCallback(
+    () => setDate((prevDate) => {
+      const nextDate = new Date(prevDate);
+      nextDate.setFullYear(nextDate.getFullYear() - 1);
+      return nextDate;
+    }),
+    [setDate],
+  );
+
+  const nextYear = React.useCallback(
+    () => setDate((prevDate) => {
+      const nextDate = new Date(prevDate);
+      nextDate.setFullYear(nextDate.getFullYear() + 1);
+      return nextDate;
+    }),
+    [setDate],
+  );
+
+  return [
+    date,
+    {
+      setDate,
+      prevMonth,
+      nextMonth,
+      today,
+      prevYear,
+      nextYear,
+    },
+  ];
 };
