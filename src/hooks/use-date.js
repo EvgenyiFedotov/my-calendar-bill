@@ -45,6 +45,24 @@ export default (defaultDate = new Date()) => {
     [setDate],
   );
 
+  const prevYears = React.useCallback(
+    () => setDate((prevDate) => {
+      const nextDate = new Date(prevDate);
+      nextDate.setFullYear(nextDate.getFullYear() - 4);
+      return nextDate;
+    }),
+    [setDate],
+  );
+
+  const nextYears = React.useCallback(
+    () => setDate((prevDate) => {
+      const nextDate = new Date(prevDate);
+      nextDate.setFullYear(nextDate.getFullYear() + 4);
+      return nextDate;
+    }),
+    [setDate],
+  );
+
   return [
     date,
     {
@@ -54,6 +72,8 @@ export default (defaultDate = new Date()) => {
       today,
       prevYear,
       nextYear,
+      prevYears,
+      nextYears,
     },
   ];
 };
