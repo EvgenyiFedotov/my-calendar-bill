@@ -1,15 +1,23 @@
 import * as React from 'react';
 
-import { dateToShortMonth } from '../../../../../helpers/date';
+import { dateToMonth } from '../../../../../helpers/date';
 import Row from '../../../styled/Row';
 import Box from '../../../styled/Box';
+import Column from '../../../styled/Column';
 
 /**
  * Component `CalendarTrigger`
  * @param {Date} [date = new Date()]
- * @param {(date: Date) => {}} [onChangeDate = () => {}]
+ * @param {(date: Date) => void} [onChangeDate = () => {}]
+ * @param {() => void} [onClickMonth = () => {}]
+ * @param {() => void} [onClickYear = () => {}]
  */
-const CalendarTrigger = ({ date = new Date(), onChangeDate = () => {} }) => {
+const CalendarTrigger = ({
+  date = new Date(),
+  onChangeDate = () => {},
+  onClickMonth = () => {},
+  onClickYear = () => {},
+}) => {
   const prevMonth = React.useCallback(
     () =>
       onChangeDate(prevDate => {
@@ -33,20 +41,28 @@ const CalendarTrigger = ({ date = new Date(), onChangeDate = () => {} }) => {
   const moveToToday = React.useCallback(() => onChangeDate(new Date()), [onChangeDate]);
 
   return (
-    <Row>
-      <Box width={2} onClick={prevMonth} disabled={true}>
-        Prev
-      </Box>
-      <Box width={3} onClick={moveToToday}>
-        {`${dateToShortMonth(date)}' ${date
-          .getFullYear()
-          .toString()
-          .slice(2)}`}
-      </Box>
-      <Box width={2} onClick={nextMonth} disabled={true}>
-        Next
-      </Box>
-    </Row>
+    <Column>
+      <Row>
+        <Box width={3.5} onClick={onClickMonth}>
+          {dateToMonth(date)}
+        </Box>
+        <Box width={3.5} onClick={onClickYear}>
+          {date.getFullYear()}
+        </Box>
+      </Row>
+
+      <Row>
+        <Box width={2} onClick={prevMonth} disabled={true}>
+          Prev
+        </Box>
+        <Box width={3} onClick={moveToToday}>
+          Today
+        </Box>
+        <Box width={2} onClick={nextMonth} disabled={true}>
+          Next
+        </Box>
+      </Row>
+    </Column>
   );
 };
 

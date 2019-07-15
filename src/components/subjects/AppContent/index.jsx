@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import CalendarMonth from '../../core/Calendar/Month';
-import TriggerMonth from '../../core/Calendar/TriggerMonth';
+import TriggerMonth from '../../core/Calendar/Month/TriggerMonth';
 import List from '../../core/List';
 import AppContext from '../contexts/App/context';
 import Column from '../../core/styled/Column';

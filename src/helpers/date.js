@@ -136,6 +136,29 @@ export const MONTHS_SHORT = [
 ];
 export const dateToShortMonth = date => `${MONTHS_SHORT[date.getMonth()]}`;
 
+export const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+/**
+ * Get month how string
+ * @param {Date} date
+ *
+ * @returns {string}
+ */
+export const dateToMonth = date => MONTHS[date.getMonth()];
+
 /**
  * Get value is prev date
  * @param {Date} date1
