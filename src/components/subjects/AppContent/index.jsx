@@ -6,6 +6,7 @@ import List from '../../core/List';
 import AppContext from '../contexts/App/context';
 import Column from '../../core/styled/Column';
 import Row from '../../core/styled/Row';
+import CalendarYear from '../../core/Calendar/Year';
 
 import Day from './Day';
 import TopToolbar from './TopTollbar';
@@ -47,6 +48,13 @@ const AppContent = () => {
             ComponentDate={Day}
             getDateProps={() => ({
               changesBillMonth,
+            })}
+          />
+
+          <CalendarYear
+            date={date}
+            getMonthProps={() => ({
+              onClick: () => console.log('@@@'),
             })}
           />
         </Column>
