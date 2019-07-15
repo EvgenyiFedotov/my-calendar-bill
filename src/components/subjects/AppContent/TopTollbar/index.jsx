@@ -19,7 +19,7 @@ const TopTollbar = () => {
     checkList,
   ]);
   const [showChangesBill, setShowChangesBill] = React.useState(false);
-  const showChBill = React.useCallback(() => setShowChangesBill(true), [setShowChangesBill]);
+  const createBill = React.useCallback(() => setShowChangesBill(true), [setShowChangesBill]);
   const hideChBill = React.useCallback(() => setShowChangesBill(false), [setShowChangesBill]);
 
   return (
@@ -29,7 +29,7 @@ const TopTollbar = () => {
       </Button>
 
       <Row justifyContent="flex-end" alignItems="center">
-        <Button color="var(--bg-color)" onClick={showChBill}>
+        <Button color="var(--bg-color)" onClick={createBill}>
           Changes bill
         </Button>
         <LabelText color={count < planCount ? 'red' : 'green'}>

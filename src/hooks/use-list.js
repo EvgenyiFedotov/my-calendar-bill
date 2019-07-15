@@ -8,8 +8,8 @@ export default (defaultList = []) => {
   const [items, setItems] = React.useState(new Map(defaultList));
   const [item, setItem] = React.useState([]);
   const createItem = React.useCallback(
-    (defaultValues = {}, key = uuid()) => () => {
-      setItem([key, { ...defaultValues }]);
+    (defaultValues = {}, key = () => uuid()) => () => {
+      setItem([key(), { ...defaultValues }]);
     },
     [setItem],
   );
@@ -40,6 +40,7 @@ export default (defaultList = []) => {
   );
   const clearItem = React.useCallback(() => setItem([]), [setItem]);
   const editItem = React.useCallback(key => () => setItem([key, items.get(key)]), [setItem, items]);
+  const getItemProp = React.useCallback(nameProps => !!item[1] && item[1][nameProps], [item]);
 
   return {
     items,
@@ -51,5 +52,6 @@ export default (defaultList = []) => {
     deleteItem,
     clearItem,
     editItem,
+    getItemProp,
   };
 };
