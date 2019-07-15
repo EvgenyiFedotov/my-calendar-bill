@@ -1,12 +1,8 @@
 import * as React from 'react';
 
-import Calendar from '../../core/Calendar';
+import CalendarMonth from '../../core/Calendar/Month';
 import TriggerMonth from '../../core/Calendar/TriggerMonth';
-import EditDialog from '../../core/EditDialog';
-import ModalWindow from '../../core/ModalWindow';
 import List from '../../core/List';
-import LabelText from '../../core/LabelText';
-import Branch from '../../core/Branch';
 import AppContext from '../contexts/App/context';
 import Column from '../../core/styled/Column';
 import Row from '../../core/styled/Row';
@@ -46,7 +42,7 @@ const AppContent = () => {
       <Row style={{ flexWrap: 'wrap' }}>
         <Column>
           <TriggerMonth date={date} onChangeDate={setDate} />
-          <Calendar
+          <CalendarMonth
             date={date}
             ComponentDate={Day}
             getDateProps={() => ({

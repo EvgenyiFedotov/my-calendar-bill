@@ -4,7 +4,6 @@ import Button from '../../../core/styled/Button';
 import AppContext from '../../contexts/App/context';
 import LabelText from '../../../core/LabelText';
 import Row from '../../../core/styled/Row';
-import ModalWindow from '../../../core/ModalWindow';
 import Branch from '../../../core/Branch';
 
 import Styled from './styled';

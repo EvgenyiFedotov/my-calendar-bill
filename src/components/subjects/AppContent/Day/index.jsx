@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import AppContext from '../../contexts/App/context';
-import { dateToSQL, isPrevDate } from '../../../../helpers/date';
+import { dateToSQL, isPrevDate, isEqualDate } from '../../../../helpers/date';
 import Branch from '../../../core/Branch';
 
 import Styled from './styled';
@@ -31,10 +31,17 @@ const Day = props => {
   const click = React.useCallback(() => {
     console.log(checkList.getPlanCount(dateWeek));
   }, [checkList, dateWeek]);
+  const isToday = React.useMemo(() => isEqualDate(dateWeek, new Date()), [dateWeek]);
 
   return (
     <Styled {...{ ...props, prevDate }} onClick={click}>
-      <CheckResult {...check}>{dateWeek.getDate()}</CheckResult>
+      <CheckResult {...check}>
+        <Branch value={isToday}>
+          <b>{dateWeek.getDate()}</b>
+        </Branch>
+
+        <Branch value={!isToday}>{dateWeek.getDate()}</Branch>
+      </CheckResult>
 
       <Branch value={!prevDate}>
         <ChangeBill>

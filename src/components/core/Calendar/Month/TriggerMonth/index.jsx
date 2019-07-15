@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { dateToShortMonth } from '../../../../helpers/date';
-import Row from '../../styled/Row';
-import Box from '../../styled/Box';
+import { dateToShortMonth } from '../../../../../helpers/date';
+import Row from '../../../styled/Row';
+import Box from '../../../styled/Box';
 
 /**
  * Component `CalendarTrigger`

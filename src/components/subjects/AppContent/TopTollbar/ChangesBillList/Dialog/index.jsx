@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import ModalWindow from '../../../../../core/ModalWindow';
 import EditDialog from '../../../../../core/EditDialog';
-import Calendar from '../../../../../core/Calendar';
+import CalendarMonth from '../../../../../core/Calendar/Month';
 import InputText from '../../../../../core/styled/InputText';
 import AppContext from '../../../../contexts/App/context';
 import useField from '../../../../../../hooks/use-field';
@@ -28,7 +28,7 @@ const Dialog = () => {
         onCancel={changesBill.clearItem}
         onSave={save}
       >
-        <Calendar />
+        <CalendarMonth />
         <InputText
           ref={countRef}
           placeholder="Count"
