@@ -8,7 +8,7 @@ import Column from '../../core/styled/Column';
 import Row from '../../core/styled/Row';
 import CalendarYear from '../../core/Calendar/Year';
 
-import Day from './Day';
+import Day from './Calendar/Day';
 import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
