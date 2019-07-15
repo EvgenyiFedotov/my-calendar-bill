@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import useList from '../../../../hooks/use-list';
+import useList from 'hooks/use-list';
 import {
   dateToSQL, isPrevDate, eachDate, isEqualDate,
-} from '../../../../helpers/date';
+} from 'helpers/date';
 
 export default (changesBill) => {
   const checkList = useList([

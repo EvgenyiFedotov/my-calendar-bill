@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import Row from '../../../../core/styled/Row';
-import Button from '../../../../core/styled/Button';
-import AppContext from '../../../contexts/App/context';
-import List from '../../../../core/List';
-import LabelText from '../../../../core/LabelText';
-import Branch from '../../../../core/Branch';
-import ModalWindow from '../../../../core/ModalWindow';
+import Row from 'components/core/styled/Row';
+import Button from 'components/core/styled/Button';
+import AppContext from 'components/subjects/contexts/App/context';
+import List from 'components/core/List';
+import LabelText from 'components/core/LabelText';
+import Branch from 'components/core/Branch';
+import ModalWindow from 'components/core/ModalWindow';
 
 import Styled from './styled';
 import Dialog from './Dialog';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import AppContext from '../../../contexts/App/context';
-import { dateToSQL, isPrevDate, isEqualDate } from '../../../../../helpers/date';
-import Branch from '../../../../core/Branch';
+import AppContext from 'components/subjects/contexts/App/context';
+import { dateToSQL, isPrevDate, isEqualDate } from 'helpers/date';
+import Branch from 'components/core/Branch';
 
 import Styled from './styled';
 import ChangeBill, { In, Out } from './styled/ChangeBill';

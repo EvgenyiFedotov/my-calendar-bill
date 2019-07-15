@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { dateToShortMonth } from '../../../../../helpers/date';
+import { dateToShortMonth } from 'helpers/date';
 
 import Styled from './styled';
 

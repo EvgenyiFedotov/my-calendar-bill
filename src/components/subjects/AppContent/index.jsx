@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import CalendarMonth from '../../core/Calendar/Month';
-import TriggerMonth from '../../core/Calendar/Month/TriggerMonth';
-import List from '../../core/List';
-import AppContext from '../contexts/App/context';
-import Column from '../../core/styled/Column';
-import Row from '../../core/styled/Row';
-import CalendarYear from '../../core/Calendar/Year';
+import CalendarMonth from 'components/core/Calendar/Month';
+import TriggerMonth from 'components/core/Calendar/Month/TriggerMonth';
+import List from 'components/core/List';
+import AppContext from 'components/subjects/contexts/App/context';
+import Column from 'components/core/styled/Column';
+import Row from 'components/core/styled/Row';
+import CalendarYear from 'components/core/Calendar/Year';
 
 import Day from './Calendar/Day';
 import TopToolbar from './TopTollbar';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { getDatesMonths } from '../../../../helpers/date';
-import Column from '../../styled/Column';
+import { getDatesMonths } from 'helpers/date';
+import Column from 'components/core/styled/Column';
 
 import Day from './Day';
 import Week from './styled/Week';

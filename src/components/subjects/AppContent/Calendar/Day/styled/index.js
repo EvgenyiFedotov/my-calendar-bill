@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import Day from '../../../../../core/Calendar/Month/Day';
+import Day from 'components/core/Calendar/Month/Day';
 
 const color = ({ prevDate = false }) => (prevDate
   ? css`

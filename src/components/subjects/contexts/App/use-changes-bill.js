@@ -1,8 +1,8 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
 
-import useList from '../../../../hooks/use-list';
-import { dateToSQL } from '../../../../helpers/date';
+import useList from 'hooks/use-list';
+import { dateToSQL } from 'helpers/date';
 
 export default () => {
   const changesBill = useList([

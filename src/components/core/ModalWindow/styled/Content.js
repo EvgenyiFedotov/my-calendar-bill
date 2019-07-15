@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { shadow } from '../../styled/shadow-hover';
+import { shadow } from 'components/core/styled/shadow-hover';
 
 export default styled.div`
   background-color: var(--bg-color);

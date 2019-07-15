@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { dateToMonth } from '../../../../../helpers/date';
-import Row from '../../../styled/Row';
-import Box from '../../../styled/Box';
-import Column from '../../../styled/Column';
+import { dateToMonth } from 'helpers/date';
+import Row from 'components/core/styled/Row';
+import Box from 'components/core/styled/Box';
+import Column from 'components/core/styled/Column';
 
 /**
  * Component `CalendarTrigger`

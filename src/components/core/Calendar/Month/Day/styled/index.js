@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import Box from '../../../../styled/Box';
-import shadowHover from '../../../../styled/shadow-hover';
+import Box from 'components/core/styled/Box';
+import shadowHover from 'components/core/styled/shadow-hover';
 
 // Get background color hover
 export const color = ({ otherMonth, holiday, selected }) => {

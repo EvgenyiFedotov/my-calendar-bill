@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import AppGlobalStyled from '../../../core/styled/AppGlobal';
+import AppGlobalStyled from 'components/core/styled/AppGlobal';
 
 import Context from './context';
 import useChangesBill from './use-changes-bill';

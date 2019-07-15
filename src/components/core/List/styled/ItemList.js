@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import Box from '../../styled/Box';
-import shadowHover from '../../styled/shadow-hover';
-import { justifyContent, alignItems } from '../../styled/Row';
+import Box from 'components/core/styled/Box';
+import shadowHover from 'components/core/styled/shadow-hover';
+import { justifyContent, alignItems } from 'components/core/styled/Row';
 
 /**
  * Styled component `Item` (ListBills)

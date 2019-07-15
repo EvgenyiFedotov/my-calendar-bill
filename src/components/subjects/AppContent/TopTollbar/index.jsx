@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import Button from '../../../core/styled/Button';
-import AppContext from '../../contexts/App/context';
-import LabelText from '../../../core/LabelText';
-import Row from '../../../core/styled/Row';
-import Branch from '../../../core/Branch';
+import Button from 'components/core/styled/Button';
+import AppContext from 'components/subjects/contexts/App/context';
+import LabelText from 'components/core/LabelText';
+import Row from 'components/core/styled/Row';
+import Branch from 'components/core/Branch';
 
 import Styled from './styled';
 import ChangesBillList from './ChangesBillList';

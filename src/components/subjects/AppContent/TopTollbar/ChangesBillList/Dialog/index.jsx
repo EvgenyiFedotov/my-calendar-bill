@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import ModalWindow from '../../../../../core/ModalWindow';
-import EditDialog from '../../../../../core/EditDialog';
-import CalendarMonth from '../../../../../core/Calendar/Month';
-import InputText from '../../../../../core/styled/InputText';
-import AppContext from '../../../../contexts/App/context';
-import useField from '../../../../../../hooks/use-field';
+import ModalWindow from 'components/core/ModalWindow';
+import EditDialog from 'components/core/EditDialog';
+import CalendarMonth from 'components/core/Calendar/Month';
+import InputText from 'components/core/styled/InputText';
+import AppContext from 'components/subjects/contexts/App/context';
+import useField from 'hooks/use-field';
 
 const Dialog = () => {
   const { changesBill } = React.useContext(AppContext);

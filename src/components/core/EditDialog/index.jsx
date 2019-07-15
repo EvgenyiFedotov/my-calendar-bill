@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Row from '../styled/Row';
-import Button from '../styled/Button';
+import Row from 'components/core/styled/Row';
+import Button from 'components/core/styled/Button';
 
 import Styled from './styled';
 import Content from './styled/Content';

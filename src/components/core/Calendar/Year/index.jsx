@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Column from '../../styled/Column';
-import Row from '../../styled/Row';
+import Column from 'components/core/styled/Column';
+import Row from 'components/core/styled/Row';
 
 import Month from './Month';
 
