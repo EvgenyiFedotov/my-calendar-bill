@@ -19,7 +19,7 @@ export default createGlobalStyle`
     --green-color: #00695C;
     --gray-color: #999999;
 
-    --space: 8px;
+    --space: 9px;
 
     --border-radius: calc(var(--space) * 0.5);
 

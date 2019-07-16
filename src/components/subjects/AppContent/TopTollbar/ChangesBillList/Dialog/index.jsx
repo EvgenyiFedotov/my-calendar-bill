@@ -12,10 +12,15 @@ import useSelectedDate from 'hooks/use-selected-date';
 
 const Dialog = () => {
   const { changesBill } = React.useContext(AppContext);
+  const [titleRef, title] = useField();
   const [countRef, count] = useField();
-  const stepperDate = useStepperDate(useDate());
-  const selectedDate = useSelectedDate(new Date(changesBill.getItemProp('date') || new Date()));
+  const date = React.useMemo(() => new Date(changesBill.getItemProp('date') || new Date()), [
+    changesBill,
+  ]);
+  const stepperDate = useStepperDate(useDate(date));
+  const selectedDate = useSelectedDate(date);
   const save = React.useCallback(() => {
+    const titleValue = title.getValue();
     const countValue = parseInt(count.getValue(), 10);
     const selectedDateValue = selectedDate[0];
 
@@ -23,9 +28,10 @@ const Dialog = () => {
       changesBill.saveItem({
         count: countValue,
         date: new Date(selectedDateValue).getTime(),
+        title: titleValue,
       });
     }
-  }, [changesBill, count, selectedDate]);
+  }, [changesBill, title, count, selectedDate]);
 
   return (
     <ModalWindow zIndex={200} onClose={changesBill.clearItem}>
@@ -34,7 +40,14 @@ const Dialog = () => {
         isNew={!changesBill.items.has(changesBill.item[0])}
         onCancel={changesBill.clearItem}
         onSave={save}
+        onDelete={() => changesBill.deleteItem()}
       >
+        <InputText
+          ref={titleRef}
+          placeholder="Title"
+          defaultValue={changesBill.getItemProp('title') || ''}
+        />
+
         <Calendar stepperDate={stepperDate} selectedDate={selectedDate} />
 
         <InputText
