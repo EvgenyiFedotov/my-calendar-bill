@@ -7,20 +7,25 @@ import AppContext from 'components/subjects/contexts/App/context';
 import useField from 'hooks/use-field';
 import useDate from 'hooks/use-date';
 import Calendar from 'components/subjects/AppContent/Calendar';
+import useStepperDate from 'hooks/use-stepper-date';
+import useSelectedDate from 'hooks/use-selected-date';
 
 const Dialog = () => {
   const { changesBill } = React.useContext(AppContext);
   const [countRef, count] = useField();
-  const date = useDate();
+  const stepperDate = useStepperDate(useDate());
+  const selectedDate = useSelectedDate(new Date(changesBill.getItemProp('date') || new Date()));
   const save = React.useCallback(() => {
     const countValue = parseInt(count.getValue(), 10);
+    const selectedDateValue = selectedDate[0];
 
-    if (typeof countValue === 'number' && !isNaN(countValue)) {
+    if (typeof countValue === 'number' && !isNaN(countValue) && selectedDateValue) {
       changesBill.saveItem({
         count: countValue,
+        date: new Date(selectedDateValue).getTime(),
       });
     }
-  }, [changesBill, count]);
+  }, [changesBill, count, selectedDate]);
 
   return (
     <ModalWindow zIndex={200} onClose={changesBill.clearItem}>
@@ -30,7 +35,8 @@ const Dialog = () => {
         onCancel={changesBill.clearItem}
         onSave={save}
       >
-        <Calendar date={date} onSelectedDate={dd => console.log('@', dd)} />
+        <Calendar stepperDate={stepperDate} selectedDate={selectedDate} />
+
         <InputText
           ref={countRef}
           placeholder="Count"

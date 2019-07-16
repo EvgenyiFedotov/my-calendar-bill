@@ -5,7 +5,8 @@ import useStepper from 'hooks/use-stepper';
 /**
  * @param {ReturtUseDate} date
  */
-export default ([,
+export default ([
+  date,
   {
     prevMonth, nextMonth, today, setDate, prevYear, nextYear, prevYears, nextYears,
   },
@@ -56,6 +57,7 @@ export default ([,
   );
 
   return [
+    date,
     step,
     {
       clickMonth,

@@ -4,12 +4,14 @@ import List from 'components/core/List';
 import AppContext from 'components/subjects/contexts/App/context';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
+import useSelectedDate from 'hooks/use-selected-date';
 
 import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
-  const { checkList, date } = React.useContext(AppContext);
+  const { checkList, stepperDate } = React.useContext(AppContext);
+  const selectedDate = useSelectedDate(new Date());
 
   /**
    * Render item check list
@@ -39,7 +41,7 @@ const AppContent = () => {
             maxWidth: 1024,
           }}
         >
-          <Calendar date={date} />
+          <Calendar stepperDate={stepperDate} selectedDate={selectedDate} />
         </Row>
       </Row>
 

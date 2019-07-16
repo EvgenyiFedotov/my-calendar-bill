@@ -9,24 +9,30 @@ import Stepper from 'components/core/Stepper';
 import Step from 'components/core/Stepper/Step';
 import { side } from 'components/core/styled/Box';
 import CalendarYears from 'components/core/Calendar/Years';
-import useSelectedDate from 'hooks/use-selected-date';
 
 import Day from './Day';
 
 /**
  * Component `Calendar`
- * @param {ReturtUseDate} date
+ * @param {ReturnUseStepperDate} stepperDate
+ * @param {ReturnUseSelectedDate} [selectedDate]
  */
-const Calendar = ({ date: [date] }) => {
-  const {
-    changesBill,
-    stepperDate: [step, { clickMonth, clickYear, clickToday, prevDate, nextDate, setDateWithStep }],
-  } = React.useContext(AppContext);
+const Calendar = (
+  {
+    stepperDate: [
+      date,
+      step,
+      { clickMonth, clickYear, clickToday, prevDate, nextDate, setDateWithStep },
+    ],
+    selectedDate,
+  },
+  ref,
+) => {
+  const { changesBill } = React.useContext(AppContext);
   const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
     changesBill,
     date,
   ]);
-  const [, { setSelectedDate, isSelectedDate }] = useSelectedDate(new Date());
 
   return (
     <Column style={{ width: side(7) }}>
@@ -46,8 +52,8 @@ const Calendar = ({ date: [date] }) => {
             ComponentDate={Day}
             getDateProps={({ dateWeek }) => ({
               changesBillMonth,
-              onClick: setSelectedDate,
-              selected: isSelectedDate(dateWeek),
+              onClick: selectedDate && selectedDate[1].setSelectedDate,
+              selected: selectedDate && selectedDate[1].isSelectedDate(dateWeek),
             })}
           />
         </Step>
@@ -74,4 +80,4 @@ const Calendar = ({ date: [date] }) => {
   );
 };
 
-export default Calendar;
+export default React.forwardRef(Calendar);

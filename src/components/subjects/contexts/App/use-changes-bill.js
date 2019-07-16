@@ -2,7 +2,7 @@ import * as React from 'react';
 import uuid from 'uuid/v4';
 
 import useList from 'hooks/use-list';
-import { dateToSQL } from 'helpers/date';
+import { dateToSQL, isEqualDate } from 'helpers/date';
 
 export default () => {
   const changesBill = useList([
@@ -37,25 +37,33 @@ export default () => {
   const getChangesBillMonth = React.useCallback(
     (date) => {
       const result = new Map();
-      const add = (dateSQL, keyChangeBill, changeBill) => {
+      const getDateMonth = (changeBill, getMonth = date => date.getMonth()) => {
+        const dateMonth = new Date(changeBill.date);
+        dateMonth.setFullYear(date.getFullYear());
+        dateMonth.setMonth(getMonth(dateMonth));
+        return dateMonth;
+      };
+      const add = ([keyChangeBill, changeBill], getMonth) => {
+        const dateMonth = getDateMonth(changeBill, getMonth);
+        const dateSQL = dateToSQL(dateMonth);
         if (!result.has(dateSQL)) result.set(dateSQL, new Map());
         result.get(dateSQL).set(keyChangeBill, changeBill);
       };
 
-      Array.from(changesBill.items).forEach(([keyChangeBill, changeBill]) => {
-        const dateMonth = new Date(changeBill.date);
-        dateMonth.setFullYear(date.getFullYear());
-        dateMonth.setMonth(date.getMonth());
-        const dateMonthSQL = dateToSQL(dateMonth);
+      Array.from(changesBill.items).forEach((changeBill) => {
+        if (changeBill[1].type === 'repeat') {
+          add(changeBill);
 
-        if (changeBill.type === 'repeat') {
-          add(dateMonthSQL, keyChangeBill, changeBill);
-        } else if (changeBill.type === 'once') {
-          if (dateMonthSQL === dateToSQL(new Date(changeBill.date))) {
-            add(dateMonthSQL, keyChangeBill, changeBill);
-          }
-        } else {
-          // pass
+          // Prev month
+          add(changeBill, date => date.getMonth() - 1);
+
+          // Next month
+          add(changeBill, date => date.getMonth() + 1);
+        } else if (
+          changeBill[1].type === 'once'
+          && isEqualDate(getDateMonth(changeBill[1]), new Date(changeBill[1].date))
+        ) {
+          add(changeBill);
         }
       });
 

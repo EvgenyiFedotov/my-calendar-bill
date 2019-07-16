@@ -7,7 +7,7 @@ import Context from './context';
 import useChangesBill from './use-changes-bill';
 import useCheckList from './use-check-list';
 import useTheme from './use-theme';
-import useStepperDate from './use-stepper-date';
+import useStepperDate from 'hooks/use-stepper-date';
 
 const App = ({ children }) => {
   const date = useDate();
