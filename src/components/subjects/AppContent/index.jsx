@@ -9,7 +9,7 @@ import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
-  const { checkList } = React.useContext(AppContext);
+  const { checkList, date } = React.useContext(AppContext);
 
   /**
    * Render item check list
@@ -29,17 +29,39 @@ const AppContent = () => {
     <Column>
       <TopToolbar />
 
-      <Row style={{ flexWrap: 'wrap' }}>
-        <Calendar />
+      <Row justifyContent="center">
+        <Row
+          style={{
+            flexWrap: 'wrap',
+            overflowY: 'auto',
+            flex: 1,
+            padding: '0 16px',
+            maxWidth: 1024,
+          }}
+        >
+          <Calendar date={date} />
+        </Row>
+      </Row>
 
-        <List
-          items={checkList.items}
-          style={{ flex: 1, minWidth: '300px' }}
-          getItemProps={item => ({
-            children: renderItemCheckList(item),
-            justifyContent: 'space-between',
-          })}
-        />
+      <Row justifyContent="center">
+        <Row
+          style={{
+            flexWrap: 'wrap',
+            overflowY: 'auto',
+            flex: 1,
+            padding: '0 16px',
+            maxWidth: 1024,
+          }}
+        >
+          <List
+            items={checkList.items}
+            style={{ flex: 1, minWidth: '300px' }}
+            getItemProps={item => ({
+              children: renderItemCheckList(item),
+              justifyContent: 'space-between',
+            })}
+          />
+        </Row>
       </Row>
     </Column>
   );

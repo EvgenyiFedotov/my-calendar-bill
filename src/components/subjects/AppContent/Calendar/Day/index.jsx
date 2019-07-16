@@ -11,13 +11,14 @@ import CheckResult from './styled/CheckResult';
 /**
  * Component `Day`
  * @param {Object} changesBillMonth
+ * @param {(date: Date) => void} [onClick = () => {}]
  */
 const Day = props => {
   const {
     changesBill: { getChangesByDirection },
     checkList,
   } = React.useContext(AppContext);
-  const { dateWeek, changesBillMonth } = props;
+  const { dateWeek, changesBillMonth, onClick = () => {} } = props;
   const dateWeekSQL = React.useMemo(() => dateToSQL(dateWeek), [dateWeek]);
   const changesByDir = React.useMemo(
     () => getChangesByDirection(changesBillMonth.get(dateWeekSQL)),
@@ -28,10 +29,12 @@ const Day = props => {
     dateWeek,
     checkList.firstCheck,
   ]);
-  const click = React.useCallback(() => {
-    console.log(checkList.getPlanCount(dateWeek));
-  }, [checkList, dateWeek]);
   const isToday = React.useMemo(() => isEqualDate(dateWeek, new Date()), [dateWeek]);
+  const click = React.useCallback(() => {
+    console.log('Plan count:', checkList.getPlanCount(dateWeek));
+
+    onClick(dateWeek);
+  }, [checkList, dateWeek]);
 
   return (
     <Styled {...{ ...props, prevDate }} onClick={click}>

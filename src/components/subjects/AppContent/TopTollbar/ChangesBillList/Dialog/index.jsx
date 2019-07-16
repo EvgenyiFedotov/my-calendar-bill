@@ -2,14 +2,16 @@ import * as React from 'react';
 
 import ModalWindow from 'components/core/ModalWindow';
 import EditDialog from 'components/core/EditDialog';
-import CalendarMonth from 'components/core/Calendar/Month';
 import InputText from 'components/core/styled/InputText';
 import AppContext from 'components/subjects/contexts/App/context';
 import useField from 'hooks/use-field';
+import useDate from 'hooks/use-date';
+import Calendar from 'components/subjects/AppContent/Calendar';
 
 const Dialog = () => {
   const { changesBill } = React.useContext(AppContext);
   const [countRef, count] = useField();
+  const date = useDate();
   const save = React.useCallback(() => {
     const countValue = parseInt(count.getValue(), 10);
 
@@ -28,7 +30,7 @@ const Dialog = () => {
         onCancel={changesBill.clearItem}
         onSave={save}
       >
-        <CalendarMonth />
+        <Calendar date={date} onSelectedDate={dd => console.log('@', dd)} />
         <InputText
           ref={countRef}
           placeholder="Count"

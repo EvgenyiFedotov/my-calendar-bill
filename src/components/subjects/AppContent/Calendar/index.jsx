@@ -10,22 +10,26 @@ import Step from 'components/core/Stepper/Step';
 import useStepper from 'hooks/use-stepper';
 import { side } from 'components/core/styled/Box';
 import CalendarYears from 'components/core/Calendar/Years';
+import useSelectedDate from 'hooks/use-selected-date';
 
 import Day from './Day';
 
-const Calendar = () => {
-  const {
-    date: [
-      date,
-      { prevMonth, nextMonth, today, setDate, prevYear, nextYear, prevYears, nextYears },
-    ],
-    changesBill,
-  } = React.useContext(AppContext);
+/**
+ * Component `Calendar`
+ * @param {ReturtUseDate} date
+ * @param {(date: Date) => void} [onSelectedDate = () => {}]
+ */
+const Calendar = ({
+  date: [date, { prevMonth, nextMonth, today, setDate, prevYear, nextYear, prevYears, nextYears }],
+  onSelectedDate = () => {},
+}) => {
+  const { changesBill } = React.useContext(AppContext);
   const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
     changesBill,
     date,
   ]);
-  const [step, stepMethods] = useStepper(2, 2);
+  const [step, stepMethods] = useStepper(0, 2);
+  const [, { setSelectedDate, isSelectedDate }] = useSelectedDate();
 
   const clickMonth = React.useCallback(() => stepMethods.setStep(step !== 1 ? 1 : 0), [
     stepMethods,
@@ -45,7 +49,8 @@ const Calendar = () => {
     } else if (step === 2) {
       prevYears();
     }
-  }, [step]);
+  }, [step, prevMonth, prevYear, prevYears]);
+
   const next = React.useCallback(() => {
     if (step === 0) {
       nextMonth();
@@ -54,16 +59,17 @@ const Calendar = () => {
     } else if (step === 2) {
       nextYears();
     }
-  }, [step]);
+  }, [step, nextMonth, nextYear, nextYears]);
+
   const nextToday = React.useCallback(() => {
     today();
     stepMethods.setStep(0);
-  }, [today]);
+  }, [today, stepMethods]);
 
   const setDateByDate = React.useCallback(
-    date => {
+    (nextStep = 0) => date => {
       setDate(date);
-      stepMethods.setStep(0);
+      stepMethods.setStep(nextStep);
     },
     [setDate, stepMethods],
   );
@@ -84,8 +90,10 @@ const Calendar = () => {
           <CalendarMonth
             date={date}
             ComponentDate={Day}
-            getDateProps={() => ({
+            getDateProps={({ dateWeek }) => ({
               changesBillMonth,
+              onClick: setSelectedDate,
+              selected: isSelectedDate(dateWeek),
             })}
           />
         </Step>
@@ -94,7 +102,7 @@ const Calendar = () => {
           <CalendarYear
             date={date}
             getMonthProps={() => ({
-              onClick: setDateByDate,
+              onClick: setDateByDate(),
             })}
           />
         </Step>
@@ -103,7 +111,7 @@ const Calendar = () => {
           <CalendarYears
             date={date}
             getYearProps={() => ({
-              onClick: setDateByDate,
+              onClick: setDateByDate(1),
             })}
           />
         </Step>

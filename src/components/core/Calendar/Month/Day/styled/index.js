@@ -7,7 +7,7 @@ import shadowHover from 'components/core/styled/shadow-hover';
 export const color = ({ otherMonth, holiday, selected }) => {
   if (selected) {
     return css`
-      color: var(--bg-color);
+      border: 1px solid var(--main-color);
     `;
   }
 
@@ -28,7 +28,7 @@ export const color = ({ otherMonth, holiday, selected }) => {
   }
 };
 
-export const backgroundColor = ({ selected }) => (selected ? 'var(--main-lg-color)' : undefined);
+// export const backgroundColor = ({ selected }) => (selected ? 'var(--main-lg-color)' : undefined);
 
 /**
  * Styled component `Day`
@@ -39,6 +39,5 @@ export const backgroundColor = ({ selected }) => (selected ? 'var(--main-lg-colo
 export default styled(Box)`
   position: relative;
   ${color};
-  background-color: ${backgroundColor};
   ${shadowHover};
 `;
