@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import AppGlobalStyled from 'components/core/styled/AppGlobal';
 import useDate from 'hooks/use-date';
 
 import Context from './context';
@@ -18,7 +17,6 @@ const App = ({ children }) => {
 
   return (
     <Context.Provider value={{ date, stepperDate, changesBill, checkList, theme }}>
-      <AppGlobalStyled theme={theme[0]} />
       {children}
     </Context.Provider>
   );
