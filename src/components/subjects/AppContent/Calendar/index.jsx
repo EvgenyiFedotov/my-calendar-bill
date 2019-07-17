@@ -17,17 +17,14 @@ import Day from './Day';
  * @param {ReturnUseStepperDate} stepperDate
  * @param {ReturnUseSelectedDate} [selectedDate]
  */
-const Calendar = (
-  {
-    stepperDate: [
-      date,
-      step,
-      { clickMonth, clickYear, clickToday, prevDate, nextDate, setDateWithStep },
-    ],
-    selectedDate,
-  },
-  ref,
-) => {
+const Calendar = ({
+  stepperDate: [
+    date,
+    step,
+    { clickMonth, clickYear, clickToday, prevDate, nextDate, setDateWithStep },
+  ],
+  selectedDate,
+}) => {
   const { changesBill } = React.useContext(AppContext);
   const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
     changesBill,
@@ -80,4 +77,4 @@ const Calendar = (
   );
 };
 
-export default React.forwardRef(Calendar);
+export default Calendar;

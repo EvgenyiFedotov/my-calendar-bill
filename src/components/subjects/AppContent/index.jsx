@@ -11,7 +11,6 @@ import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
   const { checkList, stepperDate } = React.useContext(AppContext);
-  const selectedDate = useSelectedDate(new Date());
 
   /**
    * Render item check list
@@ -41,7 +40,7 @@ const AppContent = () => {
             maxWidth: 1024,
           }}
         >
-          <Calendar stepperDate={stepperDate} selectedDate={selectedDate} />
+          <Calendar stepperDate={stepperDate} />
         </Row>
       </Row>
 

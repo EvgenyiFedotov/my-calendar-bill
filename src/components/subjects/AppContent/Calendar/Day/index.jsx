@@ -31,10 +31,10 @@ const Day = props => {
   ]);
   const isToday = React.useMemo(() => isEqualDate(dateWeek, new Date()), [dateWeek]);
   const click = React.useCallback(() => {
-    console.log('Plan count:', checkList.getPlanCount(dateWeek));
+    // console.log('Plan count:', checkList.getPlanCount(dateWeek));
 
     onClick(dateWeek);
-  }, [checkList, dateWeek]);
+  }, [onClick, dateWeek]);
 
   return (
     <Styled {...{ ...props, prevDate }} onClick={click}>
