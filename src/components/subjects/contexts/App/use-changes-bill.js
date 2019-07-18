@@ -3,7 +3,6 @@ import rc4 from 'crypto-js/rc4';
 import encUtf8 from 'crypto-js/enc-utf8';
 
 import useList from 'hooks/use-list';
-import useListIdb from 'hooks/use-list-idb';
 import { dateToSQL, isEqualDate } from 'helpers/date';
 import UserContext from 'components/subjects/contexts/User/context';
 
@@ -11,10 +10,6 @@ export default (db) => {
   const { key: [key] } = React.useContext(UserContext);
 
   const changesBill = useList();
-  const { loadItems, saveItem, deleteItem } = useListIdb(changesBill, db, 'changesBill', {
-    stringifyItem: item => rc4.encrypt(JSON.stringify(item), key).toString(),
-    parseItem: item => JSON.parse(rc4.decrypt(item, key).toString(encUtf8)),
-  });
 
   /**
    * Get changes bill for month
@@ -89,13 +84,9 @@ export default (db) => {
     return result;
   }, []);
 
-  React.useEffect(() => {
-    loadItems();
-  }, [loadItems]);
 
   return {
     ...changesBill,
-    loadItems, saveItem, deleteItem,
     getChangesBillMonth,
     getChangesByDirection,
   };

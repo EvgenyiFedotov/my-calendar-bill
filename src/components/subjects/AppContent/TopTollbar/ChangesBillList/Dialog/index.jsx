@@ -8,7 +8,6 @@ import useField from 'hooks/use-field';
 import useDate from 'hooks/use-date';
 import Calendar from 'components/subjects/AppContent/Calendar';
 import useStepperDate from 'hooks/use-stepper-date';
-import useSelectedDate from 'hooks/use-selected-date';
 
 const Dialog = () => {
   const { changesBill } = React.useContext(AppContext);
@@ -18,16 +17,15 @@ const Dialog = () => {
     changesBill,
   ]);
   const stepperDate = useStepperDate(useDate(date));
-  const selectedDate = useSelectedDate(date);
+  const [selectedDate, setSelectedDate] = React.useState(date);
   const save = React.useCallback(() => {
     const titleValue = title.getValue();
     const countValue = parseInt(count.getValue(), 10);
-    const selectedDateValue = selectedDate[0];
 
-    if (typeof countValue === 'number' && !isNaN(countValue) && selectedDateValue) {
+    if (typeof countValue === 'number' && !isNaN(countValue) && selectedDate) {
       changesBill.saveItem({
         count: countValue,
-        date: new Date(selectedDateValue).getTime(),
+        date: new Date(selectedDate).getTime(),
         title: titleValue,
         type: 'repeat',
       });
@@ -49,7 +47,11 @@ const Dialog = () => {
           defaultValue={changesBill.getItemProp('title') || ''}
         />
 
-        <Calendar stepperDate={stepperDate} selectedDate={selectedDate} />
+        <Calendar
+          stepperDate={stepperDate}
+          selectedDate={selectedDate}
+          onClickDate={setSelectedDate}
+        />
 
         <InputText
           ref={countRef}

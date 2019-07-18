@@ -18,8 +18,10 @@ const App = ({ children }) => {
   const date = useDate();
   const stepperDate = useStepperDate(date);
   const changesBill = useChangesBill(db);
-  const checkList = useCheckList(changesBill);
+  const checkList = useCheckList(db, changesBill);
   const theme = useTheme();
+
+  console.log('app');
 
   return (
     <Context.Provider value={{ date, stepperDate, changesBill, checkList, theme }}>

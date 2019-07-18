@@ -9,6 +9,12 @@ import Branch from 'components/core/Branch';
 import UserContext from 'components/subjects/contexts/User/context';
 import Auth from 'components/subjects/AppContent/Auth';
 
+import ModalWindow from 'components/core/ModalWindow';
+import EditDialog from 'components/core/EditDialog';
+import InputText from 'components/core/styled/InputText';
+import useField from 'hooks/use-field';
+import { dateToSQL } from 'helpers/date';
+
 import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
 
@@ -36,6 +42,21 @@ const AppContent = () => {
     [],
   );
 
+  const [countRef, count] = useField();
+  const [planCountRef, planCount] = useField();
+  const save = React.useCallback(() => {
+    const countValue = parseInt(count.getValue(), 10);
+    const planCountValue = parseInt(planCount.getValue(), 10);
+
+    if (planCountValue) {
+      console.log(checkList.item);
+      checkList.saveItem({
+        count: isNaN(countValue) ? null : countValue,
+        planCount: isNaN(planCountValue) ? 0 : planCountValue,
+      });
+    }
+  }, [checkList, count, planCount]);
+
   return (
     <>
       <AppGlobalStyled theme={theme} />
@@ -58,7 +79,10 @@ const AppContent = () => {
                 maxWidth: 1024,
               }}
             >
-              <Calendar stepperDate={stepperDate} />
+              <Calendar
+                stepperDate={stepperDate}
+                onClickDate={checkList.createItem(date => dateToSQL(date))}
+              />
             </Row>
           </Row>
 
@@ -82,6 +106,15 @@ const AppContent = () => {
               />
             </Row>
           </Row>
+
+          <Branch value={checkList.item[0]}>
+            <ModalWindow onClose={checkList.clearItem}>
+              <EditDialog isNew={checkList} onCancel={checkList.clearItem} onSave={save}>
+                <InputText placeholder="Count" ref={countRef} />
+                <InputText placeholder="Plan count" ref={planCountRef} />
+              </EditDialog>
+            </ModalWindow>
+          </Branch>
         </Column>
       </Branch>
     </>

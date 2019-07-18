@@ -9,13 +9,15 @@ import Stepper from 'components/core/Stepper';
 import Step from 'components/core/Stepper/Step';
 import { side } from 'components/core/styled/Box';
 import CalendarYears from 'components/core/Calendar/Years';
+import { isEqualDate } from 'helpers/date';
 
 import Day from './Day';
 
 /**
  * Component `Calendar`
  * @param {ReturnUseStepperDate} stepperDate
- * @param {ReturnUseSelectedDate} [selectedDate]
+ * @param {Date} [selectedDate]
+ * @param {(date: Date) => void} [onClickDate]
  */
 const Calendar = ({
   stepperDate: [
@@ -24,6 +26,7 @@ const Calendar = ({
     { clickMonth, clickYear, clickToday, prevDate, nextDate, setDateWithStep },
   ],
   selectedDate,
+  onClickDate,
 }) => {
   const { changesBill } = React.useContext(AppContext);
   const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
@@ -49,8 +52,8 @@ const Calendar = ({
             ComponentDate={Day}
             getDateProps={({ dateWeek }) => ({
               changesBillMonth,
-              onClick: selectedDate && selectedDate[1].setSelectedDate,
-              selected: selectedDate && selectedDate[1].isSelectedDate(dateWeek),
+              onClick: onClickDate,
+              selected: selectedDate ? isEqualDate(selectedDate, dateWeek) : undefined,
             })}
           />
         </Step>
