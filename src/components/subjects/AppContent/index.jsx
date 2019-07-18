@@ -36,8 +36,6 @@ const AppContent = () => {
     [],
   );
 
-  console.log('key', key);
-
   return (
     <>
       <AppGlobalStyled theme={theme} />

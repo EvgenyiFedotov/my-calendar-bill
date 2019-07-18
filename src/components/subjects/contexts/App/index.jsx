@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { openDB } from 'helpers/index-db';
 
 import useDate from 'hooks/use-date';
 
@@ -8,10 +9,15 @@ import useCheckList from './use-check-list';
 import useTheme from './use-theme';
 import useStepperDate from 'hooks/use-stepper-date';
 
+const db = openDB({
+  tables: ['changesBill', 'checkList'],
+  version: 3,
+});
+
 const App = ({ children }) => {
   const date = useDate();
   const stepperDate = useStepperDate(date);
-  const changesBill = useChangesBill();
+  const changesBill = useChangesBill(db);
   const checkList = useCheckList(changesBill);
   const theme = useTheme();
 

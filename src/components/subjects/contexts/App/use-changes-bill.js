@@ -1,32 +1,12 @@
 import * as React from 'react';
-import uuid from 'uuid/v4';
 
 import useList from 'hooks/use-list';
+import useListIdb from 'hooks/use-list-idb';
 import { dateToSQL, isEqualDate } from 'helpers/date';
 
-export default () => {
-  const changesBill = useList([
-    [uuid(), { date: new Date('2019-07-10').getTime(), type: 'repeat', count: 1000 }],
-    [uuid(), { date: new Date('2019-07-19').getTime(), type: 'repeat', count: -500 }],
-    [uuid(), { date: new Date('2019-07-25').getTime(), type: 'repeat', count: 1000 }],
-    [uuid(), { date: new Date('2019-07-09').getTime(), type: 'repeat', count: -300 }],
-    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: -500 }],
-    [uuid(), { date: new Date('2019-07-30').getTime(), type: 'once', count: 1000 }],
-    [uuid(), { date: new Date('2019-07-31').getTime(), type: 'once', count: -300 }],
-    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
-    [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
-    [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
-    [uuid(), { date: new Date('2019-07-30').getTime(), type: 'once', count: 1000 }],
-    [uuid(), { date: new Date('2019-07-31').getTime(), type: 'once', count: -300 }],
-    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
-    [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
-    [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
-    [uuid(), { date: new Date('2019-07-30').getTime(), type: 'once', count: 1000 }],
-    [uuid(), { date: new Date('2019-07-31').getTime(), type: 'once', count: -300 }],
-    [uuid(), { date: new Date('2019-07-29').getTime(), type: 'once', count: 170 }],
-    [uuid(), { date: new Date('2019-07-19').getTime(), type: 'once', count: -100 }],
-    [uuid(), { date: new Date('2019-08-03').getTime(), type: 'once', count: -70 }],
-  ]);
+export default (db) => {
+  const changesBill = useList();
+  const { loadItems, saveItem, deleteItem } = useListIdb(changesBill, db, 'changesBill');
 
   /**
    * Get changes bill for month
@@ -101,8 +81,13 @@ export default () => {
     return result;
   }, []);
 
+  React.useEffect(() => {
+    loadItems();
+  }, [loadItems]);
+
   return {
     ...changesBill,
+    loadItems, saveItem, deleteItem,
     getChangesBillMonth,
     getChangesByDirection,
   };

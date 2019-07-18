@@ -29,6 +29,7 @@ const Dialog = () => {
         count: countValue,
         date: new Date(selectedDateValue).getTime(),
         title: titleValue,
+        type: 'repeat',
       });
     }
   }, [changesBill, title, count, selectedDate]);
