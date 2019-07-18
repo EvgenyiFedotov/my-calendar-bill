@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { methodsTable } from 'helpers/index-db';
 
-import useList from './use-list';
-
 /**
  * @param {Promise<IndexDB>} db
  * @param {string} nameTable
@@ -43,7 +41,13 @@ export default (list, db, nameTable, options = {}) => {
    */
   const loadItems = React.useCallback(
     () => table
-      .getMap(item => (parseItem ? parseItem(item) : JSON.parse(item)))
+      .getMap((item) => {
+        try {
+          return parseItem ? parseItem(item) : JSON.parse(item);
+        } catch (e) {
+          return {};
+        }
+      })
       .then(items => setItems(items)),
     [table, setItems, parseItem],
   );
