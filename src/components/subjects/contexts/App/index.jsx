@@ -4,10 +4,10 @@ import { openDB } from 'helpers/index-db';
 import useDate from 'hooks/use-date';
 
 import Context from './context';
-import useChangesBill from './use-changes-bill';
-import useCheckList from './use-check-list';
 import useTheme from './use-theme';
 import useStepperDate from 'hooks/use-stepper-date';
+import useList from 'hooks/use-list';
+import { dateToSQL } from 'helpers/date';
 
 const db = openDB({
   tables: ['changesBill', 'checkList'],
@@ -17,11 +17,14 @@ const db = openDB({
 const App = ({ children }) => {
   const date = useDate();
   const stepperDate = useStepperDate(date);
-  const changesBill = useChangesBill(db);
-  const checkList = useCheckList(db, changesBill);
+  const changesBill = useList();
+  const checkList = useList([
+    [dateToSQL(new Date('2019-07-10')), { count: 2000, planCount: 2000 }],
+    [dateToSQL(new Date('2019-07-15')), { count: 1000, planCount: 2000 }],
+    [dateToSQL(new Date('2019-07-19')), { count: 3000, planCount: 2000 }],
+    [dateToSQL(new Date('2019-07-25')), { count: null, planCount: 2000 }],
+  ]);
   const theme = useTheme();
-
-  console.log('app');
 
   return (
     <Context.Provider value={{ date, stepperDate, changesBill, checkList, theme }}>

@@ -10,6 +10,7 @@ import Step from 'components/core/Stepper/Step';
 import { side } from 'components/core/styled/Box';
 import CalendarYears from 'components/core/Calendar/Years';
 import { isEqualDate } from 'helpers/date';
+import { getChangesBillMonth } from 'components/subjects/contexts/App/helpers';
 
 import Day from './Day';
 
@@ -29,7 +30,7 @@ const Calendar = ({
   onClickDate,
 }) => {
   const { changesBill } = React.useContext(AppContext);
-  const changesBillMonth = React.useMemo(() => changesBill.getChangesBillMonth(date), [
+  const changesBillMonth = React.useMemo(() => getChangesBillMonth(changesBill, date), [
     changesBill,
     date,
   ]);

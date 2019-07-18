@@ -5,6 +5,7 @@ import AppContext from 'components/subjects/contexts/App/context';
 import LabelText from 'components/core/LabelText';
 import Row from 'components/core/styled/Row';
 import Branch from 'components/core/Branch';
+import { getLastCheck } from 'components/subjects/contexts/App/helpers';
 
 import Styled from './styled';
 import ChangesBillList from './ChangesBillList';
@@ -14,7 +15,7 @@ const TopTollbar = () => {
     theme: [, { toggleTheme }],
     checkList,
   } = React.useContext(AppContext);
-  const [, { count, planCount }] = React.useMemo(() => checkList.getLastCheck(new Date()), [
+  const [, { count, planCount }] = React.useMemo(() => getLastCheck(checkList, new Date()), [
     checkList,
   ]);
   const [showChangesBill, setShowChangesBill] = React.useState(false);

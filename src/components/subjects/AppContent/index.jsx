@@ -49,7 +49,6 @@ const AppContent = () => {
     const planCountValue = parseInt(planCount.getValue(), 10);
 
     if (planCountValue) {
-      console.log(checkList.item);
       checkList.saveItem({
         count: isNaN(countValue) ? null : countValue,
         planCount: isNaN(planCountValue) ? 0 : planCountValue,
