@@ -15,7 +15,7 @@ export const openDB = (options = {}) => {
   });
 };
 
-export const methodsTable = (db, nameTable) => {
+export const table = (db, nameTable) => {
   const get = async key => (await db).get(nameTable, key);
   const getCrypto = async (key, hashKey) => rc4.decrypt(get(key), hashKey).toString(encUtf8);
   const set = async (key, val) => (await db).put(nameTable, val, key);

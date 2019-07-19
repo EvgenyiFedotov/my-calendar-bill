@@ -1,18 +1,13 @@
 import * as React from 'react';
-import { openDB } from 'helpers/index-db';
 
 import useDate from 'hooks/use-date';
-
 import Context from './context';
 import useTheme from './use-theme';
 import useStepperDate from 'hooks/use-stepper-date';
 import useList from 'hooks/use-list';
 import { dateToSQL } from 'helpers/date';
 
-const db = openDB({
-  tables: ['changesBill', 'checkList'],
-  version: 3,
-});
+import './index-db';
 
 const App = ({ children }) => {
   const date = useDate();
