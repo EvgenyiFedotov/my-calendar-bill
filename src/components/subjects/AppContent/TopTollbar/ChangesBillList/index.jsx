@@ -7,6 +7,7 @@ import List from 'components/core/List';
 import LabelText from 'components/core/LabelText';
 import Branch from 'components/core/Branch';
 import ModalWindow from 'components/core/ModalWindow';
+import useListItem from 'hooks/use-list-item';
 
 import Styled from './styled';
 import Dialog from './Dialog';
@@ -16,7 +17,9 @@ import Dialog from './Dialog';
  * @param {() => void} [onClose]
  */
 const ChangesBillList = ({ onClose }) => {
-  const { changesBill } = React.useContext(AppContext);
+  const { changesBill, setChangesBill } = React.useContext(AppContext);
+  const changesBillItem = useListItem([changesBill, setChangesBill]);
+  const { item, createItem, editItem } = changesBillItem;
 
   // Render item changes bill
   const renderItemChangesBill = React.useCallback(
@@ -35,23 +38,23 @@ const ChangesBillList = ({ onClose }) => {
         <Row justifyContent="space-between" alignItems="center">
           <b>Changes bill</b>
           <Row justifyContent="flex-end" alignItems="center">
-            <Button onClick={changesBill.createItem()}>Add</Button>
+            <Button onClick={createItem()}>Add</Button>
             <Button onClick={onClose}>Close</Button>
           </Row>
         </Row>
 
         <List
-          items={changesBill.items}
+          items={changesBill}
           style={{ flex: 1 }}
           getItemProps={item => ({
             children: renderItemChangesBill(item),
-            onClick: changesBill.editItem(item[0]),
+            onClick: editItem(item[0]),
             justifyContent: 'space-between',
           })}
         />
 
-        <Branch value={changesBill.item[0]}>
-          <Dialog />
+        <Branch value={item[0]}>
+          <Dialog data={changesBillItem} />
         </Branch>
       </Styled>
     </ModalWindow>

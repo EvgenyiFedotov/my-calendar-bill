@@ -17,7 +17,7 @@ const db = openDB({
 const App = ({ children }) => {
   const date = useDate();
   const stepperDate = useStepperDate(date);
-  const changesBill = useList();
+  const [changesBill, setChangesBill] = React.useState(new Map());
   const checkList = useList([
     [dateToSQL(new Date('2019-07-10')), { count: 2000, planCount: 2000 }],
     [dateToSQL(new Date('2019-07-15')), { count: 1000, planCount: 2000 }],
@@ -27,7 +27,7 @@ const App = ({ children }) => {
   const theme = useTheme();
 
   return (
-    <Context.Provider value={{ date, stepperDate, changesBill, checkList, theme }}>
+    <Context.Provider value={{ date, stepperDate, changesBill, setChangesBill, checkList, theme }}>
       {children}
     </Context.Provider>
   );

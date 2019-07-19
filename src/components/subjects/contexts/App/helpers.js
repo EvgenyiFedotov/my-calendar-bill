@@ -23,7 +23,7 @@ export const getChangesBillMonth = (changesBill, date) => {
     result.get(dateSQL).set(keyChangeBill, changeBill);
   };
 
-  Array.from(changesBill.items).forEach((changeBill) => {
+  Array.from(changesBill).forEach((changeBill) => {
     if (changeBill[1].type === 'repeat') {
       add(changeBill);
 
