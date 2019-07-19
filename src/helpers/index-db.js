@@ -1,5 +1,4 @@
 import { openDB as open } from 'idb';
-import sha3 from 'crypto-js/sha3';
 import rc4 from 'crypto-js/rc4';
 import encUtf8 from 'crypto-js/enc-utf8';
 
@@ -17,33 +16,39 @@ export const openDB = (options = {}) => {
 
 export const table = (db, nameTable) => {
   const get = async key => (await db).get(nameTable, key);
-  const getCrypto = async (key, hashKey) => rc4.decrypt(get(key), hashKey).toString(encUtf8);
+  const getCrypto = async (key, hashKey) => {
+    try {
+      return rc4.decrypt(await get(key), hashKey).toString(encUtf8);
+    } catch (e) {
+      return null;
+    }
+  };
   const set = async (key, val) => (await db).put(nameTable, val, key);
-  const setCrypto = async (key, val, hashKey) => set(key, rc4.encrypt(val, hashKey).toString());
+  const setCrypto = async (key, val, hashKey) => await set(key, rc4.encrypt(val, hashKey).toString());
   const remove = async key => (await db).delete(nameTable, key);
   const clear = async () => (await db).clear(nameTable);
   const getAllKeys = async () => (await db).getAllKeys(nameTable);
   const getAll = async () => (await db).getAll(nameTable);
-  const getMap = async () => {
+  const getMap = async (parseDate = date => date) => {
     const keys = await (await db).getAllKeys(nameTable);
     const result = new Map();
 
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index];
       const item = await (await db).get(nameTable, key);
-      result.set(key, item);
+      result.set(key, parseDate(item));
     }
 
     return result;
   };
-  const getMapCrypto = async (hashKey) => {
-    const keys = await (await db).getAllKeys(nameTable);
+  const getMapCrypto = async (hashKey, parseDate = date => date) => {
+    const keys = await getAllKeys();
     const result = new Map();
 
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index];
-      const item = await (await db).getCrypto(nameTable, key, hashKey);
-      result.set(key, item);
+      const item = await getCrypto(key, hashKey);
+      result.set(key, parseDate(item));
     }
 
     return result;

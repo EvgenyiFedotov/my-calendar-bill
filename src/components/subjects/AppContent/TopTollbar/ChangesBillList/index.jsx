@@ -17,7 +17,9 @@ import Dialog from './Dialog';
  * @param {() => void} [onClose]
  */
 const ChangesBillList = ({ onClose }) => {
-  const { changesBill, setChangesBill } = React.useContext(AppContext);
+  const {
+    changesBill: [changesBill, setChangesBill],
+  } = React.useContext(AppContext);
   const changesBillItem = useListItem([changesBill, setChangesBill]);
   const { item, createItem, editItem } = changesBillItem;
 

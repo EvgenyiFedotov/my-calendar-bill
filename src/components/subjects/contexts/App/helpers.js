@@ -90,7 +90,7 @@ export const getLastCheck = ({ items }, date) => {
     if (typeof item.count === 'number' && typeof item.planCount === 'number') {
       const dateKey = new Date(key);
       if (date && !isPrevDate(dateKey, date) && !isEqualDate(dateKey, date)) break;
-      result = [key, item];
+      result = { key, item };
     }
   }
 
@@ -109,7 +109,10 @@ export const getPlanCount = (checkList, changesBill, date) => {
   const lastCheck = getLastCheck(date);
 
   if (lastCheck) {
-    const [key, { count }] = lastCheck;
+    const {
+      key,
+      item: { count },
+    } = lastCheck;
     let result = count;
 
     eachDate(

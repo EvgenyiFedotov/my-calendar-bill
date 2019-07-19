@@ -7,8 +7,13 @@ import useField from 'hooks/use-field';
 import useDate from 'hooks/use-date';
 import Calendar from 'components/subjects/AppContent/Calendar';
 import useStepperDate from 'hooks/use-stepper-date';
+import { changesBillTable } from 'components/subjects/contexts/App/index-db';
+import UserContext from 'components/subjects/contexts/User/context';
 
 const Dialog = ({ data }) => {
+  const {
+    key: [hashKey],
+  } = React.useContext(UserContext);
   const { getItemProp, saveItem, clearItem, deleteItem, isNew } = data;
   const [titleRef, title] = useField();
   const [countRef, count] = useField();
@@ -20,14 +25,15 @@ const Dialog = ({ data }) => {
     const countValue = parseInt(count.getValue(), 10);
 
     if (typeof countValue === 'number' && !isNaN(countValue) && selectedDate) {
-      saveItem({
+      const [keyItem, item] = saveItem({
         count: countValue,
         date: new Date(selectedDate).getTime(),
         title: titleValue,
         type: 'repeat',
       });
+      changesBillTable.setCrypto(keyItem, JSON.stringify(item), hashKey);
     }
-  }, [saveItem, title, count, selectedDate]);
+  }, [saveItem, title, count, selectedDate, hashKey]);
 
   return (
     <ModalWindow zIndex={200} onClose={clearItem}>

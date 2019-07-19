@@ -15,9 +15,9 @@ const TopTollbar = () => {
     theme: [, { toggleTheme }],
     checkList,
   } = React.useContext(AppContext);
-  const [, { count, planCount }] = React.useMemo(() => getLastCheck(checkList, new Date()), [
-    checkList,
-  ]);
+  const lastCheck = React.useMemo(() => getLastCheck(checkList, new Date()), [checkList]);
+  const count = lastCheck ? lastCheck.item.count : 0;
+  const planCount = lastCheck ? lastCheck.item.planCount : 0;
   const [showChangesBill, setShowChangesBill] = React.useState(false);
   const createBill = React.useCallback(() => setShowChangesBill(true), [setShowChangesBill]);
   const hideChBill = React.useCallback(() => setShowChangesBill(false), [setShowChangesBill]);

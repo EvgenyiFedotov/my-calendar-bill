@@ -6,13 +6,18 @@ import useTheme from './use-theme';
 import useStepperDate from 'hooks/use-stepper-date';
 import useList from 'hooks/use-list';
 import { dateToSQL } from 'helpers/date';
+import UserContext from 'components/subjects/contexts/User/context';
 
-import './index-db';
+import { changesBillTable } from './index-db';
 
 const App = ({ children }) => {
+  const {
+    key: [key],
+  } = React.useContext(UserContext);
   const date = useDate();
   const stepperDate = useStepperDate(date);
-  const [changesBill, setChangesBill] = React.useState(new Map());
+  const changesBill = React.useState(new Map());
+  const [, setChangesBill] = changesBill;
   const checkList = useList([
     [dateToSQL(new Date('2019-07-10')), { count: 2000, planCount: 2000 }],
     [dateToSQL(new Date('2019-07-15')), { count: 1000, planCount: 2000 }],
@@ -21,8 +26,16 @@ const App = ({ children }) => {
   ]);
   const theme = useTheme();
 
+  React.useEffect(() => {
+    changesBillTable
+      .getMapCrypto(key, item => JSON.parse(item))
+      .then(result => setChangesBill(result));
+  }, [setChangesBill, key]);
+
+  console.log('app');
+
   return (
-    <Context.Provider value={{ date, stepperDate, changesBill, setChangesBill, checkList, theme }}>
+    <Context.Provider value={{ date, stepperDate, changesBill, checkList, theme }}>
       {children}
     </Context.Provider>
   );

@@ -29,7 +29,9 @@ const Calendar = ({
   selectedDate,
   onClickDate,
 }) => {
-  const { changesBill } = React.useContext(AppContext);
+  const {
+    changesBill: [changesBill],
+  } = React.useContext(AppContext);
   const changesBillMonth = React.useMemo(() => getChangesBillMonth(changesBill, date), [
     changesBill,
     date,
