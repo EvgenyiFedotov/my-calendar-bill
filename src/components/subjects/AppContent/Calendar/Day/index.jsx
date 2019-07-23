@@ -15,24 +15,25 @@ import CheckResult from './styled/CheckResult';
  * @param {(date: Date) => void} [onClick = () => {}]
  */
 const Day = props => {
-  const { checkList } = React.useContext(AppContext);
+  const {
+    checkList: [checkList],
+  } = React.useContext(AppContext);
   const { dateWeek, changesBillMonth, onClick = () => {} } = props;
   const dateWeekSQL = React.useMemo(() => dateToSQL(dateWeek), [dateWeek]);
   const changesByDir = React.useMemo(
     () => getChangesByDirection(changesBillMonth.get(dateWeekSQL)),
     [dateWeekSQL, changesBillMonth],
   );
-  const check = React.useMemo(() => checkList.items.get(dateWeekSQL), [checkList, dateWeekSQL]);
+  const check = React.useMemo(() => checkList.get(dateWeekSQL), [checkList, dateWeekSQL]);
   const prevDate = React.useMemo(
-    () => isPrevDate(dateWeek, new Date(Array.from(checkList.items)[0][0])),
-    [dateWeek, checkList.items],
+    () => (checkList.size ? isPrevDate(dateWeek, new Date(Array.from(checkList)[0][0])) : true),
+    [dateWeek, checkList],
   );
   const isToday = React.useMemo(() => isEqualDate(dateWeek, new Date()), [dateWeek]);
   const click = React.useCallback(() => {
     // console.log('Plan count:', checkList.getPlanCount(dateWeek));
-
-    onClick(dateWeek);
-  }, [onClick, dateWeek]);
+    !prevDate && onClick(dateWeek);
+  }, [prevDate, onClick, dateWeek]);
 
   return (
     <Styled {...{ ...props, prevDate }} onClick={click}>

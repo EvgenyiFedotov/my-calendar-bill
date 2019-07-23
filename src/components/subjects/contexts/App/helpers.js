@@ -79,13 +79,13 @@ export const getChangesByDirection = (changesBill) => {
  *
  * @returns {[string, check]}
  */
-export const getLastCheck = ({ items }, date) => {
-  const keys = Array.from(items.keys()).sort((a, b) => (a < b ? -1 : 1));
+export const getLastCheck = (checkList, date) => {
+  const keys = Array.from(checkList.keys()).sort((a, b) => (a < b ? -1 : 1));
   let result = null;
 
   for (let index = 0; index < keys.length; index += 1) {
     const key = keys[index];
-    const item = items.get(key);
+    const item = checkList.get(key);
 
     if (typeof item.count === 'number' && typeof item.planCount === 'number') {
       const dateKey = new Date(key);
@@ -106,7 +106,7 @@ export const getLastCheck = ({ items }, date) => {
  * @returns {number}
  */
 export const getPlanCount = (checkList, changesBill, date) => {
-  const lastCheck = getLastCheck(date);
+  const lastCheck = getLastCheck(checkList, date);
 
   if (lastCheck) {
     const {

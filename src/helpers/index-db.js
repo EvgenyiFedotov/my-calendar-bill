@@ -16,13 +16,7 @@ export const openDB = (options = {}) => {
 
 export const table = (db, nameTable) => {
   const get = async key => (await db).get(nameTable, key);
-  const getCrypto = async (key, hashKey) => {
-    try {
-      return rc4.decrypt(await get(key), hashKey).toString(encUtf8);
-    } catch (e) {
-      return null;
-    }
-  };
+  const getCrypto = async (key, hashKey) => rc4.decrypt(await get(key), hashKey).toString(encUtf8);
   const set = async (key, val) => (await db).put(nameTable, val, key);
   const setCrypto = async (key, val, hashKey) => await set(key, rc4.encrypt(val, hashKey).toString());
   const remove = async key => (await db).delete(nameTable, key);
@@ -47,8 +41,12 @@ export const table = (db, nameTable) => {
 
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index];
-      const item = await getCrypto(key, hashKey);
-      result.set(key, parseDate(item));
+      try {
+        const item = await getCrypto(key, hashKey);
+        result.set(key, parseDate(item));
+      } catch (e) {
+        // pass
+      }
     }
 
     return result;

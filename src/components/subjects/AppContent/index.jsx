@@ -8,12 +8,14 @@ import AppGlobalStyled from 'components/core/styled/AppGlobal';
 import Branch from 'components/core/Branch';
 import UserContext from 'components/subjects/contexts/User/context';
 import Auth from 'components/subjects/AppContent/Auth';
+import Setup from 'components/subjects/AppContent/Setup';
 
 import ModalWindow from 'components/core/ModalWindow';
 import EditDialog from 'components/core/EditDialog';
 import InputText from 'components/core/styled/InputText';
 import useField from 'hooks/use-field';
 import { dateToSQL } from 'helpers/date';
+import useListItem from 'hooks/use-list-item';
 
 import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
@@ -27,6 +29,7 @@ const AppContent = () => {
   const {
     key: [key],
   } = React.useContext(UserContext);
+  const { saveItem, createItem, item, clearItem, isNew } = useListItem(checkList);
 
   /**
    * Render item check list
@@ -49,12 +52,12 @@ const AppContent = () => {
     const planCountValue = parseInt(planCount.getValue(), 10);
 
     if (planCountValue) {
-      checkList.saveItem({
+      saveItem({
         count: isNaN(countValue) ? null : countValue,
         planCount: isNaN(planCountValue) ? 0 : planCountValue,
       });
     }
-  }, [checkList, count, planCount]);
+  }, [saveItem, count, planCount]);
 
   return (
     <>
@@ -62,59 +65,61 @@ const AppContent = () => {
 
       <Branch value={!key}>
         <Auth />
-      </Branch>
 
-      <Branch value={key}>
-        <Column>
-          <TopToolbar />
+        <Branch value={!Array.from(checkList[0])[0]}>
+          <Setup />
 
-          <Row justifyContent="center">
-            <Row
-              style={{
-                flexWrap: 'wrap',
-                overflowY: 'auto',
-                flex: 1,
-                padding: '0 16px',
-                maxWidth: 1024,
-              }}
-            >
-              <Calendar
-                stepperDate={stepperDate}
-                onClickDate={checkList.createItem(date => dateToSQL(date))}
-              />
+          <Column>
+            <TopToolbar />
+
+            <Row justifyContent="center">
+              <Row
+                style={{
+                  flexWrap: 'wrap',
+                  overflowY: 'auto',
+                  flex: 1,
+                  padding: '0 16px',
+                  maxWidth: 1024,
+                }}
+              >
+                <Calendar
+                  stepperDate={stepperDate}
+                  onClickDate={createItem(date => dateToSQL(date))}
+                />
+              </Row>
             </Row>
-          </Row>
 
-          <Row justifyContent="center">
-            <Row
-              style={{
-                flexWrap: 'wrap',
-                overflowY: 'auto',
-                flex: 1,
-                padding: '0 16px',
-                maxWidth: 1024,
-              }}
-            >
-              <List
-                items={checkList.items}
-                style={{ flex: 1, minWidth: '300px' }}
-                getItemProps={item => ({
-                  children: renderItemCheckList(item),
-                  justifyContent: 'space-between',
-                })}
-              />
+            <Row justifyContent="center">
+              <Row
+                style={{
+                  flexWrap: 'wrap',
+                  overflowY: 'auto',
+                  flex: 1,
+                  padding: '0 16px',
+                  maxWidth: 1024,
+                }}
+              >
+                <List
+                  items={checkList[0]}
+                  style={{ flex: 1, minWidth: '300px' }}
+                  getItemProps={item => ({
+                    children: renderItemCheckList(item),
+                    justifyContent: 'space-between',
+                  })}
+                />
+              </Row>
             </Row>
-          </Row>
 
-          <Branch value={checkList.item[0]}>
-            <ModalWindow onClose={checkList.clearItem}>
-              <EditDialog isNew={checkList} onCancel={checkList.clearItem} onSave={save}>
-                <InputText placeholder="Count" ref={countRef} />
-                <InputText placeholder="Plan count" ref={planCountRef} />
-              </EditDialog>
-            </ModalWindow>
-          </Branch>
-        </Column>
+            <Branch value={item[0]}>
+              <ModalWindow onClose={clearItem}>
+                <EditDialog isNew={isNew()} onCancel={clearItem} onSave={save}>
+                  <InputText placeholder="Count" ref={countRef} />
+                  <InputText placeholder="Plan count" ref={planCountRef} />
+                </EditDialog>
+              </ModalWindow>
+            </Branch>
+          </Column>
+        </Branch>
       </Branch>
     </>
   );
