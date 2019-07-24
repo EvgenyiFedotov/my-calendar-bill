@@ -7,14 +7,15 @@ import Row from 'components/core/styled/Row';
 import Branch from 'components/core/Branch';
 import { getLastCheck } from 'components/subjects/contexts/App/helpers';
 import UserContext from 'components/subjects/contexts/User/context';
+import ThemeContext from 'components/subjects/contexts/Theme/context';
 
 import Styled from './styled';
 import ChangesBillList from './ChangesBillList';
 
 const TopTollbar = () => {
+  const { toggleTheme } = React.useContext(ThemeContext);
   const { logout } = React.useContext(UserContext);
   const {
-    theme: [, { toggleTheme }],
     checkList: [checkList],
   } = React.useContext(AppContext);
   const lastCheck = React.useMemo(() => getLastCheck(checkList, new Date()), [checkList]);

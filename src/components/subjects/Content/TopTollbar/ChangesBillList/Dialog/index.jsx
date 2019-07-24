@@ -11,9 +11,7 @@ import { changesBillTable } from 'components/subjects/contexts/App/index-db';
 import UserContext from 'components/subjects/contexts/User/context';
 
 const Dialog = ({ data }) => {
-  const {
-    key: [hashKey],
-  } = React.useContext(UserContext);
+  const user = React.useContext(UserContext);
   const { getItemProp, saveItem, clearItem, deleteItem, isNew } = data;
   const [titleRef, title] = useField();
   const [countRef, count] = useField();
@@ -31,9 +29,9 @@ const Dialog = ({ data }) => {
         title: titleValue,
         type: 'repeat',
       });
-      changesBillTable.setCrypto(keyItem, JSON.stringify(item), hashKey);
+      changesBillTable.setCrypto(keyItem, JSON.stringify(item), user.data.key);
     }
-  }, [saveItem, title, count, selectedDate, hashKey]);
+  }, [saveItem, title, count, selectedDate, user.data]);
 
   return (
     <ModalWindow zIndex={200} onClose={clearItem}>

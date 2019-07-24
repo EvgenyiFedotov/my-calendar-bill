@@ -8,10 +8,11 @@ import useListItem from 'hooks/use-list-item';
 import { dateToSQL } from 'helpers/date';
 import { checkListTable } from 'components/subjects/contexts/App/index-db';
 import UserContext from 'components/subjects/contexts/User/context';
+import Branch from 'components/core/Branch';
 
-const Setup = () => {
+const Setup = ({ children }) => {
   const {
-    key: [hashKey],
+    data: { key },
   } = React.useContext(UserContext);
   const { checkList } = React.useContext(AppContext);
   const { saveItem } = useListItem(checkList);
@@ -20,22 +21,26 @@ const Setup = () => {
   const send = React.useCallback(() => {
     const countValue = parseInt(count.getValue(), 10);
     if (!isNaN(countValue) && typeof countValue === 'number') {
-      const key = dateToSQL(new Date());
+      const keyItem = dateToSQL(new Date());
       const item = {
         count: countValue,
         planCount: countValue,
       };
 
-      saveItem(item, key);
-      checkListTable.setCrypto(key, JSON.stringify(item), hashKey);
+      saveItem(keyItem, key);
+      checkListTable.setCrypto(keyItem, JSON.stringify(item), key);
     }
-  }, [count, saveItem, hashKey]);
+  }, [count, saveItem, key]);
 
   return (
-    <>
-      <InputText placeholder="Curren count" type="number" ref={countRef} />
-      <Button onClick={send}>Send</Button>
-    </>
+    <Branch value={Array.from(checkList[0])[0]}>
+      <>{children}</>
+
+      <>
+        <InputText placeholder="Current count" type="number" ref={countRef} />
+        <Button onClick={send}>Send</Button>
+      </>
+    </Branch>
   );
 };
 

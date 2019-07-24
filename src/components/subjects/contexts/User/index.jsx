@@ -4,22 +4,22 @@ import Context from './context';
 
 const KEY_SS = 'USER';
 
-const user = JSON.parse(sessionStorage.getItem(KEY_SS)) || {};
+const userFromSS = JSON.parse(sessionStorage.getItem(KEY_SS)) || {};
 
 const User = ({ children }) => {
-  const [key, setKey] = React.useState(user.key);
+  const [data, setData] = React.useState(userFromSS);
 
   /**
-   * Set key in session storage
-   * @param {string} key
+   * Set value in session storage
    */
-  const setKeySS = React.useCallback(
-    key => {
-      user.key = key;
-      sessionStorage.setItem(KEY_SS, JSON.stringify(user));
-      setKey(key);
-    },
-    [setKey],
+  const dispatch = React.useCallback(
+    (key, value) =>
+      setData(prevData => {
+        const nextData = { ...prevData, [key]: value };
+        sessionStorage.setItem(KEY_SS, JSON.stringify(nextData));
+        return nextData;
+      }),
+    [setData],
   );
 
   /**
@@ -27,10 +27,10 @@ const User = ({ children }) => {
    */
   const logout = React.useCallback(() => {
     sessionStorage.removeItem(KEY_SS);
-    setKey(null);
-  }, []);
+    setData({});
+  }, [setData]);
 
-  return <Context.Provider value={{ key: [key, setKeySS], logout }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ data, dispatch, logout }}>{children}</Context.Provider>;
 };
 
 export default User;

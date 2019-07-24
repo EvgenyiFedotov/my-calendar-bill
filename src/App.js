@@ -1,19 +1,25 @@
 import React from 'react';
 
+import ThemeContext from 'components/subjects/contexts/Theme';
 import UserContext from 'components/subjects/contexts/User';
+import Auth from 'components/subjects/Auth';
+import FirstSetup from 'components/subjects/FirstSetup';
 import AppContext from 'components/subjects/contexts/App';
-import AppStyled from 'components/core/styled/App';
-import AppContent from 'components/subjects/AppContent';
+import Content from 'components/subjects/Content';
 
 function App() {
   return (
-    <UserContext>
-      <AppContext>
-        <AppStyled>
-          <AppContent />
-        </AppStyled>
-      </AppContext>
-    </UserContext>
+    <ThemeContext>
+      <UserContext>
+        <Auth>
+          <AppContext>
+            <FirstSetup>
+              <Content />
+            </FirstSetup>
+          </AppContext>
+        </Auth>
+      </UserContext>
+    </ThemeContext>
   );
 }
 
