@@ -7,6 +7,7 @@ import Button from 'components/core/styled/Button';
 import useField from 'hooks/use-field';
 import UserContext from 'components/subjects/contexts/User/context';
 import Branch from 'components/core/Branch';
+import PageContent from 'components/core/PageContent';
 
 const Auth = ({ children }) => {
   const { data, dispatch } = React.useContext(UserContext);
@@ -27,11 +28,14 @@ const Auth = ({ children }) => {
   return (
     <Branch value={data.login && data.key}>
       <>{children}</>
-      <Column justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
-        <InputText placeholder="Login" ref={loginPass} />
-        <InputText placeholder="Password" type="password" ref={passRef} />
-        <Button onClick={send}>Send</Button>
-      </Column>
+
+      <PageContent justifyContent="center">
+        <Column justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+          <InputText placeholder="Login" ref={loginPass} />
+          <InputText placeholder="Password" type="password" ref={passRef} />
+          <Button onClick={send}>Send</Button>
+        </Column>
+      </PageContent>
     </Branch>
   );
 };

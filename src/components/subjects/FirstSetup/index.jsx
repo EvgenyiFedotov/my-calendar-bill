@@ -7,6 +7,8 @@ import AppContext from 'components/subjects/contexts/App/context';
 import useMapItem from 'hooks/use-map-item';
 import { dateToSQL } from 'helpers/date';
 import Branch from 'components/core/Branch';
+import PageContent from 'components/core/PageContent';
+import Column from 'components/core/styled/Column';
 
 const Setup = ({ children }) => {
   const { checkList, db } = React.useContext(AppContext);
@@ -30,10 +32,12 @@ const Setup = ({ children }) => {
     <Branch value={Array.from(checkList[0])[0]}>
       <>{children}</>
 
-      <>
-        <InputText placeholder="Current count" type="number" ref={countRef} />
-        <Button onClick={send}>Send</Button>
-      </>
+      <PageContent justifyContent="center">
+        <Column justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+          <InputText placeholder="Current count" type="number" ref={countRef} />
+          <Button onClick={send}>Send</Button>
+        </Column>
+      </PageContent>
     </Branch>
   );
 };
