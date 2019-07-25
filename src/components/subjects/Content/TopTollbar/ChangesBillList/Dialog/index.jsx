@@ -7,7 +7,7 @@ import useField from 'hooks/use-field';
 import useDate from 'hooks/use-date';
 import Calendar from 'components/subjects/Content/Calendar';
 import useStepperDate from 'hooks/use-stepper-date';
-import { changesBillTable } from 'components/subjects/contexts/App/index-db';
+// import { changesBillTable } from 'components/subjects/contexts/App/index-db';
 import UserContext from 'components/subjects/contexts/User/context';
 
 const Dialog = ({ data }) => {
@@ -29,7 +29,7 @@ const Dialog = ({ data }) => {
         title: titleValue,
         type: 'repeat',
       });
-      changesBillTable.setCrypto(keyItem, JSON.stringify(item), user.data.key);
+      // changesBillTable.setCrypto(keyItem, JSON.stringify(item), user.data.key);
     }
   }, [saveItem, title, count, selectedDate, user.data]);
 

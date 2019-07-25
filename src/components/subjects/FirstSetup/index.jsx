@@ -4,9 +4,8 @@ import InputText from 'components/core/styled/InputText';
 import Button from 'components/core/styled/Button';
 import useField from 'hooks/use-field';
 import AppContext from 'components/subjects/contexts/App/context';
-import useListItem from 'hooks/use-list-item';
+import useMapItem from 'hooks/use-map-item';
 import { dateToSQL } from 'helpers/date';
-import { checkListTable } from 'components/subjects/contexts/App/index-db';
 import UserContext from 'components/subjects/contexts/User/context';
 import Branch from 'components/core/Branch';
 
@@ -14,8 +13,8 @@ const Setup = ({ children }) => {
   const {
     data: { key },
   } = React.useContext(UserContext);
-  const { checkList } = React.useContext(AppContext);
-  const { saveItem } = useListItem(checkList);
+  const { checkList, db } = React.useContext(AppContext);
+  const { save } = useMapItem(checkList, db.tables.checkList);
 
   const [countRef, count] = useField();
   const send = React.useCallback(() => {
@@ -27,10 +26,9 @@ const Setup = ({ children }) => {
         planCount: countValue,
       };
 
-      saveItem(item, keyItem);
-      checkListTable.setCrypto(keyItem, JSON.stringify(item), key);
+      save(item, keyItem);
     }
-  }, [count, saveItem, key]);
+  }, [count, save, key]);
 
   return (
     <Branch value={Array.from(checkList[0])[0]}>

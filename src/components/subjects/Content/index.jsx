@@ -11,14 +11,14 @@ import EditDialog from 'components/core/EditDialog';
 import InputText from 'components/core/styled/InputText';
 import useField from 'hooks/use-field';
 import { dateToSQL } from 'helpers/date';
-import useListItem from 'hooks/use-list-item';
+import useMapItem from 'hooks/use-map-item';
 
 import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
   const { checkList, stepperDate } = React.useContext(AppContext);
-  const { saveItem, createItem, item, clearItem, isNew } = useListItem(checkList);
+  const { save, create, data, clear, isNew } = useMapItem(checkList);
 
   /**
    * Render item check list
@@ -36,17 +36,17 @@ const AppContent = () => {
 
   const [countRef, count] = useField();
   const [planCountRef, planCount] = useField();
-  const save = React.useCallback(() => {
+  const saveCheckListItem = React.useCallback(() => {
     const countValue = parseInt(count.getValue(), 10);
     const planCountValue = parseInt(planCount.getValue(), 10);
 
     if (planCountValue) {
-      saveItem({
+      save({
         count: isNaN(countValue) ? null : countValue,
         planCount: isNaN(planCountValue) ? 0 : planCountValue,
       });
     }
-  }, [saveItem, count, planCount]);
+  }, [save, count, planCount]);
 
   return (
     <Column>
@@ -62,7 +62,7 @@ const AppContent = () => {
             maxWidth: 1024,
           }}
         >
-          <Calendar stepperDate={stepperDate} onClickDate={createItem(date => dateToSQL(date))} />
+          <Calendar stepperDate={stepperDate} onClickDate={create(date => dateToSQL(date))} />
         </Row>
       </Row>
 
@@ -87,9 +87,9 @@ const AppContent = () => {
         </Row>
       </Row>
 
-      <Branch value={item[0]}>
-        <ModalWindow onClose={clearItem}>
-          <EditDialog isNew={isNew()} onCancel={clearItem} onSave={save}>
+      <Branch value={data[0]}>
+        <ModalWindow onClose={clear}>
+          <EditDialog isNew={isNew()} onCancel={clear} onSave={saveCheckListItem}>
             <InputText placeholder="Count" ref={countRef} />
             <InputText placeholder="Plan count" ref={planCountRef} />
           </EditDialog>

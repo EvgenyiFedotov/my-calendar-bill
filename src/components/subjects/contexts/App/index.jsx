@@ -3,47 +3,34 @@ import * as React from 'react';
 import useDate from 'hooks/use-date';
 import Context from './context';
 import useStepperDate from 'hooks/use-stepper-date';
+import useIndexDB from 'hooks/use-index-db';
+import useTableDB from 'hooks/use-table-db';
 import UserContext from 'components/subjects/contexts/User/context';
-import { changesBillTable, checkListTable } from 'components/subjects/contexts/App/index-db';
-// import { openDB, table } from 'helpers/index-db';
 
 const App = ({ children }) => {
-  const {
-    // login: [login],
-    data: { key },
-  } = React.useContext(UserContext);
+  const { data } = React.useContext(UserContext);
 
   const date = useDate();
   const stepperDate = useStepperDate(date);
 
-  // const db = React.useMemo()
-
-  const [changesBill, setChangesBill] = React.useState();
-  const [checkList, setCheckList] = React.useState();
-
-  // Load changes bill
-  React.useEffect(() => {
-    if (key) {
-      changesBillTable
-        .getMapCrypto(key, item => JSON.parse(item))
-        .then(result => setChangesBill(result));
-    }
-  }, [setChangesBill, key]);
-
-  // Load check list
-  React.useEffect(() => {
-    if (key) {
-      checkListTable
-        .getMapCrypto(key, item => JSON.parse(item))
-        .then(result => setCheckList(result));
-    }
-  }, [setCheckList, key]);
+  const optionsDB = React.useMemo(
+    () => ({
+      tables: ['changesBill', 'checkList'],
+      tablesAlises: ['changesBill', 'checkList'],
+      cryptoKey: data.key,
+    }),
+    [data.key],
+  );
+  const db = useIndexDB(optionsDB);
+  const [changesBill, setChangesBill] = useTableDB(db.tables.changesBill);
+  const [checkList, setCheckList] = useTableDB(db.tables.checkList);
 
   return (
     <Context.Provider
       value={{
         date,
         stepperDate,
+        db,
         changesBill: [changesBill, setChangesBill],
         checkList: [checkList, setCheckList],
       }}

@@ -7,7 +7,7 @@ import List from 'components/core/List';
 import LabelText from 'components/core/LabelText';
 import Branch from 'components/core/Branch';
 import ModalWindow from 'components/core/ModalWindow';
-import useListItem from 'hooks/use-list-item';
+import useMapItem from 'hooks/use-map-item';
 
 import Styled from './styled';
 import Dialog from './Dialog';
@@ -20,7 +20,7 @@ const ChangesBillList = ({ onClose }) => {
   const {
     changesBill: [changesBill, setChangesBill],
   } = React.useContext(AppContext);
-  const changesBillItem = useListItem([changesBill, setChangesBill]);
+  const changesBillItem = useMapItem([changesBill, setChangesBill]);
   const { item, createItem, editItem } = changesBillItem;
 
   // Render item changes bill
