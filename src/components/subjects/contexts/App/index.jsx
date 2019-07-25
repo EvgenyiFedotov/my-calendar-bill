@@ -1,4 +1,5 @@
 import * as React from 'react';
+import sha3 from 'crypto-js/sha3';
 
 import useDate from 'hooks/use-date';
 import Context from './context';
@@ -13,14 +14,14 @@ const App = ({ children }) => {
   const date = useDate();
   const stepperDate = useStepperDate(date);
 
-  const optionsDB = React.useMemo(
-    () => ({
+  const optionsDB = React.useMemo(() => {
+    return {
+      nameDB: sha3(`${data.login}-${data.key}`),
       tables: ['changesBill', 'checkList'],
       tablesAlises: ['changesBill', 'checkList'],
       cryptoKey: data.key,
-    }),
-    [data.key],
-  );
+    };
+  }, [data.login, data.key]);
   const db = useIndexDB(optionsDB);
   const [changesBill, setChangesBill] = useTableDB(db.tables.changesBill);
   const [checkList, setCheckList] = useTableDB(db.tables.checkList);
