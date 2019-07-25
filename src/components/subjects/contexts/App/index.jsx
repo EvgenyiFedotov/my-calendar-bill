@@ -1,5 +1,5 @@
 import * as React from 'react';
-import sha3 from 'crypto-js/sha3';
+import md5 from 'crypto-js/md5';
 
 import useDate from 'hooks/use-date';
 import Context from './context';
@@ -16,7 +16,7 @@ const App = ({ children }) => {
 
   const optionsDB = React.useMemo(() => {
     return {
-      nameDB: sha3(`${data.login}-${data.key}`),
+      nameDB: md5(`${data.login}-${data.key}`),
       tables: ['changesBill', 'checkList'],
       tablesAlises: ['changesBill', 'checkList'],
       cryptoKey: data.key,

@@ -21,7 +21,7 @@ const Auth = ({ children }) => {
 
     if (loginValue && passValue) {
       dispatch('login', loginValue);
-      dispatch('key', sha3(passValue));
+      dispatch('key', sha3(passValue).toString());
     }
   }, [login, pass, dispatch]);
 
