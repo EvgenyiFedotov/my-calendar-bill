@@ -3,8 +3,8 @@ import * as React from 'react';
 import List from 'components/core/List';
 import AppContext from 'components/subjects/contexts/App/context';
 import Column from 'components/core/styled/Column';
-import Row from 'components/core/styled/Row';
 import Branch from 'components/core/Branch';
+import PageContent from 'components/core/PageContent';
 
 import ModalWindow from 'components/core/ModalWindow';
 import EditDialog from 'components/core/EditDialog';
@@ -52,40 +52,20 @@ const AppContent = () => {
     <Column>
       <TopToolbar />
 
-      <Row justifyContent="center">
-        <Row
-          style={{
-            flexWrap: 'wrap',
-            overflowY: 'auto',
-            flex: 1,
-            padding: '0 16px',
-            maxWidth: 1024,
-          }}
-        >
-          <Calendar stepperDate={stepperDate} onClickDate={create(date => dateToSQL(date))} />
-        </Row>
-      </Row>
+      <PageContent>
+        <Calendar stepperDate={stepperDate} onClickDate={create(date => dateToSQL(date))} />
+      </PageContent>
 
-      <Row justifyContent="center">
-        <Row
-          style={{
-            flexWrap: 'wrap',
-            overflowY: 'auto',
-            flex: 1,
-            padding: '0 16px',
-            maxWidth: 1024,
-          }}
-        >
-          <List
-            items={checkList[0]}
-            style={{ flex: 1, minWidth: '300px' }}
-            getItemProps={item => ({
-              children: renderItemCheckList(item),
-              justifyContent: 'space-between',
-            })}
-          />
-        </Row>
-      </Row>
+      <PageContent>
+        <List
+          items={checkList[0]}
+          style={{ flex: 1, minWidth: '300px' }}
+          getItemProps={item => ({
+            children: renderItemCheckList(item),
+            justifyContent: 'space-between',
+          })}
+        />
+      </PageContent>
 
       <Branch value={data[0]}>
         <ModalWindow onClose={clear}>
