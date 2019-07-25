@@ -27,7 +27,7 @@ const Setup = ({ children }) => {
         planCount: countValue,
       };
 
-      saveItem(keyItem, key);
+      saveItem(item, keyItem);
       checkListTable.setCrypto(keyItem, JSON.stringify(item), key);
     }
   }, [count, saveItem, key]);
