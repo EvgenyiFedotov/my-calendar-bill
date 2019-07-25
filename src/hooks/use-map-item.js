@@ -37,7 +37,7 @@ export default ([map, setMap], tableDB) => {
 
       return [key, mapItem];
     },
-    [map, data, setMap, setData],
+    [map, data, setMap, setData, tableDB],
   );
 
   /**
@@ -56,7 +56,7 @@ export default ([map, setMap], tableDB) => {
       setData([]);
       return key;
     },
-    [data, setMap, setData],
+    [setMap, setData],
   );
 
   const clear = React.useCallback(() => setData([]), [setData]);

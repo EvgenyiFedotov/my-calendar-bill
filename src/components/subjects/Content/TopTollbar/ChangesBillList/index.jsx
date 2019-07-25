@@ -19,9 +19,10 @@ import Dialog from './Dialog';
 const ChangesBillList = ({ onClose }) => {
   const {
     changesBill: [changesBill, setChangesBill],
+    db,
   } = React.useContext(AppContext);
-  const changesBillItem = useMapItem([changesBill, setChangesBill]);
-  const { item, createItem, editItem } = changesBillItem;
+  const changesBillItem = useMapItem([changesBill, setChangesBill], db.tables.changesBill);
+  const { data, create, edit } = changesBillItem;
 
   // Render item changes bill
   const renderItemChangesBill = React.useCallback(
@@ -40,7 +41,7 @@ const ChangesBillList = ({ onClose }) => {
         <Row justifyContent="space-between" alignItems="center">
           <b>Changes bill</b>
           <Row justifyContent="flex-end" alignItems="center">
-            <Button onClick={createItem()}>Add</Button>
+            <Button onClick={create()}>Add</Button>
             <Button onClick={onClose}>Close</Button>
           </Row>
         </Row>
@@ -50,12 +51,12 @@ const ChangesBillList = ({ onClose }) => {
           style={{ flex: 1 }}
           getItemProps={item => ({
             children: renderItemChangesBill(item),
-            onClick: editItem(item[0]),
+            onClick: edit(item[0]),
             justifyContent: 'space-between',
           })}
         />
 
-        <Branch value={item[0]}>
+        <Branch value={data[0]}>
           <Dialog data={changesBillItem} />
         </Branch>
       </Styled>

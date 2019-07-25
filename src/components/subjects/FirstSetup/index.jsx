@@ -6,13 +6,9 @@ import useField from 'hooks/use-field';
 import AppContext from 'components/subjects/contexts/App/context';
 import useMapItem from 'hooks/use-map-item';
 import { dateToSQL } from 'helpers/date';
-import UserContext from 'components/subjects/contexts/User/context';
 import Branch from 'components/core/Branch';
 
 const Setup = ({ children }) => {
-  const {
-    data: { key },
-  } = React.useContext(UserContext);
   const { checkList, db } = React.useContext(AppContext);
   const { save } = useMapItem(checkList, db.tables.checkList);
 
@@ -28,7 +24,7 @@ const Setup = ({ children }) => {
 
       save(item, keyItem);
     }
-  }, [count, save, key]);
+  }, [count, save]);
 
   return (
     <Branch value={Array.from(checkList[0])[0]}>
