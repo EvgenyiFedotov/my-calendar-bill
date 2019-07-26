@@ -9,9 +9,9 @@ import { getLastCheck } from 'components/subjects/contexts/App/helpers';
 import UserContext from 'components/subjects/contexts/User/context';
 import ThemeContext from 'components/subjects/contexts/Theme/context';
 import PageContent from 'components/core/PageContent';
+import ChangesBillList from 'components/subjects/Content/ChangesBillList';
 
 import Styled from './styled';
-import ChangesBillList from './ChangesBillList';
 
 const TopTollbar = () => {
   const { toggleTheme } = React.useContext(ThemeContext);
