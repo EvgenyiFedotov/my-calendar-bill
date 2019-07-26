@@ -9,7 +9,7 @@ import Calendar from 'components/subjects/Content/Calendar';
 import useStepperDate from 'hooks/use-stepper-date';
 
 const Dialog = ({ data }) => {
-  const { getProp, save, clear, remove, isNew } = data;
+  const [, { getProp, save, clear, remove, isNew }] = data;
   const [titleRef, title] = useField();
   const [countRef, count] = useField();
   const date = React.useMemo(() => new Date(getProp('date') || new Date()), [getProp]);

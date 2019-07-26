@@ -26,9 +26,9 @@ const ChangesBillList = ({ onClose }) => {
 
   // Render item changes bill
   const renderItemChangesBill = React.useCallback(
-    ([key, { count }]) => (
+    ([, { title, count }]) => (
       <>
-        <div>{key}</div>
+        <div>{title || 'No title'}</div>
         <LabelText color={count < 0 ? 'red' : count > 0 ? 'green' : undefined}>{count}</LabelText>
       </>
     ),
