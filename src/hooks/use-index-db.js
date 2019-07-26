@@ -12,15 +12,14 @@ import { openDB, table } from 'helpers/index-db';
  * @param {CryptoKey} [options.cryptoKey]
  */
 export default (options = {}) => React.useMemo(() => {
-  const { tables = [], tablesAlises = [], cryptoKey } = options;
   const connect = openDB(options);
-  const tablesDB = tables.reduce(
+  const tables = options.tables.reduce(
     (res, nameTable, index) => ({
       ...res,
-      [tablesAlises[index] || index]: table(connect, nameTable, cryptoKey),
+      [options.tablesAlises[index] || index]: table(connect, nameTable, options.cryptoKey),
     }),
     {},
   );
 
-  return { connect, tables: tablesDB };
+  return [tables, connect];
 }, [options]);

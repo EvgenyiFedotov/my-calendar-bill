@@ -11,8 +11,11 @@ import PageContent from 'components/core/PageContent';
 import Column from 'components/core/styled/Column';
 
 const Setup = ({ children }) => {
-  const { checkList, db } = React.useContext(AppContext);
-  const { save } = useMapItem(checkList, db.tables.checkList);
+  const {
+    checkList,
+    db: [tables],
+  } = React.useContext(AppContext);
+  const [, { save }] = useMapItem(checkList, tables.checkList);
 
   const [countRef, count] = useField();
   const send = React.useCallback(() => {

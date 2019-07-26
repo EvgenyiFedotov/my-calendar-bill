@@ -64,15 +64,7 @@ export default ([map, setMap], tableDB) => {
   const getProp = React.useCallback(nameProps => !!data[1] && data[1][nameProps], [data]);
   const isNew = React.useCallback(() => map.has(data[0]), [map, data]);
 
-  return {
-    data,
-    setData,
-    create,
-    save,
-    remove,
-    clear,
-    edit,
-    getProp,
-    isNew,
-  };
+  return [data, {
+    setData, create, save, remove, clear, edit, getProp, isNew,
+  }];
 };

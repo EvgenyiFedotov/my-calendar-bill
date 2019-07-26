@@ -22,16 +22,16 @@ const App = ({ children }) => {
       cryptoKey: data.key,
     };
   }, [data.login, data.key]);
-  const db = useIndexDB(optionsDB);
-  const [changesBill, setChangesBill] = useTableDB(db.tables.changesBill);
-  const [checkList, setCheckList] = useTableDB(db.tables.checkList);
+  const [tables, connect] = useIndexDB(optionsDB);
+  const [changesBill, setChangesBill] = useTableDB(tables.changesBill);
+  const [checkList, setCheckList] = useTableDB(tables.checkList);
 
   return (
     <Context.Provider
       value={{
         date,
         stepperDate,
-        db,
+        db: [tables, connect],
         changesBill: [changesBill, setChangesBill],
         checkList: [checkList, setCheckList],
       }}

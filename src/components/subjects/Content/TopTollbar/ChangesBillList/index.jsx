@@ -19,10 +19,10 @@ import Dialog from './Dialog';
 const ChangesBillList = ({ onClose }) => {
   const {
     changesBill: [changesBill, setChangesBill],
-    db,
+    db: [tables],
   } = React.useContext(AppContext);
-  const changesBillItem = useMapItem([changesBill, setChangesBill], db.tables.changesBill);
-  const { data, create, edit } = changesBillItem;
+  const changesBillItem = useMapItem([changesBill, setChangesBill], tables.changesBill);
+  const [data, { create, edit }] = changesBillItem;
 
   // Render item changes bill
   const renderItemChangesBill = React.useCallback(

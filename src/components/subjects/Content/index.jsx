@@ -17,8 +17,12 @@ import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
 
 const AppContent = () => {
-  const { checkList, stepperDate, db } = React.useContext(AppContext);
-  const { save, create, data, clear, isNew } = useMapItem(checkList, db.tables.checkList);
+  const {
+    checkList,
+    stepperDate,
+    db: [tables],
+  } = React.useContext(AppContext);
+  const [data, { save, create, clear, isNew }] = useMapItem(checkList, tables.checkList);
 
   /**
    * Render item check list
