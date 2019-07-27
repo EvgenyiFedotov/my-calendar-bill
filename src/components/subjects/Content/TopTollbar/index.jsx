@@ -28,7 +28,7 @@ const TopTollbar = () => {
 
   return (
     <Styled>
-      <PageContent justifyContent="space-between">
+      <PageContent contentProps={{ justifyContent: 'space-between' }}>
         <Row>
           <Button color="var(--bg-color)" onClick={toggleTheme}>
             Change theme

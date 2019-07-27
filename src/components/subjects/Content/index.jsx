@@ -56,11 +56,8 @@ const AppContent = () => {
     <Column>
       <TopToolbar />
 
-      <PageContent>
+      <PageContent contentProps={{ style: { height: '100vh' } }}>
         <Calendar stepperDate={stepperDate} onClickDate={create(date => dateToSQL(date))} />
-      </PageContent>
-
-      <PageContent>
         <List
           items={checkList[0]}
           style={{ flex: 1, minWidth: '300px' }}

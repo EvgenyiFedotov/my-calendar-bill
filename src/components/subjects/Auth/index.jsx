@@ -29,7 +29,7 @@ const Auth = ({ children }) => {
     <Branch value={data.login && data.key}>
       <>{children}</>
 
-      <PageContent justifyContent="center">
+      <PageContent contentProps={{ justifyContent: 'center' }}>
         <Column justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
           <InputText placeholder="Login" ref={loginPass} />
           <InputText placeholder="Password" type="password" ref={passRef} />

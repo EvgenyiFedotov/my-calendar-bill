@@ -35,7 +35,7 @@ const Setup = ({ children }) => {
     <Branch value={Array.from(checkList[0])[0]}>
       <>{children}</>
 
-      <PageContent justifyContent="center">
+      <PageContent contentProps={{ justifyContent: 'center' }}>
         <Column justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
           <InputText placeholder="Current count" type="number" ref={countRef} />
           <Button onClick={send}>Send</Button>
