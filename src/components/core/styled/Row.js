@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Get justify content
 export const justifyContent = (defaultValue = '') => ({ justifyContent }) => (justifyContent || defaultValue ? `justify-content: ${justifyContent || defaultValue}` : '');
@@ -8,7 +8,7 @@ export const alignItems = (defaultValue = '') => ({ alignItems }) => (alignItems
 
 export const marginRight = ({ step = 1 }) => `margin-right: calc(var(--space) * ${step});`;
 
-export default styled.div`
+export const RowCss = css`
   display: flex;
   ${justifyContent()};
   ${alignItems()};
@@ -16,4 +16,8 @@ export default styled.div`
   & > :not(:last-child) {
     ${marginRight};
   }
+`;
+
+export default styled.div`
+  ${RowCss};
 `;
