@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import Page from 'components/core/styled/Page';
+import Column from 'components/core/styled/Column';
 
-export default styled(Page)`
+export default styled(Column)`
   justify-content: center;
   align-items: center;
   height: 100vh;

@@ -4,6 +4,7 @@ const palette = {
   dark: css`
     --bg-color: #282c34;
     --main-color: #426cbf;
+    --white-color: #ffffff;
   `,
   white: css`
     --bg-color: #ffffff;
