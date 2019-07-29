@@ -7,23 +7,29 @@ import { ColumnCss } from 'components/core/styled/Column';
  * Get side box
  * @param {number} value
  */
-export const side = (value = 1) => `calc(var(--space) * 5 * ${value} + (var(--space) * ${value - 1}))`;
+export const side = (value = 1) => `calc(var(--space) * 3 * ${value})`;
 
-export const BlockCss = css`
+export const BlockCssWidth = css`
   width: ${({ width }) => side(width)};
+`;
+
+export const BlockCssHeight = css`
   height: ${({ height }) => side(height)};
 `;
 
 export const BlockRow = styled.div`
+  align-items: center;
   ${RowCss};
-  ${BlockCss};
+  ${BlockCssHeight};
 `;
 
 export const BlockColumn = styled.div`
+  align-items: center;
   ${ColumnCss};
-  ${BlockCss};
+  ${BlockCssWidth};
 `;
 
 export default styled.div`
-  ${BlockCss};
+  ${BlockCssWidth};
+  ${BlockCssHeight};
 `;
