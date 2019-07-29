@@ -34,5 +34,6 @@ export default createGlobalStyle`
   body {
     font-size: calc(var(--space) * 2);
     color: var(--main-color);
+    background-color: var(--bg-color);
   }
 `;

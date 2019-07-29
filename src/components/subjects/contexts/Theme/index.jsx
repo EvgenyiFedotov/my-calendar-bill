@@ -2,14 +2,29 @@ import * as React from 'react';
 
 import Context from './context';
 
-const User = ({ children }) => {
-  const [theme, setTheme] = React.useState('white');
+const themeLocalStorage = localStorage.getItem('THEME') || 'white';
+
+const Theme = ({ children }) => {
+  const [data, setData] = React.useState(themeLocalStorage);
   const toggleTheme = React.useCallback(
-    () => setTheme(prevTheme => (prevTheme === 'white' ? 'black' : 'white')),
-    [setTheme],
+    value =>
+      setData(prevData => {
+        let nextData = value;
+
+        if (nextData === undefined) {
+          nextData = prevData === 'white' ? 'dark' : 'white';
+        } else {
+          nextData = nextData || 'white';
+        }
+
+        localStorage.setItem('THEME', nextData);
+
+        return nextData;
+      }),
+    [setData],
   );
 
-  return <Context.Provider value={{ theme, setTheme, toggleTheme }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ data, toggleTheme }}>{children}</Context.Provider>;
 };
 
-export default User;
+export default Theme;

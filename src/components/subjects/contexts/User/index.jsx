@@ -2,38 +2,34 @@ import * as React from 'react';
 
 import Context from './context';
 
-const KEY_SS = 'USER';
-
-const userFromSS = JSON.parse(sessionStorage.getItem(KEY_SS)) || {};
+const dataLocalStorage = {
+  login: sessionStorage.getItem('LOGIN'),
+  hashKey: sessionStorage.getItem('HASHKEY'),
+};
 
 const User = ({ children }) => {
-  const [data, setData] = React.useState(userFromSS);
-
-  /**
-   * Set value in session storage
-   */
-  const dispatch = React.useCallback(
-    addData =>
-      setData(prevData => {
-        const nextData = { ...prevData, ...addData };
-        sessionStorage.setItem(KEY_SS, JSON.stringify(nextData));
-        return nextData;
-      }),
-    [setData],
-  );
+  const [data, setData] = React.useState(dataLocalStorage);
 
   /**
    * Sign in
    * @param {string} loginUser
    * @param {string} hashKey
    */
-  const signIn = React.useCallback((login, hashKey) => dispatch({ login, hashKey }), [dispatch]);
+  const signIn = React.useCallback(
+    (login, hashKey) => {
+      sessionStorage.setItem('LOGIN', login);
+      sessionStorage.setItem('HASHKEY', hashKey);
+      setData({ login, hashKey });
+    },
+    [setData],
+  );
 
   /**
    * Sign out
    */
   const signOut = React.useCallback(() => {
-    sessionStorage.removeItem(KEY_SS);
+    sessionStorage.removeItem('LOGIN');
+    sessionStorage.removeItem('HASHKEY');
     setData({});
   }, [setData]);
 

@@ -7,6 +7,7 @@ import ButtonMenu from 'components/subjects/Content/Dashboard/styled/ButtonMenu'
 import { BlockRow } from 'components/core/styled/Block';
 import Branch from 'components/core/Branch';
 import UserContext from 'components/subjects/contexts/User/context';
+import Options from 'components/subjects/Content/Dashboard/Options';
 
 const Dashboard = () => {
   const { signOut } = React.useContext(UserContext);
@@ -29,7 +30,7 @@ const Dashboard = () => {
             </Branch>
 
             <Branch value={showContent === 'options'}>
-              <BlockRow>Options</BlockRow>
+              <Options />
             </Branch>
           </Column>
         </Row>
