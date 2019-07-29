@@ -15,6 +15,7 @@ import useMapItem from 'hooks/use-map-item';
 
 import Calendar from './Calendar';
 import TopToolbar from './TopTollbar';
+import Chart from 'components/subjects/Content/Chart';
 
 const AppContent = () => {
   const {
@@ -57,6 +58,7 @@ const AppContent = () => {
       <TopToolbar />
 
       <PageContent contentProps={{ style: { height: '100vh' } }}>
+        <Chart />
         <Calendar stepperDate={stepperDate} onClickDate={create(date => dateToSQL(date))} />
         <List
           items={checkList[0]}
