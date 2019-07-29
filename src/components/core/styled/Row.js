@@ -6,12 +6,14 @@ export const justifyContent = (defaultValue = '') => ({ justifyContent }) => (ju
 // Get align items
 export const alignItems = (defaultValue = '') => ({ alignItems }) => (alignItems || defaultValue ? `align-items: ${alignItems || defaultValue}` : '');
 
+export const marginRight = ({ step = 1 }) => `margin-right: calc(var(--space) * ${step});`;
+
 export default styled.div`
   display: flex;
   ${justifyContent()};
   ${alignItems()};
 
   & > :not(:last-child) {
-    margin-right: var(--space);
+    ${marginRight};
   }
 `;
