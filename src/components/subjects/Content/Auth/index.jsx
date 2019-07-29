@@ -23,7 +23,7 @@ const Auth = ({ children }) => {
     const loginValue = login.getValue();
     const passValue = pass.getValue();
     if (loginValue && passValue) signIn(loginValue, passValue);
-  }, [login, pass]);
+  }, [login, pass, signIn]);
 
   return (
     <Branch value={!!hashKey}>
