@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // Get color
-export const color = ({ color = 'var(--main-lg-color)' }) => `color: ${color}`;
+export const color = ({ color = 'var(--main-color)' }) => `color: ${color}`;
 
 export default styled.button`
   padding: var(--space);

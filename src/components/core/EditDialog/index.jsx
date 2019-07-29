@@ -27,17 +27,11 @@ const EditDialog = ({
       <Row justifyContent="space-between" alignItems="center">
         <b>{title}</b>
 
-        {!isNew && (
-          <Button color="var(--red-color)" onClick={onDelete}>
-            Delete
-          </Button>
-        )}
+        {!isNew && <Button onClick={onDelete}>Delete</Button>}
       </Row>
       <Content>{children}</Content>
       <Row justifyContent="flex-end" alignItems="center">
-        <Button color="var(--main-dk-color)" onClick={onCancel}>
-          Cancel
-        </Button>
+        <Button onClick={onCancel}>Cancel</Button>
         <Button onClick={onSave}>{isNew ? 'Create' : 'Edit'}</Button>
       </Row>
     </Styled>

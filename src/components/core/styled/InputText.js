@@ -10,7 +10,7 @@ export default styled.input`
   font-size: inherit;
 
   &::placeholder {
-    color: var(--main-dk-color);
+    color: var(--main-color);
   }
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
