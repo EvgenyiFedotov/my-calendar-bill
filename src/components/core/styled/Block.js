@@ -3,18 +3,19 @@ import styled, { css } from 'styled-components';
 import { RowCss } from 'components/core/styled/Row';
 import { ColumnCss } from 'components/core/styled/Column';
 
+export const side = (value = 1) => `var(--space) * 3 * ${value}`;
+
 /**
- * Get side box
  * @param {number} value
  */
-export const side = (value = 1) => `calc(var(--space) * 3 * ${value})`;
+export const sideCalc = (value = 1) => `calc(${side(value)})`;
 
 export const BlockCssWidth = css`
-  width: ${({ width }) => side(width)};
+  width: ${({ width }) => sideCalc(width)};
 `;
 
 export const BlockCssHeight = css`
-  height: ${({ height }) => side(height)};
+  height: ${({ height }) => sideCalc(height)};
 `;
 
 export const BlockRow = styled.div`
