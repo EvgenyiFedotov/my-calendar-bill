@@ -9,31 +9,40 @@ import Right from 'components/subjects/Content/Dashboard/styled/Right';
 import Bottom from 'components/subjects/Content/Dashboard/styled/Bottom';
 import ButtonMenu from 'components/subjects/Content/Dashboard/styled/ButtonMenu';
 import Branch from 'components/core/Branch';
-import Options from 'components/subjects/Content/Dashboard/Options';
+import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
+import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
 
 const Dashboard = () => {
   const { signOut } = React.useContext(UserContext);
 
   const [showContent, setShowContent] = React.useState('dashboard');
 
+  const bold = React.useCallback((value, text) => (value === showContent ? <b>{text}</b> : text), [
+    showContent,
+  ]);
+
   return (
     <Styled step={0}>
       <Top>Top</Top>
 
-      <Content step={2}>
+      <Content step={4}>
         <Left>
-          <ButtonMenu onClick={() => setShowContent('dashboard')}>Dashboard</ButtonMenu>
-          <ButtonMenu onClick={() => setShowContent('options')}>Options</ButtonMenu>
+          <ButtonMenu onClick={() => setShowContent('dashboard')}>
+            {bold('dashboard', 'Dashboard')}
+          </ButtonMenu>
+          <ButtonMenu onClick={() => setShowContent('options')}>
+            {bold('options', 'Options')}
+          </ButtonMenu>
           <ButtonMenu onClick={signOut}>Log out</ButtonMenu>
         </Left>
 
         <Right>
           <Branch value={showContent === 'dashboard'}>
-            <b>Dashboard</b>
+            <DashboardTab />
           </Branch>
 
           <Branch value={showContent === 'options'}>
-            <Options />
+            <OptionsTab />
           </Branch>
         </Right>
       </Content>
