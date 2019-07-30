@@ -8,6 +8,5 @@ export default styled.div`
   display: flex;
   box-shadow: var(--box-shadow);
 
-  width: 500px;
   height: 100vh;
 `;

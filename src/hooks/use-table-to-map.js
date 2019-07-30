@@ -9,7 +9,15 @@ export default (tableDB) => {
 
   // Load data from `indexDB`
   React.useEffect(() => {
-    tableDB.getMapCrypto(item => JSON.parse(item)).then(result => setTable(result));
+    tableDB
+      .getMapCrypto((item) => {
+        try {
+          return JSON.parse(item);
+        } catch (e) {
+          return item;
+        }
+      })
+      .then(result => setTable(result));
   }, [tableDB]);
 
   return [table, setTable];

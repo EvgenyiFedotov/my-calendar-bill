@@ -8,6 +8,8 @@ export default styled(Block)`
   align-items: center;
   border-radius: var(--border-radius);
   width: ${sideCalc(1.5)};
+  min-width: ${sideCalc(1.5)};
   height: ${sideCalc(1.5)};
+  min-height: ${sideCalc(1.5)};
   cursor: pointer;
 `;

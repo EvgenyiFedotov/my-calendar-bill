@@ -2,13 +2,16 @@ import * as React from 'react';
 
 import { MONTHS } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
-import ChecksBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChecksBill';
 import Button from 'components/core/styled/Button';
 import Row from 'components/core/styled/Row';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useMapItem from 'hooks/use-map-item';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
+import InputText from 'components/core/styled/InputText';
+import Column from 'components/core/styled/Column';
+import LabelText from 'components/core/styled/LabelText';
+import useField from 'hooks/use-field';
 
 import Styled from './styled';
 
@@ -18,16 +21,31 @@ import Styled from './styled';
  */
 const DialogEditDate = ({ date, onClose = () => {} }) => {
   const {
-    maps: { changesBill, checksBill },
+    maps: { changesBill },
+    tables,
   } = React.useContext(TablesContext);
 
   const [changeBill, changeBillMethods] = useMapItem(changesBill);
-  const [checkBill, checkBillMethods] = useMapItem(checksBill);
 
-  console.log(changeBill, checkBill);
+  const [titleRef, title] = useField();
+  const [countRef, count] = useField();
+
+  const save = React.useCallback(() => {
+    const titleValue = title.getValue();
+    const countValue = parseInt(count.getValue(), 10);
+
+    if (titleValue && !isNaN(countValue)) {
+      const [key, item] = changeBillMethods.save({
+        date: new Date(date).getTime(),
+        title: titleValue,
+        count: countValue,
+      });
+      tables.changesBill.setCrypto(key, item);
+    }
+  }, [date, title, count, changeBillMethods, tables]);
 
   return (
-    <Styled>
+    <Styled step={2}>
       <Row justifyContent="space-between" alignItems="center">
         <b>
           {date.getDate()}th {MONTHS[date.getMonth()]} {date.getFullYear()}
@@ -38,16 +56,34 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         </Row>
       </Row>
 
-      <Button onClick={changeBillMethods.create()}>Add</Button>
-      <ChangesBill />
-      <Branch value={changeBill[0]}>
-        <ModalPanel onClose={changeBillMethods.clear} />
-      </Branch>
+      <Row alignItems="center">
+        <span>Plan count: </span>
+        <LabelText>1000</LabelText>
+      </Row>
 
-      <Button onClick={checkBillMethods.create()}>Add</Button>
-      <ChecksBill />
-      <Branch value={checkBill[0]}>
-        <ModalPanel onClose={checkBillMethods.clear} />
+      <Button onClick={changeBillMethods.create()}>Add</Button>
+      <ChangesBill date={date} />
+      <Branch value={changeBill[0]}>
+        <ModalPanel onClose={changeBillMethods.clear}>
+          <Styled>
+            <Column step={2}>
+              <Column>
+                <label>Title</label>
+                <InputText placeholder="Title" ref={titleRef} />
+              </Column>
+
+              <Column>
+                <label>Count</label>
+                <InputText placeholder="Count" type="number" ref={countRef} />
+              </Column>
+
+              <Row justifyContent="flex-end" step={2}>
+                <Button onClick={changeBillMethods.clear}>Close</Button>
+                <Button onClick={save}>Save</Button>
+              </Row>
+            </Column>
+          </Styled>
+        </ModalPanel>
       </Branch>
     </Styled>
   );

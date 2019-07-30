@@ -3,17 +3,17 @@ import * as React from 'react';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import Branch from 'components/core/Branch';
 
-const ChangesBill = () => {
+const ChecksBill = () => {
   const {
     maps: {
-      changesBill: [changesBill],
+      checksBill: [checksBill],
     },
   } = React.useContext(TablesContext);
 
   return (
-    <Branch value={changesBill}>
+    <Branch value={checksBill}>
       <div>
-        <i>Changes bill list is empty</i>
+        <i>Checks bill list is empty</i>
       </div>
 
       <>Loading...</>
@@ -21,4 +21,4 @@ const ChangesBill = () => {
   );
 };
 
-export default ChangesBill;
+export default ChecksBill;

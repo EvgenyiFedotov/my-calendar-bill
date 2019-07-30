@@ -12,10 +12,12 @@ export const sideCalc = (value = 1) => `calc(${side(value)})`;
 
 export const BlockCssWidth = css`
   width: ${({ width }) => sideCalc(width)};
+  min-width: ${({ width }) => sideCalc(width)};
 `;
 
 export const BlockCssHeight = css`
   height: ${({ height }) => sideCalc(height)};
+  min-height: ${({ height }) => sideCalc(height)};
 `;
 
 export const BlockRow = styled.div`
