@@ -12,7 +12,9 @@ const ChecksBill = () => {
 
   return (
     <Branch value={checksBill}>
-      <i>Checks bill list is empty</i>
+      <div>
+        <i>Checks bill list is empty</i>
+      </div>
 
       <>Loading...</>
     </Branch>

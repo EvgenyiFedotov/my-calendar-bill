@@ -6,18 +6,34 @@ import Day from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/s
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
 import Block from 'components/core/styled/Block';
+import ModalPanel from 'components/core/ModalPanel';
+import Branch from 'components/core/Branch';
+import DialogEditDate from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate';
 
 const Calendar = () => {
   const [selectedDate, { prevMonth, nextMonth, setDate }] = React.useContext(SelectedDateContext);
   const dates = React.useMemo(() => getDatesMonths(selectedDate), [selectedDate]);
 
+  const [showModal, setShowModal] = React.useState(false);
+
   const clickDate = React.useCallback(
-    date => () => isEqualMonth(selectedDate, date) && setDate(new Date(date)),
-    [selectedDate, setDate],
+    date => () => {
+      if (isEqualMonth(selectedDate, date)) {
+        setDate(new Date(date));
+        setShowModal(true);
+      }
+    },
+    [selectedDate, setDate, setShowModal],
   );
 
   return (
     <Column>
+      <Branch value={showModal}>
+        <ModalPanel onClose={() => setShowModal(false)}>
+          <DialogEditDate date={selectedDate} onClose={() => setShowModal(false)} />
+        </ModalPanel>
+      </Branch>
+
       <Row>
         <Day onClick={prevMonth}>P</Day>
         <Block
