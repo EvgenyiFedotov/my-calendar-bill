@@ -1,16 +1,15 @@
 import * as React from 'react';
 
 import Column from 'components/core/styled/Column';
-import { BlockRow } from 'components/core/styled/Block';
-import LabelText from 'components/core/styled/LabelText';
+import SelectedDateContext from 'components/subjects/contexts/SelectedDate';
+import Calendar from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar';
 
 const Dashboard = () => {
   return (
     <Column>
-      <BlockRow>
-        <span>Current count: </span>
-        <LabelText>1000</LabelText>
-      </BlockRow>
+      <SelectedDateContext>
+        <Calendar />
+      </SelectedDateContext>
     </Column>
   );
 };

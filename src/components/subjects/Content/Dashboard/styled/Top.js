@@ -12,4 +12,5 @@ export default styled(Row)`
   background-color: var(--bg-color);
   align-items: center;
   padding: 0 10vw;
+  justify-content: space-between;
 `;

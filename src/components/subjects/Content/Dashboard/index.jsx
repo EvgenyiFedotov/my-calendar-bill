@@ -11,6 +11,7 @@ import ButtonMenu from 'components/subjects/Content/Dashboard/styled/ButtonMenu'
 import Branch from 'components/core/Branch';
 import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
 import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
+import LabelText from 'components/core/styled/LabelText';
 
 const Dashboard = () => {
   const { signOut } = React.useContext(UserContext);
@@ -23,7 +24,10 @@ const Dashboard = () => {
 
   return (
     <Styled step={0}>
-      <Top>Top</Top>
+      <Top>
+        <b>Calendar bill</b>
+        <LabelText>1000</LabelText>
+      </Top>
 
       <Content step={4}>
         <Left>

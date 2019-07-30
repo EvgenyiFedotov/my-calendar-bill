@@ -182,3 +182,5 @@ export const dateToSQL = date => `${date.getFullYear()}-${(date.getMonth() + 1).
   .getDate()
   .toString()
   .padStart(2, '0')}`;
+
+export const DAY_WEEK_SHORT = ['Mo', 'Tu', 'We', 'Tr', 'Fr', 'Sa', 'Su'];

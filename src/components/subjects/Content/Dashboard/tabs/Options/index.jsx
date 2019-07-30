@@ -11,7 +11,7 @@ const Options = () => {
   return (
     <Column>
       <BlockRow>
-        <i>Theme:</i>
+        <span>Theme:</span>
         <Button onClick={() => theme.toggleTheme()}>
           {theme.data === 'white' ? 'dark' : 'white'}
         </Button>
