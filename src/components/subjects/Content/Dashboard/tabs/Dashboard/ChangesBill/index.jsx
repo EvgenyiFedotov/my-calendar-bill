@@ -27,6 +27,15 @@ const ChangesBill = ({ date }) => {
     [date, changesBill],
   );
 
+  const getBackgroundColor = React.useCallback(count => {
+    if (count > 0) {
+      return 'var(--success-color)';
+    } else if (count < 0) {
+      return 'var(--error-color)';
+    }
+    return undefined;
+  }, []);
+
   return (
     <Branch value={items}>
       <Branch value={items && items.length}>
@@ -35,7 +44,7 @@ const ChangesBill = ({ date }) => {
             items.map(([key, item]) => (
               <Row key={key} justifyContent="space-between" alignItems="center">
                 <span>{item.title}</span>
-                <LabelText>{item.count}</LabelText>
+                <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
               </Row>
             ))}
         </Column>

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const backgroundColor = ({ color = 'var(--main-color)' }) => `background-color: ${color}`;
 
 export default styled.div`
-  display: flex;
-  padding: calc(var(--space) * 0.25) calc(var(--space) * 0.5);
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--bg-color);
   border-radius: var(--border-radius);
-  color: #ffffff;
   ${backgroundColor};
 `;

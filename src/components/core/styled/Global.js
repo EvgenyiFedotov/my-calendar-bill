@@ -5,11 +5,15 @@ const palette = {
     --bg-color: #282c34;
     --main-color: #426cbf;
     --text-color: #ffffff;
+    --success-color: #4dbb52;
+    --error-color: #f44336;
   `,
   white: css`
     --bg-color: #ffffff;
     --main-color: #426cbf;
     --text-color: #282c34;
+    --success-color: #4dbb52;
+    --error-color: #f44336;
   `,
 };
 

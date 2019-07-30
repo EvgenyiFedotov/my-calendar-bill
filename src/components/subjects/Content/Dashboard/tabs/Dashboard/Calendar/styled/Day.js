@@ -12,4 +12,5 @@ export default styled(Block)`
   height: ${sideCalc(1.5)};
   min-height: ${sideCalc(1.5)};
   cursor: pointer;
+  position: relative;
 `;

@@ -9,6 +9,8 @@ import Block from 'components/core/styled/Block';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
 import DialogEditDate from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate';
+import ChangeBillIndicatorWrapper from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/ChangeBillIndicatorWrapper';
+import ChangeBillIndicator from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/ChangeBillIndicator';
 
 const Calendar = () => {
   const [selectedDate, { prevMonth, nextMonth, setDate }] = React.useContext(SelectedDateContext);
@@ -63,6 +65,14 @@ const Calendar = () => {
                 if (isEqualDate(selectedDate, date)) result = <b>{result}</b>;
                 return result;
               })()}
+
+              <Branch value={isEqualMonth(selectedDate, date)}>
+                <ChangeBillIndicatorWrapper>
+                  <ChangeBillIndicator />
+                  <ChangeBillIndicator color="var(--success-color)" />
+                  <ChangeBillIndicator color="var(--error-color)" />
+                </ChangeBillIndicatorWrapper>
+              </Branch>
             </Day>
           ))}
         </Row>
