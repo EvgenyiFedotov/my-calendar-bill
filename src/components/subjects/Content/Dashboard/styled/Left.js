@@ -6,5 +6,5 @@ import { sideCalc } from 'components/core/styled/Block';
 export const width = sideCalc(10);
 
 export default styled(Column)`
-  background-color: var(--main-color);
+  padding: calc(var(--space) * 2) 0 calc(var(--space) * 2) 10vw;
 `;

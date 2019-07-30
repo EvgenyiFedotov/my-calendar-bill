@@ -10,4 +10,6 @@ export default styled(Row)`
   height: ${height};
   box-shadow: var(--box-shadow);
   background-color: var(--bg-color);
+  align-items: center;
+  padding: 0 10vw;
 `;

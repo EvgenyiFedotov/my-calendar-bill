@@ -15,7 +15,7 @@ const palette = {
 
 export default createGlobalStyle`
   :root {
-    --space: 9px;
+    --space: 8px;
     --border-radius: calc(var(--space) * 0.5);
     --box-shadow: 0px 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 
