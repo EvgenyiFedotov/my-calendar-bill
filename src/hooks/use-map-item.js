@@ -3,9 +3,8 @@ import uuid from 'uuid/v4';
 
 /**
  * @param {map<Map>}
- * @param {ReturnUseIndexDB.table[index]} [tableDB]
  */
-export default ([map, setMap], tableDB) => {
+export default ([map, setMap]) => {
   const [data, setData] = React.useState([]);
 
   const create = React.useCallback(
@@ -33,11 +32,9 @@ export default ([map, setMap], tableDB) => {
       setMap(nextMap);
       setData([]);
 
-      if (tableDB) tableDB.setCrypto(key, JSON.stringify(mapItem));
-
       return [key, mapItem];
     },
-    [map, data, setMap, setData, tableDB],
+    [map, data, setMap, setData],
   );
 
   /**
@@ -64,7 +61,17 @@ export default ([map, setMap], tableDB) => {
   const getProp = React.useCallback(nameProps => !!data[1] && data[1][nameProps], [data]);
   const isNew = React.useCallback(() => map.has(data[0]), [map, data]);
 
-  return [data, {
-    setData, create, save, remove, clear, edit, getProp, isNew,
-  }];
+  return [
+    data,
+    {
+      setData,
+      create,
+      save,
+      remove,
+      clear,
+      edit,
+      getProp,
+      isNew,
+    },
+  ];
 };

@@ -5,7 +5,7 @@ import * as React from 'react';
  * @param {ReturnUseIndexDB.table[index]} tableDB
  */
 export default (tableDB) => {
-  const [table, setTable] = React.useState();
+  const [table, setTable] = React.useState(null);
 
   // Load data from `indexDB`
   React.useEffect(() => {
