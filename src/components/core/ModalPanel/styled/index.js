@@ -11,11 +11,11 @@ export default styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  animation: show 0.3s ease-in-out;
+  animation: showModalPanel 0.3s ease-in-out;
   pointer-events: none;
   ${zIndex};
 
-  @keyframes show {
+  @keyframes showModalPanel {
     from {
       transform: translateX(100vw);
       opacity: 0;

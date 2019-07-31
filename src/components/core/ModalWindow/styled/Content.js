@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { shadow } from 'components/core/styled/shadow-hover';
-
 export default styled.div`
   background-color: var(--bg-color);
   pointer-events: all;
@@ -10,5 +8,5 @@ export default styled.div`
   max-width: calc(100% - var(--space) * 4);
   max-height: calc(100% - var(--space) * 4);
   display: flex;
-  ${shadow};
+  box-shadow: var(--box-shadow);
 `;

@@ -13,6 +13,8 @@ import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
 import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
 import LabelText from 'components/core/styled/LabelText';
 
+import DialogFirstCheck from './DialogFirstCheck';
+
 const Dashboard = () => {
   const { signOut } = React.useContext(UserContext);
 
@@ -24,6 +26,8 @@ const Dashboard = () => {
 
   return (
     <Styled step={0}>
+      <DialogFirstCheck />
+
       <Top>
         <b>Calendar bill</b>
         <LabelText>1000</LabelText>
