@@ -5,6 +5,8 @@ const palette = {
     --bg-color: #282c34;
     --main-color: #426cbf;
     --text-color: #ffffff;
+    --text-second-color: #bdbdbd;
+    --text-disabled-color: #414a5d;
     --success-color: #4dbb52;
     --error-color: #f44336;
   `,
@@ -12,6 +14,8 @@ const palette = {
     --bg-color: #ffffff;
     --main-color: #426cbf;
     --text-color: #282c34;
+    --text-second-color: #bdbdbd;
+    --text-disabled-color: #e0e0e0;
     --success-color: #4dbb52;
     --error-color: #f44336;
   `,

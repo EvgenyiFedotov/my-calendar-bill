@@ -7,6 +7,7 @@ import {
   isEqualMonth,
   isEqualDate,
   dateToSQL,
+  isPrevDate as getIsPrevDate,
 } from 'helpers/date';
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate/context';
 import Day from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/Day';
@@ -29,6 +30,7 @@ const Calendar = () => {
   const {
     maps: {
       changesBill: [changesBill],
+      checksBill: [checksBill],
     },
   } = React.useContext(TablesContext);
 
@@ -48,6 +50,13 @@ const Calendar = () => {
   }, [changesBill, yearSelectedDate, monthSelectedDate]);
 
   const [showModal, setShowModal] = React.useState(false);
+
+  const firstCheckBillDate = React.useMemo(() => {
+    if (checksBill) {
+      const firstCheckBill = Array.from(checksBill)[0];
+      if (firstCheckBill) return new Date(firstCheckBill[0]);
+    }
+  }, [checksBill]);
 
   const clickDate = React.useCallback(
     date => () => {
@@ -81,7 +90,7 @@ const Calendar = () => {
 
       <Row>
         {DAY_WEEK_SHORT.map(day => (
-          <Day key={`key-${day}`} style={{ color: '#bdbdbd' }}>
+          <Day key={`key-${day}`} style={{ color: 'var(--text-second-color)' }}>
             {day}
           </Day>
         ))}
@@ -91,16 +100,18 @@ const Calendar = () => {
         <Row key={`week-${indexWeek}`}>
           {week.map((date, indexDate) => {
             const progressChangeBill = processChangesBill.get(dateToSQL(date));
+            const isPrevDate = firstCheckBillDate && getIsPrevDate(date, firstCheckBillDate);
+            const colorDay = isPrevDate ? 'var(--text-disabled-color)' : undefined;
 
             return (
-              <Day key={`day-${indexDate}`} onClick={clickDate(date)}>
+              <Day key={`day-${indexDate}`} color={colorDay} onClick={clickDate(date)}>
                 {(() => {
                   let result = isEqualMonth(selectedDate, date) ? date.getDate() : '';
                   if (isEqualDate(selectedDate, date)) result = <b>{result}</b>;
                   return result;
                 })()}
 
-                <Branch value={isEqualMonth(selectedDate, date)}>
+                <Branch value={!isPrevDate && isEqualMonth(selectedDate, date)}>
                   <ChangeBillIndicatorWrapper>
                     <Branch value={progressChangeBill && progressChangeBill.zero.size}>
                       <ChangeBillIndicator />

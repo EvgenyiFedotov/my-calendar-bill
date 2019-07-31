@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import Block, { sideCalc } from 'components/core/styled/Block';
 
+const color = ({ color = 'var(--text-color)' }) => `color: ${color}`;
+
 export default styled(Block)`
   display: flex;
   justify-content: center;
@@ -13,4 +15,5 @@ export default styled(Block)`
   min-height: ${sideCalc(1.5)};
   cursor: pointer;
   position: relative;
+  ${color};
 `;
