@@ -1,4 +1,6 @@
-import { dateToSQL, isPrevDate, isEqualDate } from 'helpers/date';
+import {
+  dateToSQL, isPrevDate, isEqualDate, isEqualMonth, getLastDateMonth,
+} from 'helpers/date';
 
 /**
  * @param {Map<[string, Object]>} changesBill
@@ -9,11 +11,12 @@ export const getChangesBillByDate = (changesBill, dateMonth) => {
 
   changesBill
     && Array.from(changesBill).forEach(([key, changeBill]) => {
-      const date = new Date(changeBill.date);
+      let date = new Date(changeBill.date);
       if (dateMonth) {
         date.setFullYear(dateMonth.getFullYear());
         date.setMonth(dateMonth.getMonth());
       }
+      if (!isEqualMonth(dateMonth, date)) date = getLastDateMonth(dateMonth);
       const dateSQL = dateToSQL(date);
 
       if (!result.get(dateSQL)) result.set(dateSQL, new Map());
