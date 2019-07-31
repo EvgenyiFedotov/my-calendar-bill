@@ -169,14 +169,20 @@ export const MONTHS = [
 export const dateToMonth = date => MONTHS[date.getMonth()];
 
 /**
+ * @param {Date} date1
+ * @param {Date} date2
+ */
+export const isPrevMonth = (date1, date2) => date1.getFullYear() < date2.getFullYear()
+  || (date1.getFullYear() === date2.getFullYear() && date1.getMonth() < date2.getMonth());
+
+/**
  * Get value is prev date
  * @param {Date} date1
  * @param {Date} date2
  *
  * @returns {boolean}
  */
-export const isPrevDate = (date1, date2) => date1.getFullYear() < date2.getFullYear()
-  || (date1.getFullYear() === date2.getFullYear() && date1.getMonth() < date2.getMonth())
+export const isPrevDate = (date1, date2) => isPrevMonth(date1, date2)
   || (date1.getFullYear() === date2.getFullYear()
     && date1.getMonth() === date2.getMonth()
     && date1.getDate() < date2.getDate());
@@ -193,3 +199,27 @@ export const dateToSQL = date => `${date.getFullYear()}-${(date.getMonth() + 1).
   .padStart(2, '0')}`;
 
 export const DAY_WEEK_SHORT = ['Mo', 'Tu', 'We', 'Tr', 'Fr', 'Sa', 'Su'];
+
+/**
+ * @param {Date} prevDate
+ */
+export const prevMonth = (prevDate) => {
+  const nextDate = new Date(prevDate);
+  nextDate.setMonth(nextDate.getMonth() - 1);
+  if (prevDate.getMonth() === nextDate.getMonth()) {
+    nextDate.setMonth(nextDate.getMonth() - 1);
+  }
+  return nextDate;
+};
+
+/**
+ * @param {Date} prevDate
+ */
+export const nextMonth = (prevDate) => {
+  const nextDate = new Date(prevDate);
+  nextDate.setMonth(nextDate.getMonth() + 1);
+  if (nextDate.getMonth() - prevDate.getMonth() > 1) {
+    nextDate.setMonth(nextDate.getMonth() - 1);
+  }
+  return nextDate;
+};

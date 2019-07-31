@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { prevMonth as prevMonthDate, nextMonth as nextMonthDate } from 'helpers/date';
+
 /**
  * Hook for use date and her added methods
  * @param {Date} [defaultDate = new Date()]
@@ -7,29 +9,9 @@ import * as React from 'react';
 export default (defaultDate = new Date()) => {
   const [date, setDate] = React.useState(defaultDate);
 
-  const prevMonth = React.useCallback(
-    () => setDate((prevDate) => {
-      const nextDate = new Date(prevDate);
-      nextDate.setMonth(nextDate.getMonth() - 1);
-      if (prevDate.getMonth() === nextDate.getMonth()) {
-        nextDate.setMonth(nextDate.getMonth() - 1);
-      }
-      return nextDate;
-    }),
-    [setDate],
-  );
+  const prevMonth = React.useCallback(() => setDate(prevMonthDate), [setDate]);
 
-  const nextMonth = React.useCallback(
-    () => setDate((prevDate) => {
-      const nextDate = new Date(prevDate);
-      nextDate.setMonth(nextDate.getMonth() + 1);
-      if (nextDate.getMonth() - prevDate.getMonth() > 1) {
-        nextDate.setMonth(nextDate.getMonth() - 1);
-      }
-      return nextDate;
-    }),
-    [setDate],
-  );
+  const nextMonth = React.useCallback(() => setDate(nextMonthDate), [setDate]);
 
   const today = React.useCallback(() => setDate(new Date()), [setDate]);
 

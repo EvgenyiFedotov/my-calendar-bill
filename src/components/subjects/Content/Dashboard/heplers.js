@@ -1,5 +1,11 @@
 import {
-  dateToSQL, isPrevDate, isEqualDate, isEqualMonth, getLastDateMonth,
+  dateToSQL,
+  isPrevDate,
+  isEqualDate,
+  isEqualMonth,
+  getLastDateMonth,
+  nextMonth,
+  isPrevMonth,
 } from 'helpers/date';
 
 /**
@@ -70,6 +76,49 @@ export const getLastCheck = (checksList, date) => {
       const dateKey = new Date(key);
       if (date && !isPrevDate(dateKey, date) && !isEqualDate(dateKey, date)) break;
       result = [key, item];
+    }
+  }
+
+  return result;
+};
+
+/**
+ * @param {changesBill} changesBill
+ */
+export const getSummChangesBill = changesBill => Array.from(changesBill).reduce((memo, [, { count }]) => memo + count, 0);
+
+/**
+ * @param {checksBill} checksBill
+ * @param {changesBill} changesBill
+ * @param {Date} date
+ *
+ * @returns {number}
+ */
+export const getPlanCount = ({ checksBill, changesBill, date }) => {
+  let result = 0;
+  const [keyLastCheckBill, lastCheckBill] = getLastCheck(checksBill, date) || [];
+
+  if (lastCheckBill) {
+    const dateLastCheckBill = new Date(keyLastCheckBill);
+    let currDate = new Date(dateLastCheckBill);
+    result = lastCheckBill.planCount;
+
+    const eachDate = ([dateSQL, changesBillDate]) => {
+      const isLeftBorder = !isPrevDate(new Date(dateSQL), dateLastCheckBill)
+        || isEqualDate(new Date(dateSQL), dateLastCheckBill);
+      const isRigthBorder = isPrevDate(new Date(dateSQL), date) || isEqualDate(new Date(dateSQL), date);
+
+      if (isLeftBorder && isRigthBorder) {
+        result += getSummChangesBill(changesBillDate);
+      }
+    };
+
+    while (isEqualMonth(currDate, date) || isPrevMonth(currDate, date)) {
+      const changesBillByDate = getChangesBillByDate(changesBill, currDate);
+
+      Array.from(changesBillByDate).forEach(eachDate);
+
+      currDate = nextMonth(currDate);
     }
   }
 

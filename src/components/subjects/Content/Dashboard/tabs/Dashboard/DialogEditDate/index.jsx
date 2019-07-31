@@ -12,6 +12,7 @@ import InputText from 'components/core/styled/InputText';
 import Column from 'components/core/styled/Column';
 import LabelText from 'components/core/styled/LabelText';
 import useField from 'hooks/use-field';
+import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
 
 import Styled from './styled';
 
@@ -21,11 +22,14 @@ import Styled from './styled';
  */
 const DialogEditDate = ({ date, onClose = () => {} }) => {
   const {
-    maps: { changesBill },
+    maps: {
+      changesBill: [changesBill, setChangesBill],
+      checksBill: [checksBill],
+    },
     tables,
   } = React.useContext(TablesContext);
 
-  const [changeBill, changeBillMethods] = useMapItem(changesBill);
+  const [changeBill, changeBillMethods] = useMapItem([changesBill, setChangesBill]);
 
   const [titleRef, title] = useField();
   const [countRef, count] = useField();
@@ -44,6 +48,11 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
     }
   }, [date, title, count, changeBillMethods, tables]);
 
+  const planCount = React.useMemo(
+    () => (checksBill && changesBill ? getPlanCount({ checksBill, changesBill, date }) : 0),
+    [checksBill, changesBill, date],
+  );
+
   return (
     <Styled step={2}>
       <Row justifyContent="space-between" alignItems="center">
@@ -58,7 +67,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Row alignItems="center">
         <span>Plan count: </span>
-        <LabelText>1000</LabelText>
+        <LabelText>{planCount}</LabelText>
       </Row>
 
       <Button onClick={changeBillMethods.create()}>Add</Button>
