@@ -33,6 +33,16 @@ export const eachDate = (from, to, callback, options = {}) => {
 };
 
 /**
+ * @param {Date} date
+ */
+export const setLastDateMonth = (date) => {
+  date.setDate(15);
+  date.setMonth(date.getMonth() + 1);
+  date.setDate(0);
+  return date;
+};
+
+/**
  * Get last date month
  * @param {Date} date
  *
@@ -40,8 +50,7 @@ export const eachDate = (from, to, callback, options = {}) => {
  */
 export const getLastDateMonth = (date) => {
   const result = new Date(date);
-  result.setMonth(result.getMonth() + 1);
-  result.setDate(0);
+  setLastDateMonth(result);
   return result;
 };
 

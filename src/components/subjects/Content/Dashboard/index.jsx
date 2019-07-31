@@ -12,13 +12,24 @@ import Branch from 'components/core/Branch';
 import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
 import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
 import LabelText from 'components/core/styled/LabelText';
+import TableContext from 'components/subjects/contexts/Tables/context';
 
 import DialogFirstCheck from './DialogFirstCheck';
+import { getLastCheck } from './heplers';
 
 const Dashboard = () => {
   const { signOut } = React.useContext(UserContext);
+  const {
+    maps: {
+      checksBill: [checksBill],
+    },
+  } = React.useContext(TableContext);
 
   const [showContent, setShowContent] = React.useState('dashboard');
+
+  const lastCheck = React.useMemo(() => checksBill && getLastCheck(checksBill, new Date()), [
+    checksBill,
+  ]);
 
   const bold = React.useCallback((value, text) => (value === showContent ? <b>{text}</b> : text), [
     showContent,
@@ -30,7 +41,9 @@ const Dashboard = () => {
 
       <Top>
         <b>Calendar bill</b>
-        <LabelText>1000</LabelText>
+        <Branch value={lastCheck}>
+          <LabelText>{lastCheck && lastCheck[1].count}</LabelText>
+        </Branch>
       </Top>
 
       <Content step={4}>

@@ -11,6 +11,9 @@ export default (defaultDate = new Date()) => {
     () => setDate((prevDate) => {
       const nextDate = new Date(prevDate);
       nextDate.setMonth(nextDate.getMonth() - 1);
+      if (prevDate.getMonth() === nextDate.getMonth()) {
+        nextDate.setMonth(nextDate.getMonth() - 1);
+      }
       return nextDate;
     }),
     [setDate],
@@ -20,6 +23,9 @@ export default (defaultDate = new Date()) => {
     () => setDate((prevDate) => {
       const nextDate = new Date(prevDate);
       nextDate.setMonth(nextDate.getMonth() + 1);
+      if (nextDate.getMonth() - prevDate.getMonth() > 1) {
+        nextDate.setMonth(nextDate.getMonth() - 1);
+      }
       return nextDate;
     }),
     [setDate],

@@ -19,47 +19,10 @@ import DialogEditDate from 'components/subjects/Content/Dashboard/tabs/Dashboard
 import ChangeBillIndicatorWrapper from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/ChangeBillIndicatorWrapper';
 import ChangeBillIndicator from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/ChangeBillIndicator';
 import TablesContext from 'components/subjects/contexts/Tables/context';
-
-/**
- * @param {Map<[string, Object]>} changesBill
- */
-const getChangesBillByDate = changesBill => {
-  const result = new Map();
-
-  changesBill &&
-    Array.from(changesBill).forEach(([key, changeBill]) => {
-      const dateSQL = dateToSQL(new Date(changeBill.date));
-      if (!result.get(dateSQL)) result.set(dateSQL, new Map());
-      result.get(dateSQL).set(key, changeBill);
-    });
-
-  return result;
-};
-
-/**
- * @param {Map<[string, Object]>} changesBill
- */
-const getChangesBillByDirection = changesBill => {
-  const result = {
-    in: new Map(),
-    out: new Map(),
-    zero: new Map(),
-  };
-
-  changesBill &&
-    Array.from(changesBill).forEach(([key, changeBill]) => {
-      const { count } = changeBill;
-      if (count < 0) {
-        result.out.set(key, changeBill);
-      } else if (count > 0) {
-        result.in.set(key, changeBill);
-      } else {
-        result.zero.set(key, changeBill);
-      }
-    });
-
-  return result;
-};
+import {
+  getChangesBillByDate,
+  getChangesBillByDirection,
+} from 'components/subjects/Content/Dashboard/heplers';
 
 const Calendar = () => {
   const [selectedDate, { prevMonth, nextMonth, setDate }] = React.useContext(SelectedDateContext);
@@ -71,13 +34,18 @@ const Calendar = () => {
 
   const dates = React.useMemo(() => getDatesMonths(selectedDate), [selectedDate]);
 
+  const yearSelectedDate = selectedDate.getFullYear();
+  const monthSelectedDate = selectedDate.getMonth();
   const processChangesBill = React.useMemo(() => {
-    const changesBillByDates = getChangesBillByDate(changesBill);
+    const changesBillByDates = getChangesBillByDate(
+      changesBill,
+      new Date(yearSelectedDate, monthSelectedDate),
+    );
     Array.from(changesBillByDates).forEach(([dateSQL, changesBillByDate]) =>
       changesBillByDates.set(dateSQL, getChangesBillByDirection(changesBillByDate)),
     );
     return changesBillByDates;
-  }, [changesBill]);
+  }, [changesBill, yearSelectedDate, monthSelectedDate]);
 
   const [showModal, setShowModal] = React.useState(false);
 

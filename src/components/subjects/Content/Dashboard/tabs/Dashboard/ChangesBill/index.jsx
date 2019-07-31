@@ -5,7 +5,8 @@ import Branch from 'components/core/Branch';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
 import LabelText from 'components/core/styled/LabelText';
-import { isEqualDate } from 'helpers/date';
+import { dateToSQL } from 'helpers/date';
+import { getChangesBillByDate } from 'components/subjects/Content/Dashboard/heplers';
 
 /**
  *
@@ -18,14 +19,15 @@ const ChangesBill = ({ date }) => {
     },
   } = React.useContext(TablesContext);
 
-  const items = React.useMemo(
-    () =>
-      changesBill &&
-      Array.from(changesBill).filter(([, item]) => {
-        return date ? isEqualDate(date, new Date(item.date)) : true;
-      }),
-    [date, changesBill],
-  );
+  const items = React.useMemo(() => {
+    if (changesBill) {
+      if (date) {
+        return getChangesBillByDate(changesBill, date).get(dateToSQL(date)) || new Map();
+      } else {
+        return changesBill;
+      }
+    }
+  }, [date, changesBill]);
 
   const getBackgroundColor = React.useCallback(count => {
     if (count > 0) {
@@ -38,10 +40,10 @@ const ChangesBill = ({ date }) => {
 
   return (
     <Branch value={items}>
-      <Branch value={items && items.length}>
+      <Branch value={items && items.size}>
         <Column>
-          {changesBill &&
-            items.map(([key, item]) => (
+          {items &&
+            Array.from(items).map(([key, item]) => (
               <Row key={key} justifyContent="space-between" alignItems="center">
                 <span>{item.title}</span>
                 <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
