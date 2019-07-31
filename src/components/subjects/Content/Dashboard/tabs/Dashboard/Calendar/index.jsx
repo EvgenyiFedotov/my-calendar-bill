@@ -78,7 +78,6 @@ const Calendar = () => {
     );
     return changesBillByDates;
   }, [changesBill]);
-  console.log(processChangesBill);
 
   const [showModal, setShowModal] = React.useState(false);
 
