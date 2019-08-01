@@ -17,7 +17,7 @@ const User = ({ children }) => {
       localStorage.setItem('MODE', mode);
       setData(prevData => ({ ...prevData, mode }));
     },
-    [data, setData],
+    [setData],
   );
 
   return <Context.Provider value={[data, { setMode }]}>{children}</Context.Provider>;

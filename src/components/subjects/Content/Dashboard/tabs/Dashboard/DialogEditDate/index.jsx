@@ -69,6 +69,17 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
     }
   }, [currCount, tables, date, counts, checkBillMehtods]);
 
+  const colorPlanCount = React.useMemo(() => {
+    if (typeof counts.count === 'number' && typeof counts.planCount === 'number') {
+      if (counts.count > counts.planCount) {
+        return 'var(--success-color)';
+      } else if (counts.count < counts.planCount) {
+        return 'var(--error-color)';
+      }
+    }
+    return undefined;
+  }, [counts]);
+
   return (
     <Styled step={2}>
       <Row justifyContent="space-between" alignItems="center">
@@ -99,7 +110,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Row alignItems="center" justifyContent="space-between">
         <span>Plan count: </span>
-        <LabelText>{counts.planCount}</LabelText>
+        <LabelText color={colorPlanCount}>{counts.planCount}</LabelText>
       </Row>
 
       <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
