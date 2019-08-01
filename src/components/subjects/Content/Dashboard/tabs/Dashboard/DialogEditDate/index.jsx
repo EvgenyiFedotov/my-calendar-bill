@@ -66,12 +66,21 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         </Row>
       </Row>
 
-      <Row alignItems="center">
+      <Button color="var(--main-color)">Check</Button>
+
+      <Row alignItems="center" justifyContent="space-between">
+        <span>Count: </span>
+        <span>{planCount}</span>
+      </Row>
+
+      <Row alignItems="center" justifyContent="space-between">
         <span>Plan count: </span>
         <LabelText>{planCount}</LabelText>
       </Row>
 
-      <ButtonLink onClick={changeBillMethods.create()}>Add</ButtonLink>
+      <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
+        Add
+      </Button>
       <ChangesBill date={date} />
 
       <Branch value={changeBill[0]}>

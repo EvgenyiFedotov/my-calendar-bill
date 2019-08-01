@@ -48,21 +48,21 @@ const ChangesBill = ({ date }) => {
         <Column>
           {items && (
             <>
+              <BlockRow key="changes-bill-summ" justifyContent="space-between" alignItems="center">
+                <span>Summ</span>
+                <LabelText color={getBackgroundColor(getSummChangesBill(changesBill))}>
+                  {getSummChangesBill(changesBill)}
+                </LabelText>
+              </BlockRow>
+
+              <Separator />
+
               {Array.from(items).map(([key, item]) => (
                 <BlockRow key={key} justifyContent="space-between" alignItems="center">
                   <span>{item.title}</span>
                   <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
                 </BlockRow>
               ))}
-
-              <Separator />
-
-              <BlockRow key="changes-bill-summ" justifyContent="space-between" alignItems="center">
-                <b>Summ</b>
-                <LabelText color={getBackgroundColor(getSummChangesBill(changesBill))}>
-                  {getSummChangesBill(changesBill)}
-                </LabelText>
-              </BlockRow>
             </>
           )}
         </Column>
