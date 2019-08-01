@@ -1,38 +1,17 @@
 import * as React from 'react';
 
-import TablesContext from 'components/subjects/contexts/Tables/context';
 import Branch from 'components/core/Branch';
 import Column from 'components/core/styled/Column';
 import { BlockRow } from 'components/core/styled/Block';
 import LabelText from 'components/core/styled/LabelText';
-import { dateToSQL } from 'helpers/date';
-import {
-  getChangesBillByDate,
-  getSummChangesBill,
-} from 'components/subjects/Content/Dashboard/heplers';
+import { getSummChangesBill } from 'components/subjects/Content/Dashboard/heplers';
 import Separator from 'components/core/styled/Separator';
 
 /**
  *
- * @param {Date} [date]
+ * @param {Map} items
  */
-const ChangesBill = ({ date }) => {
-  const {
-    maps: {
-      changesBill: [changesBill],
-    },
-  } = React.useContext(TablesContext);
-
-  const items = React.useMemo(() => {
-    if (changesBill) {
-      if (date) {
-        return getChangesBillByDate(changesBill, date).get(dateToSQL(date)) || new Map();
-      } else {
-        return changesBill;
-      }
-    }
-  }, [date, changesBill]);
-
+const ChangesBill = ({ items }) => {
   const getBackgroundColor = React.useCallback(count => {
     if (count > 0) {
       return 'var(--success-color)';
@@ -50,8 +29,8 @@ const ChangesBill = ({ date }) => {
             <>
               <BlockRow key="changes-bill-summ" justifyContent="space-between" alignItems="center">
                 <span>Summ</span>
-                <LabelText color={getBackgroundColor(getSummChangesBill(changesBill))}>
-                  {getSummChangesBill(changesBill)}
+                <LabelText color={getBackgroundColor(getSummChangesBill(items))}>
+                  {getSummChangesBill(items)}
                 </LabelText>
               </BlockRow>
 

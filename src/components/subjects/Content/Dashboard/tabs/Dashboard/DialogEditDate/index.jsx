@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { MONTHS } from 'helpers/date';
+import { MONTHS, dateToSQL } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
 import ButtonLink from 'components/core/styled/ButtonLink';
 import Row from 'components/core/styled/Row';
@@ -14,6 +14,7 @@ import LabelText from 'components/core/styled/LabelText';
 import useField from 'hooks/use-field';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
 import Button from 'components/core/styled/Button';
+import { getChangesBillByDate } from 'components/subjects/Content/Dashboard/heplers';
 
 import Styled from './styled';
 
@@ -54,6 +55,16 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
     [checksBill, changesBill, date],
   );
 
+  const itemsChangesBill = React.useMemo(() => {
+    if (changesBill) {
+      if (date) {
+        return getChangesBillByDate(changesBill, date).get(dateToSQL(date)) || new Map();
+      } else {
+        return changesBill;
+      }
+    }
+  }, [date, changesBill]);
+
   return (
     <Styled step={2}>
       <Row justifyContent="space-between" alignItems="center">
@@ -81,7 +92,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
       <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
         Add
       </Button>
-      <ChangesBill date={date} />
+      <ChangesBill items={itemsChangesBill} />
 
       <Branch value={changeBill[0]}>
         <ModalPanel onClose={changeBillMethods.clear}>
