@@ -7,4 +7,12 @@ export default styled(Column)`
   overflow-y: auto;
   flex: 1;
   padding: calc(var(--space) * 2) 10vw calc(var(--space) * 2) 0;
+
+  @media (max-width: 1023px) {
+    padding: calc(var(--space) * 2);
+  }
+
+  @media (max-width: 767px) {
+    align-items: center;
+  }
 `;
