@@ -10,4 +10,8 @@ export default styled(Row)`
   height: ${height};
   box-shadow: var(--box-shadow);
   background-color: var(--bg-color);
+
+  @media (max-width: 1023px) {
+    padding: calc(var(--space) * 2);
+  }
 `;

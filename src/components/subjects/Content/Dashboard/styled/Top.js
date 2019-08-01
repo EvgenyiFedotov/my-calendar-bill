@@ -13,4 +13,8 @@ export default styled(Row)`
   align-items: center;
   padding: 0 10vw;
   justify-content: space-between;
+
+  @media (max-width: 1023px) {
+    padding: calc(var(--space) * 2);
+  }
 `;
