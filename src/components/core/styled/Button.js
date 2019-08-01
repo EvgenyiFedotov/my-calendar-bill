@@ -10,12 +10,8 @@ export default styled.button`
   cursor: pointer;
   font-size: calc(var(--space) * 2);
   height: ${sideCalc(1.5)};
-  color: ${color};
-  border: 1px solid ${color};
   border-radius: var(--border-radius);
   padding: 0 calc(var(--space) * 2);
-
-  &:hover {
-    text-decoration: underline;
-  }
+  color: #ffffff;
+  background-color: ${color};
 `;

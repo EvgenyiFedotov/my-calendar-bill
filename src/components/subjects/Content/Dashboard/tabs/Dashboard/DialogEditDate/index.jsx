@@ -97,9 +97,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
               </Column>
 
               <Row justifyContent="flex-end" step={2}>
-                <Branch>
-                  <ButtonLink color="var(--error-color)">Delete</ButtonLink>
-                </Branch>
+                <ButtonLink color="var(--error-color)">Delete</ButtonLink>
                 <Button color="var(--main-color)" onClick={save}>
                   Save
                 </Button>
