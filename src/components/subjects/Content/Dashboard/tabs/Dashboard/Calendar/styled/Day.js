@@ -4,6 +4,8 @@ import Block, { sideCalc } from 'components/core/styled/Block';
 
 const color = ({ color = 'var(--text-color)' }) => `color: ${color}`;
 
+const backgroundColor = ({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor}`;
+
 export default styled(Block)`
   display: flex;
   justify-content: center;
@@ -16,4 +18,5 @@ export default styled(Block)`
   cursor: pointer;
   position: relative;
   ${color};
+  ${backgroundColor};
 `;

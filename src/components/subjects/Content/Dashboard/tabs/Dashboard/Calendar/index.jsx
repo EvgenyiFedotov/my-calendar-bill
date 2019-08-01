@@ -4,26 +4,28 @@ import {
   getDatesMonths,
   DAY_WEEK_SHORT,
   MONTHS,
-  isEqualMonth,
+  isEqualMonth as getIsEqualMonth,
   isEqualDate,
   dateToSQL,
   isPrevDate as getIsPrevDate,
 } from 'helpers/date';
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate/context';
-import Day from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/Day';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
 import Block from 'components/core/styled/Block';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
 import DialogEditDate from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate';
-import ChangeBillIndicatorWrapper from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/ChangeBillIndicatorWrapper';
-import ChangeBillIndicator from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calendar/styled/ChangeBillIndicator';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import {
   getChangesBillByDate,
   getChangesBillByDirection,
 } from 'components/subjects/Content/Dashboard/heplers';
+
+import Day from './styled/Day';
+import ChangeBillIndicatorWrapper from './styled/ChangeBillIndicatorWrapper';
+import ChangeBillIndicator from './styled/ChangeBillIndicator';
+import CheckBillIndicator from './styled/CheckBillIndicator';
 
 const Calendar = () => {
   const [selectedDate, { prevMonth, nextMonth, setDate }] = React.useContext(SelectedDateContext);
@@ -60,7 +62,7 @@ const Calendar = () => {
 
   const clickDate = React.useCallback(
     date => () => {
-      if (isEqualMonth(selectedDate, date)) {
+      if (getIsEqualMonth(selectedDate, date)) {
         setDate(new Date(date));
         setShowModal(true);
       }
@@ -98,19 +100,40 @@ const Calendar = () => {
       {dates.map((week, indexWeek) => (
         <Row key={`week-${indexWeek}`}>
           {week.map((date, indexDate) => {
-            const progressChangeBill = processChangesBill.get(dateToSQL(date));
+            const dateSQL = dateToSQL(date);
+            const progressChangeBill = processChangesBill.get(dateSQL);
             const isPrevDate = firstCheckBillDate && getIsPrevDate(date, firstCheckBillDate);
             const colorDay = isPrevDate ? 'var(--text-disabled-color)' : undefined;
 
+            const isEqualMonth = getIsEqualMonth(selectedDate, date);
+
+            const checkBill = isEqualMonth && checksBill && checksBill.get(dateSQL);
+            let colorIndicator;
+            if (
+              checkBill &&
+              typeof checkBill.count === 'number' &&
+              typeof checkBill.planCount === 'number'
+            ) {
+              if (checkBill.count < checkBill.planCount) {
+                colorIndicator = 'var(--error-color)';
+              } else if (checkBill.count < checkBill.planCount) {
+                colorIndicator = 'var(--success-color)';
+              } else {
+                colorIndicator = 'var(--main-color)';
+              }
+            }
+
             return (
               <Day key={`day-${indexDate}`} color={colorDay} onClick={clickDate(date)}>
-                {(() => {
-                  let result = isEqualMonth(selectedDate, date) ? date.getDate() : '';
-                  if (isEqualDate(selectedDate, date)) result = <b>{result}</b>;
-                  return result;
-                })()}
+                <CheckBillIndicator backgroundColor={colorIndicator}>
+                  {(() => {
+                    let result = isEqualMonth ? date.getDate() : '';
+                    if (isEqualDate(selectedDate, date)) result = <b>{result}</b>;
+                    return result;
+                  })()}
+                </CheckBillIndicator>
 
-                <Branch value={!isPrevDate && isEqualMonth(selectedDate, date)}>
+                <Branch value={!isPrevDate && isEqualMonth}>
                   <ChangeBillIndicatorWrapper>
                     <Branch value={progressChangeBill && progressChangeBill.zero.size}>
                       <ChangeBillIndicator />
