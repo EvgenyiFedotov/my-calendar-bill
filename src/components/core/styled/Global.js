@@ -3,6 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 const palette = {
   dark: css`
     --bg-color: #282c34;
+    --bg-area-color: #303541;
     --main-color: #426cbf;
     --text-color: #ffffff;
     --text-second-color: #bdbdbd;
@@ -12,6 +13,7 @@ const palette = {
   `,
   white: css`
     --bg-color: #ffffff;
+    --bg-area-color: #f5f5f5;
     --main-color: #426cbf;
     --text-color: #282c34;
     --text-second-color: #bdbdbd;
