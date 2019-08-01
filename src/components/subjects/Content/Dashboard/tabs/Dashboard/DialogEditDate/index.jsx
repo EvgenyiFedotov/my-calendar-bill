@@ -26,7 +26,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
   const {
     maps: {
       changesBill: [changesBill, setChangesBill],
-      checksBill: [checksBill],
+      checksBill: [checksBill, setChecksBill],
     },
     tables,
   } = React.useContext(TablesContext);
@@ -50,10 +50,16 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
     }
   }, [date, title, count, changeBillMethods, tables]);
 
-  const planCount = React.useMemo(
-    () => (checksBill && changesBill ? getPlanCount({ checksBill, changesBill, date }) : 0),
-    [checksBill, changesBill, date],
-  );
+  const counts = React.useMemo(() => {
+    if (checksBill) {
+      const checkBill = checksBill.get(dateToSQL(date));
+      if (checkBill) return checkBill;
+      if (changesBill)
+        return { count: null, planCount: getPlanCount({ checksBill, changesBill, date }) };
+    }
+
+    return { count: null, planCount: 0 };
+  }, [checksBill, changesBill, date]);
 
   const itemsChangesBill = React.useMemo(() => {
     if (changesBill) {
@@ -64,6 +70,22 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
       }
     }
   }, [date, changesBill]);
+
+  const [currCountRef, currCount] = useField();
+  const [, checkBillMehtods] = useMapItem([checksBill, setChecksBill]);
+  const saveCheckBill = React.useCallback(() => {
+    const currCountValue = parseInt(currCount.getValue(), 10);
+    if (!isNaN(currCountValue)) {
+      const [key, item] = checkBillMehtods.save(
+        {
+          count: currCountValue,
+          planCount: counts.planCount,
+        },
+        dateToSQL(date),
+      );
+      tables.checksBill.setCrypto(key, item);
+    }
+  }, [currCount, tables, date, counts]);
 
   return (
     <Styled step={2}>
@@ -77,16 +99,23 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         </Row>
       </Row>
 
-      <Button color="var(--main-color)">Check</Button>
+      <Branch value={typeof counts.count === 'number'}>
+        <Row alignItems="center" justifyContent="space-between">
+          <span>Count: </span>
+          <span>{counts.count}</span>
+        </Row>
 
-      <Row alignItems="center" justifyContent="space-between">
-        <span>Count: </span>
-        <span>{planCount}</span>
-      </Row>
+        <Row>
+          <InputText placeholder="Count" type="number" ref={currCountRef} />
+          <Button color="var(--main-color)" onClick={saveCheckBill}>
+            Enter
+          </Button>
+        </Row>
+      </Branch>
 
       <Row alignItems="center" justifyContent="space-between">
         <span>Plan count: </span>
-        <LabelText>{planCount}</LabelText>
+        <LabelText>{counts.planCount}</LabelText>
       </Row>
 
       <Button color="var(--main-color)" onClick={changeBillMethods.create()}>

@@ -116,7 +116,7 @@ const Calendar = () => {
             ) {
               if (checkBill.count < checkBill.planCount) {
                 colorIndicator = 'var(--error-color)';
-              } else if (checkBill.count < checkBill.planCount) {
+              } else if (checkBill.count > checkBill.planCount) {
                 colorIndicator = 'var(--success-color)';
               } else {
                 colorIndicator = 'var(--main-color)';
