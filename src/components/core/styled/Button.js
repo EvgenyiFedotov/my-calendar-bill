@@ -9,7 +9,7 @@ export default styled.button`
   border: none;
   cursor: pointer;
   font-size: calc(var(--space) * 2);
-  height: ${sideCalc(1.5)};
+  height: ${sideCalc()};
   border-radius: var(--border-radius);
   padding: 0 calc(var(--space) * 2);
   color: #ffffff;

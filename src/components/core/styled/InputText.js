@@ -9,7 +9,7 @@ export default styled.input`
   color: var(--text-color);
   padding: var(--space);
   width: 100%;
-  height: ${sideCalc(1.5)};
+  height: ${sideCalc()};
   font-size: inherit;
 
   &::placeholder {

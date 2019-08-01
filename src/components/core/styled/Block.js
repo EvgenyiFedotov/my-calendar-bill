@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { RowCss } from 'components/core/styled/Row';
 import { ColumnCss } from 'components/core/styled/Column';
 
-export const side = (value = 1) => `var(--space) * 3 * ${value} + (var(--space) * ${value - 1})`;
+export const side = (value = 1) => `var(--space) * 4.5 * ${value} + (var(--space) * ${value - 1})`;
 
 /**
  * @param {number} value

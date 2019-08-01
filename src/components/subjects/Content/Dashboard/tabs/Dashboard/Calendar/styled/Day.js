@@ -9,10 +9,10 @@ export default styled(Block)`
   justify-content: center;
   align-items: center;
   border-radius: var(--border-radius);
-  width: ${sideCalc(1.5)};
-  min-width: ${sideCalc(1.5)};
-  height: ${sideCalc(1.5)};
-  min-height: ${sideCalc(1.5)};
+  width: ${sideCalc()};
+  min-width: ${sideCalc()};
+  height: ${sideCalc()};
+  min-height: ${sideCalc()};
   cursor: pointer;
   position: relative;
   ${color};

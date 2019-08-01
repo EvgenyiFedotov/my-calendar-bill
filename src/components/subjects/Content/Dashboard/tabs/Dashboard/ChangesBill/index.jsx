@@ -3,7 +3,7 @@ import * as React from 'react';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import Branch from 'components/core/Branch';
 import Column from 'components/core/styled/Column';
-import Row from 'components/core/styled/Row';
+import { BlockRow } from 'components/core/styled/Block';
 import LabelText from 'components/core/styled/LabelText';
 import { dateToSQL } from 'helpers/date';
 import {
@@ -49,20 +49,20 @@ const ChangesBill = ({ date }) => {
           {items && (
             <>
               {Array.from(items).map(([key, item]) => (
-                <Row key={key} justifyContent="space-between" alignItems="center">
+                <BlockRow key={key} justifyContent="space-between" alignItems="center">
                   <span>{item.title}</span>
                   <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
-                </Row>
+                </BlockRow>
               ))}
 
               <Separator />
 
-              <Row key="changes-bill-summ" justifyContent="space-between" alignItems="center">
+              <BlockRow key="changes-bill-summ" justifyContent="space-between" alignItems="center">
                 <b>Summ</b>
                 <LabelText color={getBackgroundColor(getSummChangesBill(changesBill))}>
                   {getSummChangesBill(changesBill)}
                 </LabelText>
-              </Row>
+              </BlockRow>
             </>
           )}
         </Column>

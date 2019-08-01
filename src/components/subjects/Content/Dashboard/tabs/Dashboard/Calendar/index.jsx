@@ -79,8 +79,7 @@ const Calendar = () => {
       <Row>
         <Day onClick={prevMonth}>P</Day>
         <Block
-          width={1.5 * 5}
-          height={1.5}
+          width={5}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           {MONTHS[selectedDate.getMonth()]} {selectedDate.getFullYear()}

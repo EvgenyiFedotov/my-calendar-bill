@@ -11,7 +11,7 @@ export default styled.button`
   cursor: pointer;
   font-size: calc(var(--space) * 2);
   ${color};
-  height: ${sideCalc(1.5)};
+  height: ${sideCalc()};
 
   &:hover {
     text-decoration: underline;
