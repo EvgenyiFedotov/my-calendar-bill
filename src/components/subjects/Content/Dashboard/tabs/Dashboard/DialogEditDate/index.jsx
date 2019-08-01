@@ -105,9 +105,11 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
       <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
         Add
       </Button>
-      <ChangesBill items={itemsChangesBill} />
+      <ChangesBill items={itemsChangesBill} item={[changeBill, changeBillMethods]} />
 
-      <DialogEditChangeBill date={date} item={[changeBill, changeBillMethods]} />
+      <Branch value={changeBill[0]}>
+        <DialogEditChangeBill date={date} item={[changeBill, changeBillMethods]} />
+      </Branch>
     </Styled>
   );
 };

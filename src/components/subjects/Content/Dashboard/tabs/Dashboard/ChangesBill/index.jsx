@@ -11,8 +11,11 @@ import Item from './styled/Item';
 /**
  *
  * @param {Map} items
+ * @param {[data, methods]} [item]
  */
-const ChangesBill = ({ items }) => {
+const ChangesBill = ({ items, item = [] }) => {
+  const [, changeBillMethods] = item;
+
   const getBackgroundColor = React.useCallback(count => {
     if (count > 0) {
       return 'var(--success-color)';
@@ -38,7 +41,12 @@ const ChangesBill = ({ items }) => {
               <Separator />
 
               {Array.from(items).map(([key, item]) => (
-                <Item key={key} justifyContent="space-between" alignItems="center">
+                <Item
+                  key={key}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  onClick={changeBillMethods && changeBillMethods.edit(key)}
+                >
                   <span>{item.title}</span>
                   <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
                 </Item>

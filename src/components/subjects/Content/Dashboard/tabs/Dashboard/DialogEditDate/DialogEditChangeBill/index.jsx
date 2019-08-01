@@ -11,7 +11,7 @@ import Styled from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogE
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useField from 'hooks/use-field';
 
-const DialogEditChangeBill = ({ date, item: [changeBill, changeBillMethods] }) => {
+const DialogEditChangeBill = ({ date, item: [[keyChangeBill, changeBill], changeBillMethods] }) => {
   const { tables } = React.useContext(TablesContext);
 
   const [titleRef, title] = useField();
@@ -31,39 +31,52 @@ const DialogEditChangeBill = ({ date, item: [changeBill, changeBillMethods] }) =
     }
   }, [date, title, count, changeBillMethods, tables]);
 
+  const remove = React.useCallback(() => {
+    const key = changeBillMethods.remove();
+    tables.changesBill.remove(key);
+  }, [changeBillMethods, tables]);
+
   return (
-    <Branch value={changeBill[0]}>
-      <ModalPanel onClose={changeBillMethods.clear}>
-        <Styled>
-          <Column step={2}>
-            <Row justifyContent="space-between" alignItems="center">
-              <b>Change bill</b>
+    <ModalPanel onClose={changeBillMethods.clear}>
+      <Styled>
+        <Column step={2}>
+          <Row justifyContent="space-between" alignItems="center">
+            <b>Change bill</b>
 
-              <Row>
-                <ButtonLink onClick={changeBillMethods.clear}>Close</ButtonLink>
-              </Row>
+            <Row>
+              <ButtonLink onClick={changeBillMethods.clear}>Close</ButtonLink>
             </Row>
+          </Row>
 
-            <Column>
-              <label>Title</label>
-              <InputText placeholder="Title" ref={titleRef} />
-            </Column>
-
-            <Column>
-              <label>Count</label>
-              <InputText placeholder="Count" type="number" ref={countRef} />
-            </Column>
-
-            <Row justifyContent="flex-end" step={2}>
-              <ButtonLink color="var(--error-color)">Delete</ButtonLink>
-              <Button color="var(--main-color)" onClick={save}>
-                Save
-              </Button>
-            </Row>
+          <Column>
+            <label>Title</label>
+            <InputText placeholder="Title" ref={titleRef} defaultValue={changeBill.title} />
           </Column>
-        </Styled>
-      </ModalPanel>
-    </Branch>
+
+          <Column>
+            <label>Count</label>
+            <InputText
+              placeholder="Count"
+              type="number"
+              ref={countRef}
+              defaultValue={changeBill.count}
+            />
+          </Column>
+
+          <Row justifyContent="flex-end" step={2}>
+            <Branch value={!changeBillMethods.isNew()}>
+              <ButtonLink color="var(--error-color)" onClick={remove}>
+                Delete
+              </ButtonLink>
+            </Branch>
+
+            <Button color="var(--main-color)" onClick={save}>
+              Save
+            </Button>
+          </Row>
+        </Column>
+      </Styled>
+    </ModalPanel>
   );
 };
 

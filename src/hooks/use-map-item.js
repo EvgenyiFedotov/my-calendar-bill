@@ -44,7 +44,7 @@ export default ([map, setMap]) => {
    * @returns {string} key
    */
   const remove = React.useCallback(
-    (key = [0]) => {
+    (key = data[0]) => {
       setMap((prevMap) => {
         const nextMap = new Map(prevMap);
         nextMap.delete(key);
@@ -53,13 +53,13 @@ export default ([map, setMap]) => {
       setData([]);
       return key;
     },
-    [setMap, setData],
+    [data, setMap, setData],
   );
 
   const clear = React.useCallback(() => setData([]), [setData]);
   const edit = React.useCallback(key => () => setData([key, map.get(key)]), [setData, map]);
   const getProp = React.useCallback(nameProps => !!data[1] && data[1][nameProps], [data]);
-  const isNew = React.useCallback(() => map.has(data[0]), [map, data]);
+  const isNew = React.useCallback(() => !map.has(data[0]), [map, data]);
 
   return [
     data,
