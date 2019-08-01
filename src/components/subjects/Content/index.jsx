@@ -7,6 +7,7 @@ import Dashboard from 'components/subjects/Content/Dashboard';
 import ThemeContext from 'components/subjects/contexts/Theme/context';
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate';
 import TablesContext from 'components/subjects/contexts/Tables';
+import OptionsContext from 'components/subjects/contexts/Options';
 
 const Content = () => {
   const theme = React.useContext(ThemeContext);
@@ -16,11 +17,13 @@ const Content = () => {
       <GlobalStyled theme={theme.data} />
       <UserContext>
         <Auth>
-          <SelectedDateContext>
-            <TablesContext>
-              <Dashboard />
-            </TablesContext>
-          </SelectedDateContext>
+          <OptionsContext>
+            <SelectedDateContext>
+              <TablesContext>
+                <Dashboard />
+              </TablesContext>
+            </SelectedDateContext>
+          </OptionsContext>
         </Auth>
       </UserContext>
     </>

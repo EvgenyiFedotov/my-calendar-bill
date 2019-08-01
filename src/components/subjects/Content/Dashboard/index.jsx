@@ -13,6 +13,7 @@ import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
 import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
 import LabelText from 'components/core/styled/LabelText';
 import TableContext from 'components/subjects/contexts/Tables/context';
+import OptionsContext from 'components/subjects/contexts/Options/context';
 
 import DialogFirstCheck from './DialogFirstCheck';
 import { getLastCheck } from './heplers';
@@ -24,6 +25,7 @@ const Dashboard = () => {
       checksBill: [checksBill],
     },
   } = React.useContext(TableContext);
+  const [{ mode }] = React.useContext(OptionsContext);
 
   const [showContent, setShowContent] = React.useState('dashboard');
 
@@ -39,7 +41,7 @@ const Dashboard = () => {
     <Styled step={0}>
       <DialogFirstCheck />
 
-      <Top>
+      <Top mode={mode}>
         <b>Calendar bill</b>
         <Branch value={lastCheck}>
           <LabelText>{lastCheck && lastCheck[1].count}</LabelText>
@@ -47,7 +49,7 @@ const Dashboard = () => {
       </Top>
 
       <Content step={4}>
-        <Left>
+        <Left mode={mode}>
           <ButtonMenu onClick={() => setShowContent('dashboard')}>
             {bold('dashboard', 'Dashboard')}
           </ButtonMenu>
@@ -57,7 +59,7 @@ const Dashboard = () => {
           <ButtonMenu onClick={signOut}>Log out</ButtonMenu>
         </Left>
 
-        <Right>
+        <Right mode={mode}>
           <Branch value={showContent === 'dashboard'}>
             <DashboardTab />
           </Branch>
@@ -68,7 +70,7 @@ const Dashboard = () => {
         </Right>
       </Content>
 
-      <Bottom />
+      <Bottom mode={mode} />
     </Styled>
   );
 };

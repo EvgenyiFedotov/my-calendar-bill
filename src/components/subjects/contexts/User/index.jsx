@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import Context from './context';
 
-const dataLocalStorage = {
+const dateSessionStorage = {
   login: sessionStorage.getItem('LOGIN'),
   hashKey: sessionStorage.getItem('HASHKEY'),
 };
 
 const User = ({ children }) => {
-  const [data, setData] = React.useState(dataLocalStorage);
+  const [data, setData] = React.useState(dateSessionStorage);
 
   /**
    * Sign in
