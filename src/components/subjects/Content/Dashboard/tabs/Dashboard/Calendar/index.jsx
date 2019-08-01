@@ -124,8 +124,8 @@ const Calendar = () => {
             }
 
             return (
-              <Day key={`day-${indexDate}`} color={colorDay} onClick={clickDate(date)}>
-                <CheckBillIndicator backgroundColor={colorIndicator}>
+              <Day key={`day-${indexDate}`} onClick={clickDate(date)}>
+                <CheckBillIndicator color={colorDay} backgroundColor={colorIndicator}>
                   {(() => {
                     let result = isEqualMonth ? date.getDate() : '';
                     if (isEqualDate(selectedDate, date)) result = <b>{result}</b>;

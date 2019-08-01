@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { MONTHS, dateToSQL } from 'helpers/date';
+import { MONTHS, dateToSQL, isPrevDate } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
 import ButtonLink from 'components/core/styled/ButtonLink';
 import Row from 'components/core/styled/Row';
@@ -85,7 +85,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
       );
       tables.checksBill.setCrypto(key, item);
     }
-  }, [currCount, tables, date, counts]);
+  }, [currCount, tables, date, counts, checkBillMehtods]);
 
   return (
     <Styled step={2}>
@@ -99,18 +99,20 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         </Row>
       </Row>
 
-      <Branch value={typeof counts.count === 'number'}>
-        <Row alignItems="center" justifyContent="space-between">
-          <span>Count: </span>
-          <span>{counts.count}</span>
-        </Row>
+      <Branch value={isPrevDate(date, new Date())}>
+        <Branch value={typeof counts.count === 'number'}>
+          <Row alignItems="center" justifyContent="space-between">
+            <span>Count: </span>
+            <span>{counts.count}</span>
+          </Row>
 
-        <Row>
-          <InputText placeholder="Count" type="number" ref={currCountRef} />
-          <Button color="var(--main-color)" onClick={saveCheckBill}>
-            Enter
-          </Button>
-        </Row>
+          <Row>
+            <InputText placeholder="Count" type="number" ref={currCountRef} />
+            <Button color="var(--main-color)" onClick={saveCheckBill}>
+              Enter
+            </Button>
+          </Row>
+        </Branch>
       </Branch>
 
       <Row alignItems="center" justifyContent="space-between">

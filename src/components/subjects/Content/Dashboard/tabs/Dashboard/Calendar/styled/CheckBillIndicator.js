@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
-const color = ({ backgroundColor }) => (backgroundColor
+const color = ({ backgroundColor, color = 'var(--text-color)' }) => (backgroundColor
   ? css`
         color: #ffffff;
       `
   : css`
-        color: var(--text-color);
+        color: ${color};
       `);
 const backgroundColor = ({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor}`;
 
