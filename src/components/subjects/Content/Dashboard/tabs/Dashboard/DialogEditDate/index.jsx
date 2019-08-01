@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { MONTHS } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
-import Button from 'components/core/styled/ButtonLink';
+import ButtonLink from 'components/core/styled/ButtonLink';
 import Row from 'components/core/styled/Row';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useMapItem from 'hooks/use-map-item';
@@ -13,6 +13,7 @@ import Column from 'components/core/styled/Column';
 import LabelText from 'components/core/styled/LabelText';
 import useField from 'hooks/use-field';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
+import Button from 'components/core/styled/Button';
 
 import Styled from './styled';
 
@@ -61,7 +62,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         </b>
 
         <Row>
-          <Button onClick={onClose}>Close</Button>
+          <ButtonLink onClick={onClose}>Close</ButtonLink>
         </Row>
       </Row>
 
@@ -70,7 +71,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         <LabelText>{planCount}</LabelText>
       </Row>
 
-      <Button onClick={changeBillMethods.create()}>Add</Button>
+      <ButtonLink onClick={changeBillMethods.create()}>Add</ButtonLink>
       <ChangesBill date={date} />
 
       <Branch value={changeBill[0]}>
@@ -81,7 +82,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
                 <b>Change bill</b>
 
                 <Row>
-                  <Button onClick={changeBillMethods.clear}>Close</Button>
+                  <ButtonLink onClick={changeBillMethods.clear}>Close</ButtonLink>
                 </Row>
               </Row>
 
@@ -96,7 +97,12 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
               </Column>
 
               <Row justifyContent="flex-end" step={2}>
-                <Button onClick={save}>Save</Button>
+                <Branch>
+                  <ButtonLink color="var(--error-color)">Delete</ButtonLink>
+                </Branch>
+                <Button color="var(--main-color)" onClick={save}>
+                  Save
+                </Button>
               </Row>
             </Column>
           </Styled>
