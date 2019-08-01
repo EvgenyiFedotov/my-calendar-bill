@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import InputText from 'components/core/styled/InputText';
-import Button from 'components/core/styled/Button';
+import Button from 'components/core/styled/ButtonLink';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
 import TablesContext from 'components/subjects/contexts/Tables/context';

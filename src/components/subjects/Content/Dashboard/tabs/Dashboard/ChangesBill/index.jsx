@@ -6,7 +6,11 @@ import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
 import LabelText from 'components/core/styled/LabelText';
 import { dateToSQL } from 'helpers/date';
-import { getChangesBillByDate } from 'components/subjects/Content/Dashboard/heplers';
+import {
+  getChangesBillByDate,
+  getSummChangesBill,
+} from 'components/subjects/Content/Dashboard/heplers';
+import Separator from 'components/core/styled/Separator';
 
 /**
  *
@@ -42,13 +46,25 @@ const ChangesBill = ({ date }) => {
     <Branch value={items}>
       <Branch value={items && items.size}>
         <Column>
-          {items &&
-            Array.from(items).map(([key, item]) => (
-              <Row key={key} justifyContent="space-between" alignItems="center">
-                <span>{item.title}</span>
-                <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
+          {items && (
+            <>
+              {Array.from(items).map(([key, item]) => (
+                <Row key={key} justifyContent="space-between" alignItems="center">
+                  <span>{item.title}</span>
+                  <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
+                </Row>
+              ))}
+
+              <Separator />
+
+              <Row key="changes-bill-summ" justifyContent="space-between" alignItems="center">
+                <b>Summ</b>
+                <LabelText color={getBackgroundColor(getSummChangesBill(changesBill))}>
+                  {getSummChangesBill(changesBill)}
+                </LabelText>
               </Row>
-            ))}
+            </>
+          )}
         </Column>
 
         <i>Changes bill list is empty</i>

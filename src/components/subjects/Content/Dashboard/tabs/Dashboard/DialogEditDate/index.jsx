@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { MONTHS } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
-import Button from 'components/core/styled/Button';
+import Button from 'components/core/styled/ButtonLink';
 import Row from 'components/core/styled/Row';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useMapItem from 'hooks/use-map-item';
@@ -72,10 +72,19 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Button onClick={changeBillMethods.create()}>Add</Button>
       <ChangesBill date={date} />
+
       <Branch value={changeBill[0]}>
         <ModalPanel onClose={changeBillMethods.clear}>
           <Styled>
             <Column step={2}>
+              <Row justifyContent="space-between" alignItems="center">
+                <b>Change bill</b>
+
+                <Row>
+                  <Button onClick={changeBillMethods.clear}>Close</Button>
+                </Row>
+              </Row>
+
               <Column>
                 <label>Title</label>
                 <InputText placeholder="Title" ref={titleRef} />
@@ -87,7 +96,6 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
               </Column>
 
               <Row justifyContent="flex-end" step={2}>
-                <Button onClick={changeBillMethods.clear}>Close</Button>
                 <Button onClick={save}>Save</Button>
               </Row>
             </Column>
