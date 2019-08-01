@@ -6,10 +6,8 @@ import ButtonLink from 'components/core/styled/ButtonLink';
 import Row from 'components/core/styled/Row';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useMapItem from 'hooks/use-map-item';
-import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
 import InputText from 'components/core/styled/InputText';
-import Column from 'components/core/styled/Column';
 import LabelText from 'components/core/styled/LabelText';
 import useField from 'hooks/use-field';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
@@ -17,6 +15,7 @@ import Button from 'components/core/styled/Button';
 import { getChangesBillByDate } from 'components/subjects/Content/Dashboard/heplers';
 
 import Styled from './styled';
+import DialogEditChangeBill from './DialogEditChangeBill';
 
 /**
  * @param {Date} date
@@ -32,23 +31,6 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
   } = React.useContext(TablesContext);
 
   const [changeBill, changeBillMethods] = useMapItem([changesBill, setChangesBill]);
-
-  const [titleRef, title] = useField();
-  const [countRef, count] = useField();
-
-  const save = React.useCallback(() => {
-    const titleValue = title.getValue();
-    const countValue = parseInt(count.getValue(), 10);
-
-    if (titleValue && !isNaN(countValue)) {
-      const [key, item] = changeBillMethods.save({
-        date: new Date(date).getTime(),
-        title: titleValue,
-        count: countValue,
-      });
-      tables.changesBill.setCrypto(key, item);
-    }
-  }, [date, title, count, changeBillMethods, tables]);
 
   const counts = React.useMemo(() => {
     if (checksBill) {
@@ -125,38 +107,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
       </Button>
       <ChangesBill items={itemsChangesBill} />
 
-      <Branch value={changeBill[0]}>
-        <ModalPanel onClose={changeBillMethods.clear}>
-          <Styled>
-            <Column step={2}>
-              <Row justifyContent="space-between" alignItems="center">
-                <b>Change bill</b>
-
-                <Row>
-                  <ButtonLink onClick={changeBillMethods.clear}>Close</ButtonLink>
-                </Row>
-              </Row>
-
-              <Column>
-                <label>Title</label>
-                <InputText placeholder="Title" ref={titleRef} />
-              </Column>
-
-              <Column>
-                <label>Count</label>
-                <InputText placeholder="Count" type="number" ref={countRef} />
-              </Column>
-
-              <Row justifyContent="flex-end" step={2}>
-                <ButtonLink color="var(--error-color)">Delete</ButtonLink>
-                <Button color="var(--main-color)" onClick={save}>
-                  Save
-                </Button>
-              </Row>
-            </Column>
-          </Styled>
-        </ModalPanel>
-      </Branch>
+      <DialogEditChangeBill date={date} item={[changeBill, changeBillMethods]} />
     </Styled>
   );
 };
