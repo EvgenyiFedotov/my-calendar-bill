@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FiLayout, FiCalendar, FiLogOut } from 'react-icons/fi';
 
 import UserContext from 'components/subjects/contexts/User/context';
 import Styled from 'components/subjects/Content/Dashboard/styled';
@@ -14,6 +15,7 @@ import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
 import LabelText from 'components/core/styled/LabelText';
 import TableContext from 'components/subjects/contexts/Tables/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';
+import Row from 'components/core/styled/Row';
 
 import DialogFirstCheck from './DialogFirstCheck';
 import { getLastCheck } from './heplers';
@@ -70,7 +72,13 @@ const Dashboard = () => {
         </Right>
       </Content>
 
-      <Bottom mode={mode} />
+      <Bottom mode={mode}>
+        <Row step={5}>
+          <FiLayout style={{ cursor: 'pointer' }} onClick={() => setShowContent('dashboard')} />
+          <FiCalendar style={{ cursor: 'pointer' }} onClick={() => setShowContent('options')} />
+          <FiLogOut style={{ cursor: 'pointer' }} onClick={signOut} />
+        </Row>
+      </Bottom>
     </Styled>
   );
 };

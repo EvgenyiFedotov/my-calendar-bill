@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import {
   getDatesMonths,
@@ -79,14 +80,18 @@ const Calendar = () => {
       </Branch>
 
       <Row>
-        <Day onClick={prevMonth}>P</Day>
+        <Day onClick={prevMonth}>
+          <FiChevronLeft />
+        </Day>
         <Block
           width={5}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           {MONTHS[selectedDate.getMonth()]} {selectedDate.getFullYear()}
         </Block>
-        <Day onClick={nextMonth}>N</Day>
+        <Day onClick={nextMonth}>
+          <FiChevronRight />
+        </Day>
       </Row>
 
       <Row>

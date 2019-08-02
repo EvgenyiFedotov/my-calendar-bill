@@ -10,6 +10,9 @@ export default styled(Row)`
   height: ${height};
   box-shadow: var(--box-shadow);
   background-color: var(--bg-color);
+  align-items: center;
+  justify-content: center;
+  padding: 0 10vw;
 
   @media (max-width: 1023px) {
     padding: calc(var(--space) * 2);

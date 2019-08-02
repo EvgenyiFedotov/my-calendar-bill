@@ -11,8 +11,8 @@ export default styled(Row)`
   box-shadow: var(--box-shadow);
   background-color: var(--bg-color);
   align-items: center;
-  padding: 0 10vw;
   justify-content: space-between;
+  padding: 0 10vw;
 
   @media (max-width: 1023px) {
     padding: calc(var(--space) * 2);
