@@ -8,8 +8,8 @@ export default styled.div`
   align-items: center;
   width: 100%;
   min-width: ${sideCalc(7)};
+  max-width: 100%;
   height: ${sideCalc(8)};
   min-height: ${sideCalc(8)};
-  background-color: pink;
   flex: 1;
 `;
