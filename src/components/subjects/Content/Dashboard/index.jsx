@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FiLayout, FiSettings, FiLogOut } from 'react-icons/fi';
+import { FiLayout, FiSettings, FiLogOut, FiRefreshCcw } from 'react-icons/fi';
 
 import UserContext from 'components/subjects/contexts/User/context';
 import Styled from 'components/subjects/Content/Dashboard/styled';
@@ -16,6 +16,7 @@ import LabelText from 'components/core/styled/LabelText';
 import TableContext from 'components/subjects/contexts/Tables/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';
 import Row from 'components/core/styled/Row';
+import Separator from 'components/core/styled/Separator';
 
 import DialogFirstCheck from './DialogFirstCheck';
 import { getLastCheck } from './heplers';
@@ -35,9 +36,10 @@ const Dashboard = () => {
     checksBill,
   ]);
 
-  const bold = React.useCallback((value, text) => (value === showContent ? <b>{text}</b> : text), [
-    showContent,
-  ]);
+  const bold = React.useCallback(
+    (value, text) => (value === showContent ? <b>{text}</b> : <span>{text}</span>),
+    [showContent],
+  );
 
   return (
     <Styled step={0}>
@@ -53,12 +55,33 @@ const Dashboard = () => {
       <Content step={4}>
         <Left mode={mode}>
           <ButtonMenu onClick={() => setShowContent('dashboard')}>
-            {bold('dashboard', 'Dashboard')}
+            <Row>
+              <FiLayout />
+              {bold('dashboard', 'Dashboard')}
+            </Row>
           </ButtonMenu>
           <ButtonMenu onClick={() => setShowContent('options')}>
-            {bold('options', 'Options')}
+            <Row>
+              <FiSettings />
+              {bold('options', 'Options')}
+            </Row>
           </ButtonMenu>
-          <ButtonMenu onClick={signOut}>Log out</ButtonMenu>
+
+          <Separator />
+
+          <ButtonMenu onClick={signOut}>
+            <Row>
+              <FiRefreshCcw />
+              <span>Sync data</span>
+            </Row>
+          </ButtonMenu>
+
+          <ButtonMenu onClick={signOut}>
+            <Row>
+              <FiLogOut />
+              <span>Log out</span>
+            </Row>
+          </ButtonMenu>
         </Left>
 
         <Right mode={mode}>
@@ -76,6 +99,8 @@ const Dashboard = () => {
         <Row step={5}>
           <FiLayout style={{ cursor: 'pointer' }} onClick={() => setShowContent('dashboard')} />
           <FiSettings style={{ cursor: 'pointer' }} onClick={() => setShowContent('options')} />
+
+          <FiRefreshCcw style={{ cursor: 'pointer' }} />
           <FiLogOut style={{ cursor: 'pointer' }} onClick={signOut} />
         </Row>
       </Bottom>

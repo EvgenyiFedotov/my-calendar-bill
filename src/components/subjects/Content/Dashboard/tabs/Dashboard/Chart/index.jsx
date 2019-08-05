@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Area, AreaChart } from 'recharts';
 
 import useResize from 'hooks/use-resize';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
@@ -44,33 +44,33 @@ const Chart = () => {
 
   return (
     <Styled ref={container}>
-      <LineChart {...size} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      <AreaChart {...size} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
         <XAxis
           dataKey="date"
           tick={{ fill: 'var(--text-color)', fontSize: 'calc(var(--space) * 1.5)' }}
           tickLine={{ stroke: 'var(--text-color)' }}
           axisLine={{ stroke: 'var(--text-color)' }}
         />
-        <YAxis
+        {/* <YAxis
           tick={{ fill: 'var(--text-color)', fontSize: 'calc(var(--space) * 1.5)' }}
           tickLine={{ stroke: 'var(--text-color)' }}
           axisLine={{ stroke: 'var(--text-color)' }}
-        />
+        /> */}
         <Tooltip
           contentStyle={{
             backgroundColor: 'var(--bg-color)',
             borderRadius: 'var(--border-radius)',
           }}
         />
-        <Line
+        <Area
           type="monotone"
           dataKey="plan"
           stroke="var(--main-color)"
           activeDot={{ r: 8, stroke: 'var(--bg-color)' }}
-          dot={{ fill: 'var(--bg-color)' }}
+          // dot={{ fill: 'var(--bg-color)' }}
           strokeWidth={2}
         />
-      </LineChart>
+      </AreaChart>
     </Styled>
   );
 };
