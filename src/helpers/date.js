@@ -188,12 +188,20 @@ export const isPrevDate = (date1, date2) => isPrevMonth(date1, date2)
     && date1.getDate() < date2.getDate());
 
 /**
+ * Date to SQL month
+ * @param {Date} date
+ *
+ * @returns {string} date in format [YYYY-MM]
+ */
+export const dateToSQLMonth = date => `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+
+/**
  * Format date to SQL date
  * @param {Date} date
  *
  * @returns {string} Date in format `YYYY-MM-DD`
  */
-export const dateToSQL = date => `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date
+export const dateToSQL = date => `${dateToSQLMonth(date)}-${date
   .getDate()
   .toString()
   .padStart(2, '0')}`;

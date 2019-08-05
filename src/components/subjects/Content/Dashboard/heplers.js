@@ -6,6 +6,7 @@ import {
   getLastDateMonth,
   nextMonth,
   isPrevMonth,
+  dateToSQLMonth,
 } from 'helpers/date';
 
 /**
@@ -92,24 +93,27 @@ export const getSummChangesBill = changesBill => Array.from(changesBill).reduce(
  * @param {changesBill} changesBill
  * @param {Date} date
  *
- * @returns {number}
+ * @returns {{ summ: number, summByMonth: { [propName: dateSQLMonth]: number }, summByMonthOnly: { [propName: dateSQLMonth]: number } }}
  */
 export const getPlanCount = ({ checksBill, changesBill, date }) => {
-  let result = 0;
+  const result = { summ: 0, summByMonth: {}, summByMonthOnly: {} };
   const [keyLastCheckBill, lastCheckBill] = getLastCheck(checksBill, date) || [];
 
   if (lastCheckBill) {
     const dateLastCheckBill = new Date(keyLastCheckBill);
     let currDate = new Date(dateLastCheckBill);
-    result = lastCheckBill.planCount;
+    result.summ = lastCheckBill.planCount;
 
     const eachDate = ([dateSQL, changesBillDate]) => {
-      const isLeftBorder = !isPrevDate(new Date(dateSQL), dateLastCheckBill)
-        || isEqualDate(new Date(dateSQL), dateLastCheckBill);
-      const isRigthBorder = isPrevDate(new Date(dateSQL), date) || isEqualDate(new Date(dateSQL), date);
+      const cbDate = new Date(dateSQL);
+      const isLeftBorder = !isPrevDate(cbDate, dateLastCheckBill) || isEqualDate(cbDate, dateLastCheckBill);
+      const isRigthBorder = isPrevDate(cbDate, date) || isEqualDate(cbDate, date);
 
       if (isLeftBorder && isRigthBorder) {
-        result += getSummChangesBill(changesBillDate);
+        const summ = getSummChangesBill(changesBillDate);
+        result.summ += summ;
+        result.summByMonth[dateToSQLMonth(cbDate)] = result.summ;
+        result.summByMonthOnly[dateToSQLMonth(cbDate)] = (result.summByMonthOnly[dateToSQLMonth(cbDate)] || 0) + summ;
       }
     };
 

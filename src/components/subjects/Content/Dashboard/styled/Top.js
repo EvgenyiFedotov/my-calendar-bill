@@ -13,6 +13,7 @@ export default styled(Row)`
   align-items: center;
   justify-content: space-between;
   padding: 0 10vw;
+  z-index: 1;
 
   @media (max-width: 1023px) {
     padding: calc(var(--space) * 2);

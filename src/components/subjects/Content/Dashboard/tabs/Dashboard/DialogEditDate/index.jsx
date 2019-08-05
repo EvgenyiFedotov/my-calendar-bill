@@ -37,7 +37,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
       const checkBill = checksBill.get(dateToSQL(date));
       if (checkBill) return checkBill;
       if (changesBill)
-        return { count: null, planCount: getPlanCount({ checksBill, changesBill, date }) };
+        return { count: null, planCount: getPlanCount({ checksBill, changesBill, date }).summ };
     }
 
     return { count: null, planCount: 0 };
