@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FiLayout, FiCalendar, FiLogOut } from 'react-icons/fi';
+import { FiLayout, FiSettings, FiLogOut } from 'react-icons/fi';
 
 import UserContext from 'components/subjects/contexts/User/context';
 import Styled from 'components/subjects/Content/Dashboard/styled';
@@ -75,7 +75,7 @@ const Dashboard = () => {
       <Bottom mode={mode}>
         <Row step={5}>
           <FiLayout style={{ cursor: 'pointer' }} onClick={() => setShowContent('dashboard')} />
-          <FiCalendar style={{ cursor: 'pointer' }} onClick={() => setShowContent('options')} />
+          <FiSettings style={{ cursor: 'pointer' }} onClick={() => setShowContent('options')} />
           <FiLogOut style={{ cursor: 'pointer' }} onClick={signOut} />
         </Row>
       </Bottom>
