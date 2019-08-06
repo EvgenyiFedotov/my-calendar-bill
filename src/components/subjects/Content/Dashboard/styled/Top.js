@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import Row from 'components/core/styled/Row';
+import { Row } from 'components/core/styled/FlexBlock';
 import { sideCalc } from 'components/core/styled/Block';
 
 export const height = sideCalc(2);

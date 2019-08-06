@@ -11,8 +11,7 @@ import {
   isPrevDate as getIsPrevDate,
 } from 'helpers/date';
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate/context';
-import Column from 'components/core/styled/Column';
-import Row from 'components/core/styled/Row';
+import { Column, Row } from 'components/core/styled/FlexBlock';
 import Block from 'components/core/styled/Block';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
@@ -72,7 +71,7 @@ const Calendar = () => {
   );
 
   return (
-    <Column>
+    <Column marginStep={0}>
       <Branch value={showModal}>
         <ModalPanel onClose={() => setShowModal(false)}>
           <DialogEditDate date={selectedDate} onClose={() => setShowModal(false)} />

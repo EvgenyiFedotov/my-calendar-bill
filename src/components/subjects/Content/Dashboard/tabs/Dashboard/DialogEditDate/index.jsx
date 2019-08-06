@@ -3,12 +3,11 @@ import * as React from 'react';
 import { MONTHS, dateToSQL, isPrevDate } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
 import ButtonLink from 'components/core/styled/ButtonLink';
-import Row from 'components/core/styled/Row';
+import { Row } from 'components/core/styled/FlexBlock';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useMapItem from 'hooks/use-map-item';
 import Branch from 'components/core/Branch';
 import InputText from 'components/core/styled/InputText';
-import LabelText from 'components/core/styled/LabelText';
 import useField from 'hooks/use-field';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
 import Button from 'components/core/styled/Button';
@@ -69,17 +68,6 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
     }
   }, [currCount, tables, date, counts, checkBillMehtods]);
 
-  // const colorPlanCount = React.useMemo(() => {
-  //   if (typeof counts.count === 'number' && typeof counts.planCount === 'number') {
-  //     if (counts.count > counts.planCount) {
-  //       return 'var(--success-color)';
-  //     } else if (counts.count < counts.planCount) {
-  //       return 'var(--error-color)';
-  //     }
-  //   }
-  //   return undefined;
-  // }, [counts]);
-
   return (
     <Styled step={2}>
       <Row justifyContent="space-between" alignItems="center">
@@ -110,7 +98,6 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Row alignItems="center" justifyContent="space-between">
         <span>Plan count: </span>
-        {/* <LabelText color={colorPlanCount}>{counts.planCount}</LabelText> */}
         <span>{counts.planCount}</span>
       </Row>
 

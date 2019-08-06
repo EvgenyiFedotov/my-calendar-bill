@@ -19,7 +19,7 @@ export const blockCss = ({
   width: ${sideCalc(widthStep)};
   min-width: ${sideCalc(minWidthStep)};
   max-width: ${sideCalc(maxWidthStep)};
-  height: ${heightStep};
+  height: ${sideCalc(heightStep)};
   min-height: ${sideCalc(minHeightStep)};
   max-height: ${sideCalc(maxHeightStep)};
 `;

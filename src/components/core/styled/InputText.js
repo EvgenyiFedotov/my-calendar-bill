@@ -8,7 +8,6 @@ export default styled.input`
   background-color: transparent;
   color: var(--text-color);
   padding: var(--space);
-  width: 100%;
   height: ${sideCalc()};
   font-size: inherit;
 

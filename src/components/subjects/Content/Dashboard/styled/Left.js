@@ -14,5 +14,6 @@ const styleByMode = ({ mode = 'default' }) => mode === 'default'
 
 export default styled(Column)`
   padding: calc(var(--space) * 2) 0 calc(var(--space) * 2) 10vw;
+  justify-content: center;
   ${styleByMode};
 `;

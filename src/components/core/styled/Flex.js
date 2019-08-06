@@ -11,7 +11,6 @@ export const flexCss = ({
 `;
 
 export const Row = styled.div`
-  align-items: center;
   ${flexCss};
 `;
 

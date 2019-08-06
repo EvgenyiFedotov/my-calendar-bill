@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import ButtonLink from 'components/core/styled/ButtonLink';
-import Row from 'components/core/styled/Row';
 import ModalPanel from 'components/core/ModalPanel';
 import InputText from 'components/core/styled/InputText';
-import Column from 'components/core/styled/Column';
+import { Column, Row } from 'components/core/styled/FlexBlock';
 import Button from 'components/core/styled/Button';
 import Branch from 'components/core/Branch';
 import Styled from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate/styled';
@@ -39,7 +38,7 @@ const DialogEditChangeBill = ({ date, item: [[keyChangeBill, changeBill], change
   return (
     <ModalPanel onClose={changeBillMethods.clear}>
       <Styled>
-        <Column step={2}>
+        <Column marginStep={2}>
           <Row justifyContent="space-between" alignItems="center">
             <b>Change bill</b>
 
@@ -63,7 +62,7 @@ const DialogEditChangeBill = ({ date, item: [[keyChangeBill, changeBill], change
             />
           </Column>
 
-          <Row justifyContent="flex-end" step={2}>
+          <Row justifyContent="flex-end" marginStep={2}>
             <Branch value={!changeBillMethods.isNew()}>
               <ButtonLink color="var(--error-color)" onClick={remove}>
                 Delete

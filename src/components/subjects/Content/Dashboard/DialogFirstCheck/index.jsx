@@ -2,8 +2,7 @@ import * as React from 'react';
 
 import InputText from 'components/core/styled/InputText';
 import Button from 'components/core/styled/ButtonLink';
-import Column from 'components/core/styled/Column';
-import Row from 'components/core/styled/Row';
+import { Column, Row } from 'components/core/styled/FlexBlock';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import ModalWindow from 'components/core/ModalWindow';
 import Branch from 'components/core/Branch';
@@ -42,7 +41,7 @@ const DialogFirstCheck = () => {
   return (
     <Branch value={checksBill && !checksBill.size}>
       <ModalWindow>
-        <Styled step={2}>
+        <Styled marginStep={2}>
           <Column>
             <label>Current count</label>
             <InputText placeholder="Current count" ref={countRef} />

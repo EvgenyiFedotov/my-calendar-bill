@@ -2,11 +2,9 @@ import * as React from 'react';
 import { FiChevronDown, FiChevronUp, FiMinus } from 'react-icons/fi';
 
 import Branch from 'components/core/Branch';
-import Column from 'components/core/styled/Column';
-import LabelText from 'components/core/styled/LabelText';
 import { getSummChangesBill } from 'components/subjects/Content/Dashboard/heplers';
 import Separator from 'components/core/styled/Separator';
-import Row from 'components/core/styled/Row';
+import { Column, Row } from 'components/core/styled/FlexBlock';
 
 import Item from './styled/Item';
 
@@ -17,15 +15,6 @@ import Item from './styled/Item';
  */
 const ChangesBill = ({ items, item = [] }) => {
   const [, changeBillMethods] = item;
-
-  const getBackgroundColor = React.useCallback(count => {
-    if (count > 0) {
-      return 'var(--success-color)';
-    } else if (count < 0) {
-      return 'var(--error-color)';
-    }
-    return undefined;
-  }, []);
 
   return (
     <Branch value={items}>
@@ -45,9 +34,6 @@ const ChangesBill = ({ items, item = [] }) => {
                   <b>Summ</b>
                 </Row>
                 <b>{getSummChangesBill(items)}</b>
-                {/* <LabelText color={getBackgroundColor(getSummChangesBill(items))}>
-                  {getSummChangesBill(items)}
-                </LabelText> */}
               </Item>
 
               <Separator />
