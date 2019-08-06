@@ -4,11 +4,15 @@ import Flex, { Row as RowFlex, Column as ColumnFlex } from 'components/core/styl
 import { blockCss } from 'components/core/styled/Block';
 
 export const Row = styled(RowFlex)`
-  ${blockCss};
+  & > * {
+    ${blockCss};
+  }
 `;
 
 export const Column = styled(ColumnFlex)`
-  ${blockCss};
+  & > * {
+    ${blockCss};
+  }
 `;
 
 export default styled(Flex)`

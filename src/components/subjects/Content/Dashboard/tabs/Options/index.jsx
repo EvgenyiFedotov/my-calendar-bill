@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import Column from 'components/core/styled/Column';
 import { Row } from 'components/core/styled/FlexBlock';
-import { BlockSpan } from 'components/core/styled/Block';
 import Button from 'components/core/styled/ButtonLink';
 import ThemeContext from 'components/subjects/contexts/Theme/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';
@@ -14,14 +13,14 @@ const Options = () => {
   return (
     <Column>
       <Row>
-        <BlockSpan>Theme:</BlockSpan>
+        <span>Theme:</span>
         <Button onClick={() => theme.toggleTheme()}>
           {theme.data === 'white' ? 'dark' : 'white'}
         </Button>
       </Row>
 
       <Row>
-        <BlockSpan>Mode:</BlockSpan>
+        <span>Mode:</span>
         <Button onClick={() => setMode(mode === 'default' ? 'desktop' : 'default')}>
           {mode === 'default' ? 'desktop' : 'default'}
         </Button>
