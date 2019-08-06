@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import Column from 'components/core/styled/Column';
+import { Column } from 'components/core/styled/Flex';
 import { blockCss } from 'components/core/styled/Block';
 
 const padding = ({ paddingSpaceStep = [1, 1] }) => css`

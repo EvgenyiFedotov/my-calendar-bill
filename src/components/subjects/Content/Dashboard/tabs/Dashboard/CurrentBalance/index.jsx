@@ -26,14 +26,7 @@ const CurrentBalance = () => {
   }, [checksBill]);
 
   return (
-    <Box
-      step={2}
-      paddingSpaceStep={[4, 8]}
-      widthStep={7}
-      minWidthStep={7}
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Box justifyContent="center" alignItems="center" widthStep={7} heightStep={3}>
       <span>Current balance</span>
       <Count>
         <IconDirection value={counts.count} matchValue={counts.planCount} />

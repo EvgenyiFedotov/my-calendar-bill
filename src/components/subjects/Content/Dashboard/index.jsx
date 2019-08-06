@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [showContent, setShowContent] = React.useState('dashboard');
 
   return (
-    <Styled step={0}>
+    <Styled marginStep={0}>
       <DialogFirstCheck />
 
       {/* <Top mode={mode}>
