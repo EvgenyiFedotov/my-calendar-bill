@@ -1,9 +1,17 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Row from 'components/core/styled/Row';
 import { sideCalc } from 'components/core/styled/Block';
 
 export const height = sideCalc(2);
+
+const styleByMode = ({ mode = 'default' }) => mode === 'default'
+  && css`
+    @media (max-width: 1023px) {
+      display: flex;
+      padding: calc(var(--space) * 2);
+    }
+  `;
 
 export default styled(Row)`
   width: 100%;
@@ -14,8 +22,6 @@ export default styled(Row)`
   justify-content: center;
   padding: 0 10vw;
   z-index: 1;
-
-  @media (max-width: 1023px) {
-    padding: calc(var(--space) * 2);
-  }
+  display: none;
+  ${styleByMode};
 `;

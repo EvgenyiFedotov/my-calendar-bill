@@ -13,7 +13,7 @@ const palette = {
   `,
   white: css`
     --bg-color: #ffffff;
-    --bg-area-color: #f5f5f5;
+    --bg-area-color: #fafafa;
     --main-color: #426cbf;
     --text-color: #282c34;
     --text-second-color: #9e9e9e;

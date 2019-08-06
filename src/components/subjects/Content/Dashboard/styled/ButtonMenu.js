@@ -9,4 +9,8 @@ const color = ({ active = false }) => css`
 export default styled(Button)`
   text-align: left;
   ${color};
+
+  &:hover {
+    text-decoration: none;
+  }
 `;
