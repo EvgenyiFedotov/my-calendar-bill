@@ -36,11 +36,6 @@ const Dashboard = () => {
     checksBill,
   ]);
 
-  const bold = React.useCallback(
-    (value, text) => (value === showContent ? <b>{text}</b> : <span>{text}</span>),
-    [showContent],
-  );
-
   return (
     <Styled step={0}>
       <DialogFirstCheck />
@@ -54,16 +49,19 @@ const Dashboard = () => {
 
       <Content step={4}>
         <Left mode={mode}>
-          <ButtonMenu onClick={() => setShowContent('dashboard')}>
+          <ButtonMenu
+            active={'dashboard' === showContent}
+            onClick={() => setShowContent('dashboard')}
+          >
             <Row>
               <FiLayout />
-              {bold('dashboard', 'Dashboard')}
+              <span>Dashboard</span>
             </Row>
           </ButtonMenu>
-          <ButtonMenu onClick={() => setShowContent('options')}>
+          <ButtonMenu active={'options' === showContent} onClick={() => setShowContent('options')}>
             <Row>
               <FiSettings />
-              {bold('options', 'Options')}
+              <span>Options</span>
             </Row>
           </ButtonMenu>
 
@@ -97,11 +95,27 @@ const Dashboard = () => {
 
       <Bottom mode={mode}>
         <Row step={5}>
-          <FiLayout style={{ cursor: 'pointer' }} onClick={() => setShowContent('dashboard')} />
-          <FiSettings style={{ cursor: 'pointer' }} onClick={() => setShowContent('options')} />
+          <FiLayout
+            style={{
+              cursor: 'pointer',
+              stroke:
+                'dashboard' === showContent ? 'var(--text-color)' : 'var(--text-second-color)',
+            }}
+            onClick={() => setShowContent('dashboard')}
+          />
+          <FiSettings
+            style={{
+              cursor: 'pointer',
+              stroke: 'options' === showContent ? 'var(--text-color)' : 'var(--text-second-color)',
+            }}
+            onClick={() => setShowContent('options')}
+          />
 
-          <FiRefreshCcw style={{ cursor: 'pointer' }} />
-          <FiLogOut style={{ cursor: 'pointer' }} onClick={signOut} />
+          <FiRefreshCcw style={{ cursor: 'pointer', stroke: 'var(--text-second-color)' }} />
+          <FiLogOut
+            style={{ cursor: 'pointer', stroke: 'var(--text-second-color)' }}
+            onClick={signOut}
+          />
         </Row>
       </Bottom>
     </Styled>

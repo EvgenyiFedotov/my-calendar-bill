@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { FiChevronDown, FiChevronUp, FiMinus } from 'react-icons/fi';
 
 import Branch from 'components/core/Branch';
 import Column from 'components/core/styled/Column';
 import LabelText from 'components/core/styled/LabelText';
 import { getSummChangesBill } from 'components/subjects/Content/Dashboard/heplers';
 import Separator from 'components/core/styled/Separator';
+import Row from 'components/core/styled/Row';
 
 import Item from './styled/Item';
 
@@ -32,10 +34,20 @@ const ChangesBill = ({ items, item = [] }) => {
           {items && (
             <>
               <Item key="changes-bill-summ" justifyContent="space-between" alignItems="center">
-                <span>Summ</span>
-                <LabelText color={getBackgroundColor(getSummChangesBill(items))}>
+                <Row alignItems="center">
+                  <Branch value={getSummChangesBill(items) > 0}>
+                    <FiChevronUp stroke="var(--success-color)" strokeWidth={3} />
+                    <Branch value={getSummChangesBill(items) < 0}>
+                      <FiChevronDown stroke="var(--error-color)" strokeWidth={3} />
+                      <FiMinus stroke="var(--main-color)" strokeWidth={3} />
+                    </Branch>
+                  </Branch>
+                  <b>Summ</b>
+                </Row>
+                <b>{getSummChangesBill(items)}</b>
+                {/* <LabelText color={getBackgroundColor(getSummChangesBill(items))}>
                   {getSummChangesBill(items)}
-                </LabelText>
+                </LabelText> */}
               </Item>
 
               <Separator />
@@ -47,8 +59,20 @@ const ChangesBill = ({ items, item = [] }) => {
                   alignItems="center"
                   onClick={changeBillMethods && changeBillMethods.edit(key)}
                 >
-                  <span>{item.title}</span>
-                  <LabelText color={getBackgroundColor(item.count)}>{item.count}</LabelText>
+                  <Row alignItems="center">
+                    <Branch value={item.count > 0}>
+                      <FiChevronUp stroke="var(--success-color)" strokeWidth={3} />
+                      <Branch value={item.count < 0}>
+                        <FiChevronDown stroke="var(--error-color)" strokeWidth={3} />
+                        <FiMinus stroke="var(--main-color)" strokeWidth={3} />
+                      </Branch>
+                    </Branch>
+                    <span>{item.title}</span>
+                  </Row>
+
+                  <Row alignItems="center">
+                    <span>{item.count}</span>
+                  </Row>
                 </Item>
               ))}
             </>

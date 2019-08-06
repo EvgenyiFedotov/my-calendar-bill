@@ -6,7 +6,7 @@ const palette = {
     --bg-area-color: #303541;
     --main-color: #426cbf;
     --text-color: #ffffff;
-    --text-second-color: #bdbdbd;
+    --text-second-color: #9e9e9e;
     --text-disabled-color: #414a5d;
     --success-color: #4dbb52;
     --error-color: #f44336;
@@ -16,7 +16,7 @@ const palette = {
     --bg-area-color: #f5f5f5;
     --main-color: #426cbf;
     --text-color: #282c34;
-    --text-second-color: #bdbdbd;
+    --text-second-color: #9e9e9e;
     --text-disabled-color: #e0e0e0;
     --success-color: #4dbb52;
     --error-color: #f44336;
