@@ -41,9 +41,9 @@ const Dashboard = () => {
       <DialogFirstCheck />
 
       <Top mode={mode}>
-        <b>Calendar bill</b>
+        {/* <b>Calendar bill</b> */}
         <Branch value={lastCheck}>
-          <LabelText>{lastCheck && lastCheck[1].count}</LabelText>
+          <>{lastCheck && lastCheck[1].count}</>
         </Branch>
       </Top>
 

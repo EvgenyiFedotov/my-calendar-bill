@@ -110,7 +110,8 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Row alignItems="center" justifyContent="space-between">
         <span>Plan count: </span>
-        <LabelText color={colorPlanCount}>{counts.planCount}</LabelText>
+        {/* <LabelText color={colorPlanCount}>{counts.planCount}</LabelText> */}
+        <span>{counts.planCount}</span>
       </Row>
 
       <Button color="var(--main-color)" onClick={changeBillMethods.create()}>

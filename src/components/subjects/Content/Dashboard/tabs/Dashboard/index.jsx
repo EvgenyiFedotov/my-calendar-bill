@@ -16,6 +16,9 @@ const Dashboard = () => {
 
   return (
     <Column>
+      {/* <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
+        <>160,000</>
+      </Row> */}
       <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
         <Calendar />
         <Chart />
