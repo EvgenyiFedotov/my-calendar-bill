@@ -12,8 +12,8 @@ import ButtonMenu from 'components/subjects/Content/Dashboard/styled/ButtonMenu'
 import Branch from 'components/core/Branch';
 import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
 import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
-import LabelText from 'components/core/styled/LabelText';
-import TableContext from 'components/subjects/contexts/Tables/context';
+// import LabelText from 'components/core/styled/LabelText';
+// import TableContext from 'components/subjects/contexts/Tables/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';
 import Row from 'components/core/styled/Row';
 import Separator from 'components/core/styled/Separator';
@@ -23,29 +23,29 @@ import { getLastCheck } from './heplers';
 
 const Dashboard = () => {
   const { signOut } = React.useContext(UserContext);
-  const {
-    maps: {
-      checksBill: [checksBill],
-    },
-  } = React.useContext(TableContext);
+  // const {
+  //   maps: {
+  //     checksBill: [checksBill],
+  //   },
+  // } = React.useContext(TableContext);
   const [{ mode }] = React.useContext(OptionsContext);
 
   const [showContent, setShowContent] = React.useState('dashboard');
 
-  const lastCheck = React.useMemo(() => checksBill && getLastCheck(checksBill, new Date()), [
-    checksBill,
-  ]);
+  // const lastCheck = React.useMemo(() => checksBill && getLastCheck(checksBill, new Date()), [
+  //   checksBill,
+  // ]);
 
   return (
     <Styled step={0}>
       <DialogFirstCheck />
 
-      <Top mode={mode}>
-        {/* <b>Calendar bill</b> */}
+      {/* <Top mode={mode}>
+        <b>Calendar bill</b>
         <Branch value={lastCheck}>
           <>{lastCheck && lastCheck[1].count}</>
         </Branch>
-      </Top>
+      </Top> */}
 
       <Content step={4}>
         <Left mode={mode}>

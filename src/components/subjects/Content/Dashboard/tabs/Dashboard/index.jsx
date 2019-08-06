@@ -6,6 +6,7 @@ import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/Ch
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import Chart from 'components/subjects/Content/Dashboard/tabs/Dashboard/Chart';
 import Row from 'components/core/styled/Row';
+import CurrentBalance from 'components/subjects/Content/Dashboard/tabs/Dashboard/CurrentBalance';
 
 const Dashboard = () => {
   const {
@@ -15,10 +16,10 @@ const Dashboard = () => {
   } = React.useContext(TablesContext);
 
   return (
-    <Column>
-      {/* <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
-        <>160,000</>
-      </Row> */}
+    <Column step={2}>
+      <Row step={2} alignItems="center" style={{ flexWrap: 'wrap' }}>
+        <CurrentBalance />
+      </Row>
       <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
         <Calendar />
         <Chart />

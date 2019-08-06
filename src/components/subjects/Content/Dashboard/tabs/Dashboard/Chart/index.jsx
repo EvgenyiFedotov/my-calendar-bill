@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, Area, AreaChart } from 'recharts';
+import { XAxis, Tooltip, Area, AreaChart } from 'recharts';
 
 import useResize from 'hooks/use-resize';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
@@ -51,11 +51,6 @@ const Chart = () => {
           tickLine={{ stroke: 'var(--text-color)' }}
           axisLine={{ stroke: 'var(--text-color)' }}
         />
-        {/* <YAxis
-          tick={{ fill: 'var(--text-color)', fontSize: 'calc(var(--space) * 1.5)' }}
-          tickLine={{ stroke: 'var(--text-color)' }}
-          axisLine={{ stroke: 'var(--text-color)' }}
-        /> */}
         <Tooltip
           contentStyle={{
             backgroundColor: 'var(--bg-color)',
@@ -66,8 +61,7 @@ const Chart = () => {
           type="monotone"
           dataKey="plan"
           stroke="var(--main-color)"
-          activeDot={{ r: 8, stroke: 'var(--bg-color)' }}
-          // dot={{ fill: 'var(--bg-color)' }}
+          activeDot={{ r: 4, stroke: 'var(--bg-color)' }}
           strokeWidth={2}
         />
       </AreaChart>

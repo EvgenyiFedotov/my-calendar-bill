@@ -69,16 +69,16 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
     }
   }, [currCount, tables, date, counts, checkBillMehtods]);
 
-  const colorPlanCount = React.useMemo(() => {
-    if (typeof counts.count === 'number' && typeof counts.planCount === 'number') {
-      if (counts.count > counts.planCount) {
-        return 'var(--success-color)';
-      } else if (counts.count < counts.planCount) {
-        return 'var(--error-color)';
-      }
-    }
-    return undefined;
-  }, [counts]);
+  // const colorPlanCount = React.useMemo(() => {
+  //   if (typeof counts.count === 'number' && typeof counts.planCount === 'number') {
+  //     if (counts.count > counts.planCount) {
+  //       return 'var(--success-color)';
+  //     } else if (counts.count < counts.planCount) {
+  //       return 'var(--error-color)';
+  //     }
+  //   }
+  //   return undefined;
+  // }, [counts]);
 
   return (
     <Styled step={2}>
