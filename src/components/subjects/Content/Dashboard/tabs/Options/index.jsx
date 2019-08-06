@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Column from 'components/core/styled/Column';
-import { BlockRow } from 'components/core/styled/Block';
+import { BlockRow } from 'components/core/styled/BlockOLD';
 import Button from 'components/core/styled/ButtonLink';
 import ThemeContext from 'components/subjects/contexts/Theme/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import Row from 'components/core/styled/Row';
-import { sideCalc } from 'components/core/styled/Block';
+import { sideCalc } from 'components/core/styled/BlockOLD';
 
 export const height = sideCalc(2);
 

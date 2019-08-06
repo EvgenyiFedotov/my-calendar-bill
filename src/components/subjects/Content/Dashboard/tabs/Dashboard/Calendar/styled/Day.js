@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Block, { sideCalc } from 'components/core/styled/Block';
+import Block, { sideCalc } from 'components/core/styled/BlockOLD';
 
 const color = ({ color = 'var(--text-color)' }) => `color: ${color}`;
 

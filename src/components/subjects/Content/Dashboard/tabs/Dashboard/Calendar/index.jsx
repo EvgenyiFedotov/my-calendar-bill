@@ -13,7 +13,7 @@ import {
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate/context';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
-import Block from 'components/core/styled/Block';
+import Block from 'components/core/styled/BlockOLD';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
 import DialogEditDate from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate';

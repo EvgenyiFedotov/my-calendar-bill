@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BlockRow } from 'components/core/styled/Block';
+import { BlockRow } from 'components/core/styled/BlockOLD';
 
 export default styled(BlockRow)`
   background-color: var(--bg-area-color);

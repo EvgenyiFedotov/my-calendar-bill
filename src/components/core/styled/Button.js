@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { sideCalc } from 'components/core/styled/Block';
+import { sideCalc } from 'components/core/styled/BlockOLD';
 
 export const color = ({ color = 'var(--text-color)' }) => css`
   border-color: ${color};
