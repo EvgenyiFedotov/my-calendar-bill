@@ -13,7 +13,7 @@ import {
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate/context';
 import Column from 'components/core/styled/Column';
 import Row from 'components/core/styled/Row';
-import Block from 'components/core/styled/BlockOLD';
+import Block from 'components/core/styled/Block';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';
 import DialogEditDate from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate';
@@ -84,7 +84,8 @@ const Calendar = () => {
           <FiChevronLeft />
         </Day>
         <Block
-          width={5}
+          widthStep={5}
+          minWidthStep={5}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           {MONTHS[selectedDate.getMonth()]} {selectedDate.getFullYear()}

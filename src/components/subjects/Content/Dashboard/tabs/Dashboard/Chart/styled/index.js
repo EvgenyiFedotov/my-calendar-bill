@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { sideCalc } from 'components/core/styled/BlockOLD';
+import { sideCalc } from 'components/core/styled/Block';
 
 export default styled.div`
   display: flex;

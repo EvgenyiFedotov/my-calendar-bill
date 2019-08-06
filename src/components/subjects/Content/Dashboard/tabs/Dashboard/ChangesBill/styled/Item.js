@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-import { BlockRow } from 'components/core/styled/BlockOLD';
+import { blockCss } from 'components/core/styled/Block';
+import Row from 'components/core/styled/Row';
 
-export default styled(BlockRow)`
+export default styled(Row)`
   background-color: var(--bg-area-color);
   padding: var(--space);
   border-radius: var(--border-radius);
   cursor: pointer;
+  ${blockCss({ heightStep: 1, minHeightStep: 1 })};
 `;

@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import Column from 'components/core/styled/Column';
-import { BlockRow } from 'components/core/styled/BlockOLD';
+import { Row } from 'components/core/styled/FlexBlock';
+import { BlockSpan } from 'components/core/styled/Block';
 import Button from 'components/core/styled/ButtonLink';
 import ThemeContext from 'components/subjects/contexts/Theme/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';
@@ -12,19 +13,19 @@ const Options = () => {
 
   return (
     <Column>
-      <BlockRow>
-        <span>Theme:</span>
+      <Row>
+        <BlockSpan>Theme:</BlockSpan>
         <Button onClick={() => theme.toggleTheme()}>
           {theme.data === 'white' ? 'dark' : 'white'}
         </Button>
-      </BlockRow>
+      </Row>
 
-      <BlockRow>
-        <span>Mode:</span>
+      <Row>
+        <BlockSpan>Mode:</BlockSpan>
         <Button onClick={() => setMode(mode === 'default' ? 'desktop' : 'default')}>
           {mode === 'default' ? 'desktop' : 'default'}
         </Button>
-      </BlockRow>
+      </Row>
     </Column>
   );
 };

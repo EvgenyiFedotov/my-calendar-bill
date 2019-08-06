@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { sideCalc } from 'components/core/styled/BlockOLD';
+import { blockCss } from 'components/core/styled/Block';
 
 // Get color
 export const color = ({ color = 'var(--text-color)' }) => `color: ${color}`;
@@ -11,7 +11,7 @@ export default styled.button`
   cursor: pointer;
   font-size: calc(var(--space) * 2);
   ${color};
-  height: ${sideCalc()};
+  ${blockCss({ minHeightStep: 1 })};
 
   &:hover {
     text-decoration: underline;
