@@ -3,7 +3,7 @@ import * as React from 'react';
 import { MONTHS, dateToSQL, isPrevDate } from 'helpers/date';
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
 import ButtonLink from 'components/core/styled/ButtonLink';
-import { Row } from 'components/core/styled/FlexBlock';
+import { Row } from 'components/core/styled/Flex';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import useMapItem from 'hooks/use-map-item';
 import Branch from 'components/core/Branch';

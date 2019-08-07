@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Row, Column } from 'components/core/styled/FlexBlock';
+import { Row, Column } from 'components/core/styled/Flex';
 import Button from 'components/core/styled/ButtonLink';
 import ThemeContext from 'components/subjects/contexts/Theme/context';
 import OptionsContext from 'components/subjects/contexts/Options/context';

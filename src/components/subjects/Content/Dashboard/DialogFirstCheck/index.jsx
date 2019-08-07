@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import InputText from 'components/core/styled/InputText';
 import Button from 'components/core/styled/ButtonLink';
-import { Column, Row } from 'components/core/styled/FlexBlock';
+import { Column, Row } from 'components/core/styled/Flex';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import ModalWindow from 'components/core/ModalWindow';
 import Branch from 'components/core/Branch';

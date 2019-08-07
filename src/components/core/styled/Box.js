@@ -9,9 +9,13 @@ const padding = ({ paddingSpaceStep = [1, 1] }) => css`
   })`};
 `;
 
-export default styled(Column)`
+export const boxCss = () => css`
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   ${blockCss};
   ${padding};
+`;
+
+export default styled(Column)`
+  ${boxCss};
 `;

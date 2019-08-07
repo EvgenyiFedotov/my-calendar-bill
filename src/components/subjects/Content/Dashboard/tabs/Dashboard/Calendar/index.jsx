@@ -11,7 +11,7 @@ import {
   isPrevDate as getIsPrevDate,
 } from 'helpers/date';
 import SelectedDateContext from 'components/subjects/contexts/SelectedDate/context';
-import { Column, Row } from 'components/core/styled/FlexBlock';
+import { Column, Row } from 'components/core/styled/Flex';
 import Block from 'components/core/styled/Block';
 import ModalPanel from 'components/core/ModalPanel';
 import Branch from 'components/core/Branch';

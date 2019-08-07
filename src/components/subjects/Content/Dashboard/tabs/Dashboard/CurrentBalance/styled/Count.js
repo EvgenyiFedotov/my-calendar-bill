@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Row } from 'components/core/styled/FlexBlock';
+import { Row } from 'components/core/styled/Flex';
 
 export default styled(Row)`
   font-size: calc(var(--space) * 4);

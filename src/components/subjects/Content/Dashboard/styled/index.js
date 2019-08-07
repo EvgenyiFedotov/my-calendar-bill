@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Column } from 'components/core/styled/FlexBlock';
+import { Column } from 'components/core/styled/Flex';
 
 export default styled(Column)`
   width: 100%;

@@ -3,7 +3,7 @@ import * as React from 'react';
 import ButtonLink from 'components/core/styled/ButtonLink';
 import ModalPanel from 'components/core/ModalPanel';
 import InputText from 'components/core/styled/InputText';
-import { Column, Row } from 'components/core/styled/FlexBlock';
+import { Column, Row } from 'components/core/styled/Flex';
 import Button from 'components/core/styled/Button';
 import Branch from 'components/core/Branch';
 import Styled from 'components/subjects/Content/Dashboard/tabs/Dashboard/DialogEditDate/styled';

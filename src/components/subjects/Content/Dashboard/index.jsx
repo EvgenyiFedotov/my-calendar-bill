@@ -13,7 +13,7 @@ import Branch from 'components/core/Branch';
 import DashboardTab from 'components/subjects/Content/Dashboard/tabs/Dashboard';
 import OptionsTab from 'components/subjects/Content/Dashboard/tabs/Options';
 import OptionsContext from 'components/subjects/contexts/Options/context';
-import { Row } from 'components/core/styled/FlexBlock';
+import { Row } from 'components/core/styled/Flex';
 import Separator from 'components/core/styled/Separator';
 
 import DialogFirstCheck from './DialogFirstCheck';

@@ -4,7 +4,7 @@ import Branch from 'components/core/Branch';
 import UserContext from 'components/subjects/contexts/User/context';
 import InputText from 'components/core/styled/InputText';
 import Button from 'components/core/styled/ButtonLink';
-import { Column } from 'components/core/styled/FlexBlock';
+import { Column } from 'components/core/styled/Flex';
 import useField from 'hooks/use-field';
 
 import Styled from './styled';

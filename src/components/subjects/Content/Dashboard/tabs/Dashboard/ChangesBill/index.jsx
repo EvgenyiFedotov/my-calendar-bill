@@ -4,7 +4,7 @@ import { FiChevronDown, FiChevronUp, FiMinus } from 'react-icons/fi';
 import Branch from 'components/core/Branch';
 import { getSummChangesBill } from 'components/subjects/Content/Dashboard/heplers';
 import Separator from 'components/core/styled/Separator';
-import { Column, Row } from 'components/core/styled/FlexBlock';
+import { Column, Row } from 'components/core/styled/Flex';
 
 import Item from './styled/Item';
 

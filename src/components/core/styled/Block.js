@@ -35,10 +35,6 @@ export const blockCss = ({
   max-height: ${sideCalc(maxHeightStep)};
 `;
 
-export const BlockSpan = styled.span`
-  ${blockCss};
-`;
-
 export default styled.div`
   ${blockCss};
 `;

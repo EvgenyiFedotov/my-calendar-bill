@@ -4,7 +4,7 @@ import Calendar from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calen
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import Chart from 'components/subjects/Content/Dashboard/tabs/Dashboard/Chart';
-import { Column, Row } from 'components/core/styled/FlexBlock';
+import { Column, Row } from 'components/core/styled/Flex';
 import CurrentBalance from 'components/subjects/Content/Dashboard/tabs/Dashboard/CurrentBalance';
 
 const Dashboard = () => {

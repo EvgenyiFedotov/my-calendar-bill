@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { Column } from 'components/core/styled/FlexBlock';
+import { Column } from 'components/core/styled/Flex';
 import { sideCalc } from 'components/core/styled/Block';
 
 export const width = sideCalc(10);
