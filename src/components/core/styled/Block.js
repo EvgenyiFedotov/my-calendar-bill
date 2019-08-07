@@ -8,14 +8,21 @@ export const marginCalc = (step = 1) => `calc(var(--space) * ${step * 0.5})`;
 
 export const blockCss = ({
   marginStep,
+  marginTopStep,
+  marginRightStep,
+  marginBottomStep,
+  marginLeftStep,
+
   widthStep,
   minWidthStep,
   maxWidthStep,
+
   heightStep,
   minHeightStep,
   maxHeightStep,
 }) => css`
-  margin: ${marginCalc(marginStep)};
+  margin: ${marginCalc(marginTopStep || marginStep)} ${marginCalc(marginRightStep || marginStep)}
+    ${marginCalc(marginBottomStep || marginStep)} ${marginCalc(marginLeftStep || marginStep)};
   width: ${sideCalc(widthStep)};
   min-width: ${sideCalc(minWidthStep)};
   max-width: ${sideCalc(maxWidthStep)};

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import { Column } from 'components/core/styled/FlexBlock';
+import { Column } from 'components/core/styled/Flex';
 
 export default styled(Column)`
   overflow-x: hidden;
   overflow-y: auto;
   flex: 1;
-  padding: calc(var(--space) * 2) 10vw calc(var(--space) * 2) 0;
+  padding-right: 10vw;
   height: 100%;
 
   @media (max-width: 1023px) {

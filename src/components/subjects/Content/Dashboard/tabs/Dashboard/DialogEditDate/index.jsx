@@ -69,7 +69,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
   }, [currCount, tables, date, counts, checkBillMehtods]);
 
   return (
-    <Styled step={2}>
+    <Styled marginStep={0} marginBottomStep={2}>
       <Row justifyContent="space-between" alignItems="center">
         <b>
           {date.getDate()}th {MONTHS[date.getMonth()]} {date.getFullYear()}
@@ -101,9 +101,12 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
         <span>{counts.planCount}</span>
       </Row>
 
-      <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
-        Add
-      </Button>
+      <Row>
+        <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
+          Add
+        </Button>
+      </Row>
+
       <ChangesBill items={itemsChangesBill} item={[changeBill, changeBillMethods]} />
 
       <Branch value={changeBill[0]}>

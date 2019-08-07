@@ -15,7 +15,7 @@ const Dashboard = () => {
   } = React.useContext(TablesContext);
 
   return (
-    <Column marginStep={0}>
+    <Column marginStep={2}>
       <Row marginStep={0} alignItems="center" style={{ flexWrap: 'wrap' }}>
         <CurrentBalance />
       </Row>

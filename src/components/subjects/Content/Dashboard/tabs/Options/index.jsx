@@ -11,14 +11,14 @@ const Options = () => {
 
   return (
     <Column>
-      <Row>
+      <Row alignItems="center">
         <span>Theme:</span>
         <Button onClick={() => theme.toggleTheme()}>
           {theme.data === 'white' ? 'dark' : 'white'}
         </Button>
       </Row>
 
-      <Row>
+      <Row alignItems="center">
         <span>Mode:</span>
         <Button onClick={() => setMode(mode === 'default' ? 'desktop' : 'default')}>
           {mode === 'default' ? 'desktop' : 'default'}
