@@ -1,20 +1,22 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Flex, { Row as RowFlex, Column as ColumnFlex } from 'components/core/styled/Flex';
 import { blockCss } from 'components/core/styled/Block';
 
-export const Row = styled(RowFlex)`
+const children = (childrenProps = {}) => css`
   & > * {
-    ${blockCss};
+    ${blockCss(childrenProps)};
   }
+`;
+
+export const Row = styled(RowFlex)`
+  ${children};
 `;
 
 export const Column = styled(ColumnFlex)`
-  & > * {
-    ${blockCss};
-  }
+  ${children};
 `;
 
 export default styled(Flex)`
-  ${blockCss};
+  ${children};
 `;

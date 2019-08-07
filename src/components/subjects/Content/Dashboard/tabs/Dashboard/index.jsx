@@ -16,13 +16,9 @@ const Dashboard = () => {
 
   return (
     <Column marginStep={2}>
-      <Row marginStep={0} alignItems="center" style={{ flexWrap: 'wrap' }}>
-        <CurrentBalance />
-      </Row>
-      <Row marginStep={0} justifyContent="center" style={{ flexWrap: 'wrap' }}>
-        <Calendar />
-        <Chart />
-      </Row>
+      <CurrentBalance />
+      <Calendar />
+      <Chart />
       <ChangesBill items={changesBill} />
     </Column>
   );

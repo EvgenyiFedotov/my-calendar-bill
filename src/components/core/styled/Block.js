@@ -13,20 +13,24 @@ export const blockCss = ({
   marginBottomStep,
   marginLeftStep,
 
+  width,
   widthStep,
   minWidthStep,
   maxWidthStep,
 
+  height,
   heightStep,
   minHeightStep,
   maxHeightStep,
 }) => css`
   margin: ${marginCalc(marginTopStep || marginStep)} ${marginCalc(marginRightStep || marginStep)}
     ${marginCalc(marginBottomStep || marginStep)} ${marginCalc(marginLeftStep || marginStep)};
-  width: ${sideCalc(widthStep)};
+
+  width: ${width || sideCalc(widthStep)};
   min-width: ${sideCalc(minWidthStep)};
   max-width: ${sideCalc(maxWidthStep)};
-  height: ${sideCalc(heightStep)};
+
+  height: ${height || sideCalc(heightStep)};
   min-height: ${sideCalc(minHeightStep)};
   max-height: ${sideCalc(maxHeightStep)};
 `;

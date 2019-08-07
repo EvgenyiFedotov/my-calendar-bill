@@ -4,7 +4,7 @@ import { Column } from 'components/core/styled/Flex';
 
 export default styled(Column)`
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   flex: 1;
   padding-right: 10vw;
   height: 100%;

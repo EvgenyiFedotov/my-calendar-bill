@@ -4,21 +4,21 @@ const palette = {
   dark: css`
     --bg-color: #282c34;
     --bg-area-color: #303541;
-    --main-color: #426cbf;
+    --main-color: #0088fe;
     --text-color: #ffffff;
     --text-second-color: #9e9e9e;
     --text-disabled-color: #414a5d;
-    --success-color: #4dbb52;
+    --success-color: #00c49f;
     --error-color: #f44336;
   `,
   white: css`
     --bg-color: #ffffff;
     --bg-area-color: #fafafa;
-    --main-color: #426cbf;
+    --main-color: #0088fe;
     --text-color: #282c34;
     --text-second-color: #9e9e9e;
     --text-disabled-color: #e0e0e0;
-    --success-color: #4dbb52;
+    --success-color: #00c49f;
     --error-color: #f44336;
   `,
 };
