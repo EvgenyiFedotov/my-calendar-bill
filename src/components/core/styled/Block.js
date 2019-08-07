@@ -7,30 +7,19 @@ export const sideCalc = step => (typeof step === 'number' ? `calc(${side(step)})
 export const marginCalc = (step = 1) => `calc(var(--space) * ${step * 0.5})`;
 
 export const blockCss = ({
-  marginStep,
-  marginTopStep,
-  marginRightStep,
-  marginBottomStep,
-  marginLeftStep,
-
-  width,
   widthStep,
   minWidthStep,
   maxWidthStep,
 
-  height,
   heightStep,
   minHeightStep,
   maxHeightStep,
 }) => css`
-  margin: ${marginCalc(marginTopStep || marginStep)} ${marginCalc(marginRightStep || marginStep)}
-    ${marginCalc(marginBottomStep || marginStep)} ${marginCalc(marginLeftStep || marginStep)};
-
-  width: ${width || sideCalc(widthStep)};
+  width: ${sideCalc(widthStep)};
   min-width: ${sideCalc(minWidthStep)};
   max-width: ${sideCalc(maxWidthStep)};
 
-  height: ${height || sideCalc(heightStep)};
+  height: ${sideCalc(heightStep)};
   min-height: ${sideCalc(minHeightStep)};
   max-height: ${sideCalc(maxHeightStep)};
 `;

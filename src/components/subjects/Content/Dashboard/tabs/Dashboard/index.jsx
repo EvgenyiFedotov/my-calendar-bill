@@ -15,7 +15,7 @@ const Dashboard = () => {
   } = React.useContext(TablesContext);
 
   return (
-    <Column marginStep={2}>
+    <Column step={2}>
       <CurrentBalance />
       <Calendar />
       <Chart />

@@ -71,14 +71,14 @@ const Calendar = () => {
   );
 
   return (
-    <Column marginStep={0}>
+    <Column step={1}>
       <Branch value={showModal}>
         <ModalPanel onClose={() => setShowModal(false)}>
           <DialogEditDate date={selectedDate} onClose={() => setShowModal(false)} />
         </ModalPanel>
       </Branch>
 
-      <Row>
+      <Row step={1}>
         <Day onClick={prevMonth}>
           <FiChevronLeft />
         </Day>
@@ -94,7 +94,7 @@ const Calendar = () => {
         </Day>
       </Row>
 
-      <Row>
+      <Row step={1}>
         {DAY_WEEK_SHORT.map(day => (
           <Day key={`key-${day}`} style={{ color: 'var(--text-second-color)' }}>
             {day}
@@ -103,7 +103,7 @@ const Calendar = () => {
       </Row>
 
       {dates.map((week, indexWeek) => (
-        <Row key={`week-${indexWeek}`}>
+        <Row key={`week-${indexWeek}`} step={1}>
           {week.map((date, indexDate) => {
             const dateSQL = dateToSQL(date);
             const progressChangeBill = processChangesBill.get(dateSQL);

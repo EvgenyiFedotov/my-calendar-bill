@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import Box from 'components/core/styled/Box';
 import TableContext from 'components/subjects/contexts/Tables/context';
 import { getLastCheck } from 'components/subjects/Content/Dashboard/heplers';
 import IconDirection from 'components/subjects/Content/Dashboard/tabs/Dashboard/IconDirection';
 
 import Count from './styled/Count';
+import Box from './styled/Box';
 
 const CurrentBalance = () => {
   const {
@@ -26,7 +26,7 @@ const CurrentBalance = () => {
   }, [checksBill]);
 
   return (
-    <Box justifyContent="center" alignItems="center" widthStep={7} heightStep={3} minHeightStep={3}>
+    <Box>
       <span>Current balance</span>
       <Count>
         <IconDirection value={counts.count} matchValue={counts.planCount} />

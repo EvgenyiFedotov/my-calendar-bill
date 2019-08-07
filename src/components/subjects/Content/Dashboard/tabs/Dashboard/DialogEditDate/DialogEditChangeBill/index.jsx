@@ -38,7 +38,7 @@ const DialogEditChangeBill = ({ date, item: [[keyChangeBill, changeBill], change
   return (
     <ModalPanel onClose={changeBillMethods.clear}>
       <Styled>
-        <Column marginStep={2}>
+        <Column step={2}>
           <Row justifyContent="space-between" alignItems="center">
             <b>Change bill</b>
 
@@ -62,7 +62,7 @@ const DialogEditChangeBill = ({ date, item: [[keyChangeBill, changeBill], change
             />
           </Column>
 
-          <Row justifyContent="flex-end" marginStep={2}>
+          <Row justifyContent="flex-end" step={2}>
             <Branch value={!changeBillMethods.isNew()}>
               <ButtonLink color="var(--error-color)" onClick={remove}>
                 Delete

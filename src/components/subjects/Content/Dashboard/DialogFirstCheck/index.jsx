@@ -41,7 +41,7 @@ const DialogFirstCheck = () => {
   return (
     <Branch value={checksBill && !checksBill.size}>
       <ModalWindow>
-        <Styled marginStep={2}>
+        <Styled step={2}>
           <Column>
             <label>Current count</label>
             <InputText placeholder="Current count" ref={countRef} />

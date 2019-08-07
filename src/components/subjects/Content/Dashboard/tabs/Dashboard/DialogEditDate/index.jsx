@@ -69,7 +69,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
   }, [currCount, tables, date, counts, checkBillMehtods]);
 
   return (
-    <Styled marginStep={0} marginBottomStep={2}>
+    <Styled step={0} marginBottomStep={2}>
       <Row justifyContent="space-between" alignItems="center">
         <b>
           {date.getDate()}th {MONTHS[date.getMonth()]} {date.getFullYear()}

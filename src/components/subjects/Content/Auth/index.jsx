@@ -30,7 +30,7 @@ const Auth = ({ children }) => {
       <>{children}</>
 
       <Styled>
-        <Content marginStep={2}>
+        <Content step={2}>
           <Column>
             <label>Login</label>
             <InputText placeholder="Login" ref={loginRef} />

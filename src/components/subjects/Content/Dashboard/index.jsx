@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [showContent, setShowContent] = React.useState('dashboard');
 
   return (
-    <Styled marginStep={0}>
+    <Styled step={0}>
       <DialogFirstCheck />
 
       {/* <Top mode={mode}>
@@ -35,7 +35,7 @@ const Dashboard = () => {
         </Branch>
       </Top> */}
 
-      <Content marginStep={4}>
+      <Content step={4}>
         <Left mode={mode}>
           <ButtonMenu
             active={'dashboard' === showContent}
@@ -82,7 +82,7 @@ const Dashboard = () => {
       </Content>
 
       <Bottom mode={mode}>
-        <Row marginStep={5}>
+        <Row step={5}>
           <FiLayout
             style={{
               cursor: 'pointer',

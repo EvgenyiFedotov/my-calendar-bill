@@ -21,5 +21,5 @@ export default styled.div`
     minHeightStep: 1,
   })};
 
-  /* background-color: pink; */
+  background-color: pink;
 `;
