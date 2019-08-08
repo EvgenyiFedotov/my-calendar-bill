@@ -8,5 +8,5 @@ export default styled(Column)`
   box-shadow: var(--box-shadow);
   justify-content: center;
   align-items: center;
-  ${blockCss({ widthStep: 7, heightStep: 3, minHeightStep: 3 })};
+  ${blockCss({ minWidthStep: 7, widthStep: 7, heightStep: 3, minHeightStep: 3 })};
 `;

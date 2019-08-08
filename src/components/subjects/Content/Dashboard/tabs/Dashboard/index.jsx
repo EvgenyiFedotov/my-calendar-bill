@@ -4,9 +4,11 @@ import Calendar from 'components/subjects/Content/Dashboard/tabs/Dashboard/Calen
 import ChangesBill from 'components/subjects/Content/Dashboard/tabs/Dashboard/ChangesBill';
 import TablesContext from 'components/subjects/contexts/Tables/context';
 import Chart from 'components/subjects/Content/Dashboard/tabs/Dashboard/Chart';
-import { Column, Row } from 'components/core/styled/Flex';
+import { Column } from 'components/core/styled/Flex';
 import CurrentBalance from 'components/subjects/Content/Dashboard/tabs/Dashboard/CurrentBalance';
 import PlanBalance from 'components/subjects/Content/Dashboard/tabs/Dashboard/PlanBalance';
+
+import ContentRow from './styled/ContentRow';
 
 const Dashboard = () => {
   const {
@@ -16,16 +18,16 @@ const Dashboard = () => {
   } = React.useContext(TablesContext);
 
   return (
-    <Column step={2}>
-      <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
+    <Column step={2} style={{ padding: 'var(--space)' }}>
+      <ContentRow>
         <CurrentBalance />
         <PlanBalance />
-      </Row>
+      </ContentRow>
 
-      <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
+      <ContentRow>
         <Calendar />
         <Chart />
-      </Row>
+      </ContentRow>
 
       <ChangesBill items={changesBill} />
     </Column>

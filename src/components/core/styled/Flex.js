@@ -19,6 +19,7 @@ export const rowCss = props => css`
   ${flexCss(props)};
 
   & > *:not(:last-child) {
+    margin: 0;
     ${marginRight(props)};
   }
 `;
@@ -36,6 +37,7 @@ export const columnCss = props => css`
   ${flexCss(props)};
 
   & > *:not(:last-child) {
+    margin: 0;
     ${marginBottom(props)};
   }
 `;
