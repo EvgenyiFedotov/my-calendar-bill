@@ -47,12 +47,12 @@ const DialogEditChangeBill = ({ date, item: [[keyChangeBill, changeBill], change
             </Row>
           </Row>
 
-          <Column>
+          <Column step={1}>
             <label>Title</label>
             <InputText placeholder="Title" ref={titleRef} defaultValue={changeBill.title} />
           </Column>
 
-          <Column>
+          <Column step={1}>
             <label>Count</label>
             <InputText
               placeholder="Count"

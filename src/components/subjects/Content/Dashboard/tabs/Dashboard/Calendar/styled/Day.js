@@ -20,6 +20,6 @@ export default styled.div`
     heightStep: 1,
     minHeightStep: 1,
   })};
-
-  background-color: pink;
+  /* 
+  background-color: pink; */
 `;

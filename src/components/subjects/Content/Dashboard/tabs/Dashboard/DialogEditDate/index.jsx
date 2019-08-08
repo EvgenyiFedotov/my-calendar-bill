@@ -12,6 +12,7 @@ import useField from 'hooks/use-field';
 import { getPlanCount } from 'components/subjects/Content/Dashboard/heplers';
 import Button from 'components/core/styled/Button';
 import { getChangesBillByDate } from 'components/subjects/Content/Dashboard/heplers';
+import { numToMoneyStr } from 'helpers/number';
 
 import Styled from './styled';
 import DialogEditChangeBill from './DialogEditChangeBill';
@@ -69,7 +70,7 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
   }, [currCount, tables, date, counts, checkBillMehtods]);
 
   return (
-    <Styled step={0} marginBottomStep={2}>
+    <Styled step={2}>
       <Row justifyContent="space-between" alignItems="center">
         <b>
           {date.getDate()}th {MONTHS[date.getMonth()]} {date.getFullYear()}
@@ -82,13 +83,13 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Branch value={isPrevDate(date, new Date())}>
         <Branch value={typeof counts.count === 'number'}>
-          <Row alignItems="center" justifyContent="space-between">
+          <Row step={1} alignItems="center" justifyContent="space-between">
             <span>Count: </span>
-            <span>{counts.count}</span>
+            <span>{counts.count !== null && numToMoneyStr(counts.count)}</span>
           </Row>
 
-          <Row>
-            <InputText placeholder="Count" type="number" ref={currCountRef} />
+          <Row step={1}>
+            <InputText placeholder="Count" type="number" ref={currCountRef} style={{ flex: 1 }} />
             <Button color="var(--main-color)" onClick={saveCheckBill}>
               Enter
             </Button>
@@ -98,14 +99,12 @@ const DialogEditDate = ({ date, onClose = () => {} }) => {
 
       <Row alignItems="center" justifyContent="space-between">
         <span>Plan count: </span>
-        <span>{counts.planCount}</span>
+        <span>{numToMoneyStr(counts.planCount)}</span>
       </Row>
 
-      <Row>
-        <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
-          Add
-        </Button>
-      </Row>
+      <Button color="var(--main-color)" onClick={changeBillMethods.create()}>
+        Add
+      </Button>
 
       <ChangesBill items={itemsChangesBill} item={[changeBill, changeBillMethods]} />
 
