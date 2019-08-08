@@ -31,12 +31,12 @@ const Auth = ({ children }) => {
 
       <Styled>
         <Content step={2}>
-          <Column>
+          <Column step={1}>
             <label>Login</label>
             <InputText placeholder="Login" ref={loginRef} />
           </Column>
 
-          <Column>
+          <Column step={1}>
             <label>Password</label>
             <InputText placeholder="Password" type="password" ref={passRef} />
           </Column>
