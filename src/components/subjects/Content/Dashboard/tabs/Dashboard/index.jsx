@@ -6,6 +6,7 @@ import TablesContext from 'components/subjects/contexts/Tables/context';
 import Chart from 'components/subjects/Content/Dashboard/tabs/Dashboard/Chart';
 import { Column, Row } from 'components/core/styled/Flex';
 import CurrentBalance from 'components/subjects/Content/Dashboard/tabs/Dashboard/CurrentBalance';
+import PlanBalance from 'components/subjects/Content/Dashboard/tabs/Dashboard/PlanBalance';
 
 const Dashboard = () => {
   const {
@@ -16,11 +17,16 @@ const Dashboard = () => {
 
   return (
     <Column step={2}>
-      <CurrentBalance />
+      <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
+        <CurrentBalance />
+        <PlanBalance />
+      </Row>
+
       <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
         <Calendar />
         <Chart />
       </Row>
+
       <ChangesBill items={changesBill} />
     </Column>
   );

@@ -5,6 +5,7 @@ import Branch from 'components/core/Branch';
 import { getSummChangesBill } from 'components/subjects/Content/Dashboard/heplers';
 import Separator from 'components/core/styled/Separator';
 import { Column, Row } from 'components/core/styled/Flex';
+import { numToMoneyStr } from 'helpers/number';
 
 import Item from './styled/Item';
 
@@ -33,7 +34,7 @@ const ChangesBill = ({ items, item = [] }) => {
                   </Branch>
                   <b>Summ</b>
                 </Row>
-                <b>{getSummChangesBill(items)}</b>
+                <b>{numToMoneyStr(getSummChangesBill(items))}</b>
               </Item>
 
               <Separator />
@@ -57,7 +58,7 @@ const ChangesBill = ({ items, item = [] }) => {
                   </Row>
 
                   <Row alignItems="center">
-                    <span>{item.count}</span>
+                    <span>{numToMoneyStr(item.count)}</span>
                   </Row>
                 </Item>
               ))}
