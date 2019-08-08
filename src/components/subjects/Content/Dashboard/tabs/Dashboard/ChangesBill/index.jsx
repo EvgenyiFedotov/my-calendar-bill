@@ -19,11 +19,11 @@ const ChangesBill = ({ items, item = [] }) => {
   return (
     <Branch value={items}>
       <Branch value={items && items.size}>
-        <Column>
+        <Column step={1}>
           {items && (
             <>
               <Item key="changes-bill-summ" justifyContent="space-between" alignItems="center">
-                <Row alignItems="center">
+                <Row alignItems="center" step={1}>
                   <Branch value={getSummChangesBill(items) > 0}>
                     <FiChevronUp stroke="var(--success-color)" strokeWidth={3} />
                     <Branch value={getSummChangesBill(items) < 0}>
@@ -45,7 +45,7 @@ const ChangesBill = ({ items, item = [] }) => {
                   alignItems="center"
                   onClick={changeBillMethods && changeBillMethods.edit(key)}
                 >
-                  <Row alignItems="center">
+                  <Row alignItems="center" step={1}>
                     <Branch value={item.count > 0}>
                       <FiChevronUp stroke="var(--success-color)" strokeWidth={3} />
                       <Branch value={item.count < 0}>

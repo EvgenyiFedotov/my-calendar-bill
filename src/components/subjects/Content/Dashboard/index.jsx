@@ -35,19 +35,19 @@ const Dashboard = () => {
         </Branch>
       </Top> */}
 
-      <Content step={4}>
-        <Left mode={mode}>
+      <Content step={1}>
+        <Left mode={mode} step={1}>
           <ButtonMenu
             active={'dashboard' === showContent}
             onClick={() => setShowContent('dashboard')}
           >
-            <Row>
+            <Row step={1}>
               <FiLayout />
               <span>Dashboard</span>
             </Row>
           </ButtonMenu>
           <ButtonMenu active={'options' === showContent} onClick={() => setShowContent('options')}>
-            <Row>
+            <Row step={1}>
               <FiSettings />
               <span>Options</span>
             </Row>
@@ -56,14 +56,14 @@ const Dashboard = () => {
           <Separator />
 
           <ButtonMenu onClick={signOut}>
-            <Row>
+            <Row step={1}>
               <FiRefreshCcw />
               <span>Sync data</span>
             </Row>
           </ButtonMenu>
 
           <ButtonMenu onClick={signOut}>
-            <Row>
+            <Row step={1}>
               <FiLogOut />
               <span>Log out</span>
             </Row>

@@ -17,8 +17,10 @@ const Dashboard = () => {
   return (
     <Column step={2}>
       <CurrentBalance />
-      <Calendar />
-      <Chart />
+      <Row step={2} justifyContent="center" style={{ flexWrap: 'wrap' }}>
+        <Calendar />
+        <Chart />
+      </Row>
       <ChangesBill items={changesBill} />
     </Column>
   );

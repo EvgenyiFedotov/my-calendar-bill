@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { blockCss } from 'components/core/styled/Block';
-import { Row } from 'components/core/styled/Flex';
+import { Row, rowCss } from 'components/core/styled/Flex';
 
 export default styled(Row)`
   background-color: var(--bg-area-color);
@@ -9,4 +9,5 @@ export default styled(Row)`
   border-radius: var(--border-radius);
   cursor: pointer;
   ${blockCss({ heightStep: 1, minHeightStep: 1 })};
+  ${rowCss({ step: 1 })};
 `;
