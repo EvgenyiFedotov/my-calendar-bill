@@ -18,7 +18,9 @@ export const isEqualDate = (date1, date2) => date1.getFullYear() === date2.getFu
  */
 export const eachDate = (from, to, callback, options = {}) => {
   const { last = false } = options;
-  if (isPrevDate(from, to)) {
+  const _isPrevDate = isPrevDate(from, to);
+
+  if (_isPrevDate || (!_isPrevDate && isEqualDate(from, to))) {
     while (!isEqualDate(from, to)) {
       callback(new Date(from));
       from.setDate(from.getDate() + 1);
@@ -31,6 +33,31 @@ export const eachDate = (from, to, callback, options = {}) => {
 };
 
 /**
+ * Get last date month
+ * @param {Date} date
+ *
+ * @returns {Date}
+ */
+export const getLastDateMonth = (date) => {
+  const result = new Date(date);
+  result.setMonth(result.getMonth() + 1);
+  result.setDate(0);
+  return result;
+};
+
+/**
+ * Get first and last (border) dates month
+ * @param {Date} date
+ *
+ * @returns {[Date, Date]}
+ */
+export const getBorderMonth = (date) => {
+  const begin = new Date(date);
+  begin.setDate(1);
+  return [begin, getLastDateMonth(date)];
+};
+
+/**
  * Get dates month by weeks
  *
  * @param {number} [date=new Date()]
@@ -40,14 +67,11 @@ export const eachDate = (from, to, callback, options = {}) => {
  * @returns {Array<Array<Date>>};
  */
 export const getDatesMonths = (date = new Date(), options = {}) => {
-  const currDate = new Date(date);
-  const endDate = new Date(date);
+  const [currDate, endDate] = getBorderMonth(date);
   const { showSixthWeek = true } = options;
 
   currDate.setDate(1);
   currDate.setDate(currDate.getDate() - (currDate.getDay() || 7) + 1);
-  endDate.setMonth(endDate.getMonth() + 1);
-  endDate.setDate(-1);
   endDate.setDate(endDate.getDate() + (7 - endDate.getDay()));
 
   const result = [[]];
@@ -111,6 +135,29 @@ export const MONTHS_SHORT = [
   'Dec',
 ];
 export const dateToShortMonth = date => `${MONTHS_SHORT[date.getMonth()]}`;
+
+export const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+/**
+ * Get month how string
+ * @param {Date} date
+ *
+ * @returns {string}
+ */
+export const dateToMonth = date => MONTHS[date.getMonth()];
 
 /**
  * Get value is prev date

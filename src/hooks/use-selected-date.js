@@ -3,23 +3,15 @@ import * as React from 'react';
 import { isEqualDate } from '../helpers/date';
 
 /**
- * Hook
- * @param {() => boolean} [checkClickDate=() => true]
+ * Hook use selected date
+ * @param {Date} [defaultDate]
  */
-export default (options = {}) => {
-  const { checkClickDate = () => true } = options;
-  const [selectedDate, setSelectedDate] = React.useState();
+export default (defaultDate) => {
+  const [selectedDate, setSelectedDate] = React.useState(defaultDate);
   const isSelectedDate = React.useCallback(
     date => selectedDate && isEqualDate(date, selectedDate),
     [selectedDate],
   );
-  const clickDate = React.useCallback(
-    (params) => {
-      const { dateWeek } = params;
-      checkClickDate(params) && setSelectedDate(dateWeek);
-    },
-    [setSelectedDate, checkClickDate],
-  );
 
-  return [selectedDate, { isSelectedDate, setSelectedDate, clickDate }];
+  return [selectedDate, { isSelectedDate, setSelectedDate }];
 };

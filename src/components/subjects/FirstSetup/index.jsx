@@ -1,33 +1,48 @@
 import * as React from 'react';
 
-import Stepper from '../../core/Stepper';
-import Button from '../../styled/Button';
-import useStepper from '../../../hooks/use-stepper';
-import InputText from '../../styled/InputText';
-import useField from '../../../hooks/use-field';
-import AppContext from '../../contexts/App/context';
-import { dateToSQL } from '../../../helpers/date';
+import InputText from 'components/core/styled/InputText';
+import Button from 'components/core/styled/Button';
+import useField from 'hooks/use-field';
+import AppContext from 'components/subjects/contexts/App/context';
+import useMapItem from 'hooks/use-map-item';
+import { dateToSQL } from 'helpers/date';
+import Branch from 'components/core/Branch';
+import PageContent from 'components/core/PageContent';
+import Column from 'components/core/styled/Column';
 
-import StepContent from './StepContent';
+const Setup = ({ children }) => {
+  const {
+    checkList,
+    db: [tables],
+  } = React.useContext(AppContext);
+  const [, { save }] = useMapItem(checkList, tables.checkList);
 
-const FirstSetup = () => {
-  const { listChecks } = React.useContext(AppContext);
-  const [step] = useStepper(0, 1);
   const [countRef, count] = useField();
-  const nextToDate = React.useCallback(() => {
-    const value = parseInt(count.getValue(), 10);
-    if (!isNaN(value)) {
-      listChecks.saveItem({ count: value, planCount: value }, dateToSQL(new Date()));
+  const send = React.useCallback(() => {
+    const countValue = parseInt(count.getValue(), 10);
+    if (!isNaN(countValue) && typeof countValue === 'number') {
+      const keyItem = dateToSQL(new Date());
+      const item = {
+        count: countValue,
+        planCount: countValue,
+      };
+
+      save(item, keyItem);
     }
-  }, [listChecks, count]);
+  }, [count, save]);
 
   return (
-    <Stepper step={step}>
-      <StepContent title="Current count" buttons={<Button onClick={nextToDate}>Next</Button>}>
-        <InputText placeholder="count" type="number" ref={countRef} />
-      </StepContent>
-    </Stepper>
+    <Branch value={Array.from(checkList[0])[0]}>
+      <>{children}</>
+
+      <PageContent contentProps={{ justifyContent: 'center' }}>
+        <Column justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
+          <InputText placeholder="Current count" type="number" ref={countRef} />
+          <Button onClick={send}>Send</Button>
+        </Column>
+      </PageContent>
+    </Branch>
   );
 };
 
-export default FirstSetup;
+export default Setup;
